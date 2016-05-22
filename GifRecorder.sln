@@ -12,12 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{0039724A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenToGif", "ScreenToGif\ScreenToGif.csproj", "{9A332077-74BA-4C6A-8381-6D98C31A490A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GifRecorder", "GifRecorder\GifRecorder.csproj", "{6E0C559B-207D-45BB-9821-75EB01186A49}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{13F2A1B9-496A-446E-8B06-776ACAE5CEA4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HookTest", "Other\HookTest\HookTest.csproj", "{A4BCA4D6-B6F4-4875-BD8A-A59E0CE5E7B5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,19 +22,8 @@ Global
 		{9A332077-74BA-4C6A-8381-6D98C31A490A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A332077-74BA-4C6A-8381-6D98C31A490A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A332077-74BA-4C6A-8381-6D98C31A490A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E0C559B-207D-45BB-9821-75EB01186A49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E0C559B-207D-45BB-9821-75EB01186A49}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E0C559B-207D-45BB-9821-75EB01186A49}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E0C559B-207D-45BB-9821-75EB01186A49}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4BCA4D6-B6F4-4875-BD8A-A59E0CE5E7B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4BCA4D6-B6F4-4875-BD8A-A59E0CE5E7B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4BCA4D6-B6F4-4875-BD8A-A59E0CE5E7B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4BCA4D6-B6F4-4875-BD8A-A59E0CE5E7B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A4BCA4D6-B6F4-4875-BD8A-A59E0CE5E7B5} = {13F2A1B9-496A-446E-8B06-776ACAE5CEA4}
 	EndGlobalSection
 EndGlobal
