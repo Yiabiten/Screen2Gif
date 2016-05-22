@@ -1,4 +1,6 @@
-﻿using ScreenToGif.Properties;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+using ScreenToGif.Properties;
 
 namespace ScreenToGif.Pages
 {
@@ -7,7 +9,7 @@ namespace ScreenToGif.Pages
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -132,9 +134,9 @@ namespace ScreenToGif.Pages
 
         #endregion
 
-        private System.Windows.Forms.Label lblValue;
-        private System.Windows.Forms.TrackBar trackBar;
-        private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.Button btnCancel;
+        private Label lblValue;
+        private TrackBar trackBar;
+        private Button btnOk;
+        private Button btnCancel;
     }
 }

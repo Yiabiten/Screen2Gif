@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -9,8 +8,8 @@ using System.IO.Compression;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -21,14 +20,26 @@ using System.Windows.Threading;
 using Microsoft.Win32;
 using ScreenToGif.Controls;
 using ScreenToGif.ImageUtil;
+using ScreenToGif.ImageUtil.Decoder;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows.Other;
-using ScreenToGif.ImageUtil.Decoder;
-using ScreenToGif.Util.Converters;
+using Clipboard = ScreenToGif.Util.Clipboard;
 using Color = System.Windows.Media.Color;
+using Cursors = System.Windows.Input.Cursors;
+using DataFormats = System.Windows.DataFormats;
+using DragDropEffects = System.Windows.DragDropEffects;
+using DragEventArgs = System.Windows.DragEventArgs;
+using Image = System.Windows.Controls.Image;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
+using ListViewItem = System.Windows.Controls.ListViewItem;
+using MouseEventArgs = System.Windows.Input.MouseEventArgs;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
+using Pen = System.Drawing.Pen;
+using Point = System.Windows.Point;
+using Size = System.Windows.Size;
 
 namespace ScreenToGif.Windows
 {
@@ -93,7 +104,7 @@ namespace ScreenToGif.Windows
         /// </summary>
         private bool WasChangingSelection { get; set; }
 
-        private readonly System.Windows.Forms.Timer _timerPreview = new System.Windows.Forms.Timer();
+        private readonly Timer _timerPreview = new Timer();
 
         #endregion
 
@@ -244,7 +255,6 @@ namespace ScreenToGif.Windows
                 }
 
                 //GC.Collect(1);
-                return;
             }
 
             #endregion
@@ -411,7 +421,7 @@ namespace ScreenToGif.Windows
                 Filter = "All supported files (*.bmp, *.jpg, *.png, *.gif, *.mp4, *.wmv, *.avi, *.stg, *.zip)|*.bmp;*.jpg;*.png;*.gif;*.mp4;*.wmv;*.avi;*.stg;*.zip|" +
                          "Image (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif|" +
                          "Video (*.mp4, *.wmv, *.avi)|*.mp4;*.wmv;*.avi|" +
-                         "ScreenToGif Project (*.stg, *.zip) |*.stg;*.zip",
+                         "ScreenToGif Project (*.stg, *.zip) |*.stg;*.zip"
             };
 
             var result = ofd.ShowDialog();
@@ -523,7 +533,7 @@ namespace ScreenToGif.Windows
                 Title = FindResource("Editor.OpenMedia").ToString(),
                 Filter = "All supported files (*.bmp, *.jpg, *.png, *.gif, *.mp4, *.wmv, *.avi)|*.bmp;*.jpg;*.png;*.gif;*.mp4;*.wmv;*.avi|" +
                          "Image (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif|" +
-                         "Video (*.mp4, *.wmv, *.avi)|*.mp4;*.wmv;*.avi|",
+                         "Video (*.mp4, *.wmv, *.avi)|*.mp4;*.wmv;*.avi|"
             };
 
             var result = ofd.ShowDialog();
@@ -828,7 +838,7 @@ namespace ScreenToGif.Windows
 
             FrameListView.SelectedIndex = -1;
 
-            if (!Util.Clipboard.Cut(list))
+            if (!Clipboard.Cut(list))
             {
                 Dialog.Ok("Clipboard Exception", "Impossible to cut selected frames.",
                     "Something wrong happened, please report this issue (by sending the exception log).");
@@ -877,7 +887,7 @@ namespace ScreenToGif.Windows
             var selected = FrameListView.SelectedItems.OfType<FrameListBoxItem>().ToList();
             var list = selected.Select(item => ListFrames[item.FrameNumber]).ToList();
 
-            if (!Util.Clipboard.Copy(list))
+            if (!Clipboard.Copy(list))
             {
                 Dialog.Ok("Clipboard Exception", "Impossible to copy selected frames.",
                     "Something wrong happened, please report this issue (by sending the exception log).");
@@ -911,7 +921,7 @@ namespace ScreenToGif.Windows
 
         private void Paste_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = FrameListView?.SelectedItem != null && Util.Clipboard.Items.Count > 0 &&
+            e.CanExecute = FrameListView?.SelectedItem != null && Clipboard.Items.Count > 0 &&
                            ClipboardListView.SelectedItem != null;
         }
 
@@ -926,7 +936,7 @@ namespace ScreenToGif.Windows
 
             ActionStack.Did(ListFrames);
 
-            var clipData = Util.Clipboard.Paste(ClipboardListView.SelectedIndex, 0);
+            var clipData = Clipboard.Paste(ClipboardListView.SelectedIndex, 0);
 
             ListFrames.InsertRange(index, clipData);
 
@@ -950,7 +960,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                var selected = Util.Clipboard.Items[ClipboardListView.SelectedIndex];
+                var selected = Clipboard.Items[ClipboardListView.SelectedIndex];
 
                 Process.Start(Path.GetDirectoryName(selected[0].ImageLocation));
             }
@@ -963,7 +973,7 @@ namespace ScreenToGif.Windows
 
         private void RemoveClipboard_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Util.Clipboard.Remove(ClipboardListView.SelectedIndex);
+            Clipboard.Remove(ClipboardListView.SelectedIndex);
             ClipboardListView.Items.RemoveAt(ClipboardListView.SelectedIndex);
         }
 
@@ -1347,8 +1357,8 @@ namespace ScreenToGif.Windows
         }
 
         private CroppingAdorner _cropAdorner;
-        private FrameworkElement _currentElement = null;
-        private bool _resizing = false;
+        private FrameworkElement _currentElement;
+        private bool _resizing;
 
         private void AddCropToElement(FrameworkElement fel)
         {
@@ -1423,7 +1433,7 @@ namespace ScreenToGif.Windows
             var bottom = BottomCropNumericUpDown.Value;
             var right = RightCropNumericUpDown.Value;
 
-            _cropAdorner.ClipRectangle = new Rect(new System.Windows.Point(left, top), new System.Windows.Point(right, bottom));
+            _cropAdorner.ClipRectangle = new Rect(new Point(left, top), new Point(right, bottom));
         }
 
         private void ApplyCropButton_Click(object sender, RoutedEventArgs e)
@@ -1750,7 +1760,7 @@ namespace ScreenToGif.Windows
                 AddExtension = true,
                 CheckFileExists = true,
                 Title = ResMessage("Editor.Watermark.Select"),
-                Filter = "Image (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png",
+                Filter = "Image (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png"
             };
 
             var result = ofd.ShowDialog();
@@ -1859,7 +1869,7 @@ namespace ScreenToGif.Windows
             #region Get the Strokes and Clip the Image
 
             var image = ListFrames[0].ImageLocation.SourceFrom();
-            var rectangle = new RectangleGeometry(new Rect(new System.Windows.Point(0, 0), new System.Windows.Size(image.PixelWidth, image.PixelHeight)));
+            var rectangle = new RectangleGeometry(new Rect(new Point(0, 0), new Size(image.PixelWidth, image.PixelHeight)));
             Geometry geometry = Geometry.Empty;
 
             foreach (Stroke stroke in CinemagraphInkCanvas.Strokes)
@@ -1869,7 +1879,7 @@ namespace ScreenToGif.Windows
 
             geometry = Geometry.Combine(geometry, rectangle, GeometryCombineMode.Xor, null);
 
-            var clippedImage = new System.Windows.Controls.Image
+            var clippedImage = new Image
             {
                 Height = image.PixelHeight,
                 Width = image.PixelWidth,
@@ -2007,14 +2017,14 @@ namespace ScreenToGif.Windows
             if (ListFrames == null) return;
             if (ListFrames.Count == 0) return;
             if (FrameListView.SelectedIndex == -1) return;
-            if ((int)DelayNumericUpDown.Value < 10)
+            if (DelayNumericUpDown.Value < 10)
                 DelayNumericUpDown.Value = 10;
 
             //TODO: Add to the ActionStack
 
-            ListFrames[FrameListView.SelectedIndex].Delay = (int)DelayNumericUpDown.Value;
+            ListFrames[FrameListView.SelectedIndex].Delay = DelayNumericUpDown.Value;
 
-            ((FrameListBoxItem)FrameListView.Items[FrameListView.SelectedIndex]).Delay = (int)DelayNumericUpDown.Value;
+            ((FrameListBoxItem)FrameListView.Items[FrameListView.SelectedIndex]).Delay = DelayNumericUpDown.Value;
         }
 
         private void OverrideDelay_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -2396,7 +2406,7 @@ namespace ScreenToGif.Windows
                                             frame.CursorInfo.Image.Width - 5,
                                             frame.CursorInfo.Image.Height - 5);
 
-                                        graph.DrawEllipse(new System.Drawing.Pen(new SolidBrush(System.Drawing.Color.FromArgb(120, color)), frame.CursorInfo.Image.Width), rectEllipse);
+                                        graph.DrawEllipse(new Pen(new SolidBrush(System.Drawing.Color.FromArgb(120, color)), frame.CursorInfo.Image.Width), rectEllipse);
                                     }
 
                                     #endregion

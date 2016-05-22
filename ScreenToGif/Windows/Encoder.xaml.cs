@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using ScreenToGif.Controls;
@@ -32,7 +34,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// The static Encoder window.
         /// </summary>
-        private static Encoder _encoder = null;
+        private static Encoder _encoder;
 
         /// <summary>
         /// List of Tasks, each task executes the encoding process for one recording.
@@ -56,7 +58,7 @@ namespace ScreenToGif.Windows
 
         #region Events
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             //TODO: Check for memmory leaks.
 
@@ -184,7 +186,7 @@ namespace ScreenToGif.Windows
                 Text = FindResource("Encoder.Starting").ToString(),
                 FrameCount = listFrames.Count,
                 Id = a,
-                TokenSource = cancellationTokenSource,
+                TokenSource = cancellationTokenSource
             };
 
             encoderItem.CloseButtonClickedEvent += EncoderItem_CloseButtonClickedEvent;
@@ -298,10 +300,6 @@ namespace ScreenToGif.Windows
                         {
                             listFrames = ImageMethods.CutUnchanged(listFrames, id, tokenSource);
                         }
-                    }
-                    else
-                    {
-                        //TODO: verify all rect.
                     }
 
                     #endregion
@@ -474,7 +472,7 @@ namespace ScreenToGif.Windows
                 var image = listFrames[0].ImageLocation.SourceFrom();
 
                 using (var aviWriter = new AviWriter(fileName, 1000 / listFrames[0].Delay, 
-                    (int)image.PixelWidth, (int)image.PixelHeight, 5000))
+                    image.PixelWidth, image.PixelHeight, 5000))
                 {
                     int numImage = 0;
                     foreach (FrameInfo frame in listFrames)
@@ -544,9 +542,9 @@ namespace ScreenToGif.Windows
 
         private static WindowState _lastState = WindowState.Normal;
 
-        private static System.Windows.Forms.Screen GetScreen(Window window)
+        private static Screen GetScreen(Window window)
         {
-            return System.Windows.Forms.Screen.FromHandle(new WindowInteropHelper(window).Handle);
+            return Screen.FromHandle(new WindowInteropHelper(window).Handle);
         }
 
         #endregion

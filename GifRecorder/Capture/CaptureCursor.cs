@@ -75,8 +75,8 @@ namespace ScreenToGif.Capture
             if (!Win32Stuff.GetIconInfo(hicon, out iconInfo))
                 return null;
 
-            point.X = cursorInfo.ptScreenPos.x - ((int)iconInfo.xHotspot);
-            point.Y = cursorInfo.ptScreenPos.y - ((int)iconInfo.yHotspot);
+            point.X = cursorInfo.ptScreenPos.x - iconInfo.xHotspot;
+            point.Y = cursorInfo.ptScreenPos.y - iconInfo.yHotspot;
 
             using (Bitmap maskBitmap = Image.FromHbitmap(iconInfo.hbmMask))
             {

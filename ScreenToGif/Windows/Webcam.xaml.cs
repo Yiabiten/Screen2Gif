@@ -1,25 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using ScreenToGif.FileWriters;
-using ScreenToGif.ImageUtil;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
 using ScreenToGif.Util.Enum;
 using ScreenToGif.Util.Writers;
 using ScreenToGif.Webcam.DirectX;
-using ScreenToGif.Windows.Other;
-using Timer = System.Windows.Forms.Timer;
+using Application = System.Windows.Application;
+using Cursors = System.Windows.Input.Cursors;
+using Point = System.Drawing.Point;
+using Size = System.Drawing.Size;
 
 namespace ScreenToGif.Windows
 {
@@ -63,7 +65,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// The numbers of frames, this is updated while recording.
         /// </summary>
-        private int _frameCount = 0;
+        private int _frameCount;
 
         #endregion
 
@@ -75,7 +77,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// The Path of the Temp folder.
         /// </summary>
-        private readonly string _pathTemp = System.IO.Path.GetTempPath() +
+        private readonly string _pathTemp = Path.GetTempPath() +
             String.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")); //TODO: Change to a more dynamic folder naming.
 
         private Timer _timer = new Timer();
@@ -278,7 +280,7 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             try
             {
@@ -397,11 +399,11 @@ namespace ScreenToGif.Windows
             ListFrames.Add(new FrameInfo(fileName, _timer.Interval));
 
             //Get the actual position of the form.
-            var lefttop = Dispatcher.Invoke(() => new System.Drawing.Point((int)Math.Round((Left + _offsetX) * _scale, MidpointRounding.AwayFromZero), 
+            var lefttop = Dispatcher.Invoke(() => new Point((int)Math.Round((Left + _offsetX) * _scale, MidpointRounding.AwayFromZero), 
                 (int)Math.Round((Top + _offsetY) * _scale,  MidpointRounding.AwayFromZero)));
 
             //Take a screenshot of the area.
-            var bt = Native.Capture(new System.Drawing.Size((int)Math.Round(WebcamControl.ActualWidth * _scale, MidpointRounding.AwayFromZero),
+            var bt = Native.Capture(new Size((int)Math.Round(WebcamControl.ActualWidth * _scale, MidpointRounding.AwayFromZero),
                 (int)Math.Round(WebcamControl.ActualHeight * _scale, MidpointRounding.AwayFromZero)), lefttop.X, lefttop.Y);
 
             _addDel.BeginInvoke(fileName, new Bitmap(bt), null, null); //CallBack
@@ -435,7 +437,7 @@ namespace ScreenToGif.Windows
             {
                 #region To Record
 
-                _timer = new Timer { Interval = 1000 / (int)FpsNumericUpDown.Value };
+                _timer = new Timer { Interval = 1000 / FpsNumericUpDown.Value };
 
                 ListFrames = new List<FrameInfo>();
 

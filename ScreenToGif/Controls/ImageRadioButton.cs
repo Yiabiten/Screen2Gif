@@ -11,9 +11,9 @@ namespace ScreenToGif.Controls
         public Viewbox _viewbox;
         public TextBlock _label;
 
-        public readonly static DependencyProperty ChildProperty;
-        public readonly static DependencyProperty TextProperty;
-        public readonly static DependencyProperty MaxSizeProperty;
+        public static readonly DependencyProperty ChildProperty;
+        public static readonly DependencyProperty TextProperty;
+        public static readonly DependencyProperty MaxSizeProperty;
 
         #endregion
 

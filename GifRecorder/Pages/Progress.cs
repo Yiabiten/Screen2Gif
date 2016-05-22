@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using ScreenToGif.Properties;
 
@@ -33,7 +28,7 @@ namespace ScreenToGif.Pages
 
             #region Localization of Labels
 
-            this.Text = Resources.Title_Progress;
+            Text = Resources.Title_Progress;
             lblSizeType.Text = Resources.Label_BarThicknessType;
             lblBarThickness.Text = Resources.Label_BarThickness;
             lblPosition.Text = Resources.Label_Position;
@@ -213,7 +208,7 @@ namespace ScreenToGif.Pages
 
             Settings.Default.Save();
 
-            this.DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
         }
 
         #endregion
@@ -230,7 +225,7 @@ namespace ScreenToGif.Pages
             {
                 const float maxValue = 100;
 
-                Brush fillBrush = null;
+                Brush fillBrush;
 
                 #region Pen
 
@@ -249,7 +244,7 @@ namespace ScreenToGif.Pages
 
                 #region Position
 
-                var rectangle = new Rectangle();
+                Rectangle rectangle;
                 
                 if (rbTop.Checked)
                 {

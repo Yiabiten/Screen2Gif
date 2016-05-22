@@ -1,4 +1,5 @@
-﻿using ScreenToGif.Properties;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace ScreenToGif.Pages
 {
@@ -7,7 +8,7 @@ namespace ScreenToGif.Pages
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -303,21 +304,21 @@ namespace ScreenToGif.Pages
 
         #endregion
 
-        private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.TrackBar trackRed;
-        private System.Windows.Forms.TrackBar trackGreen;
-        private System.Windows.Forms.TrackBar trackBlue;
-        private System.Windows.Forms.TrackBar trackAlpha;
-        private System.Windows.Forms.PictureBox pbColor;
-        private System.Windows.Forms.Label lblRed;
-        private System.Windows.Forms.Label lblGreen;
-        private System.Windows.Forms.Label lblBlue;
-        private System.Windows.Forms.Label lblAlpha;
-        private System.Windows.Forms.PictureBox pbRed;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.ToolTip tooltip;
+        private Button btnOk;
+        private Button btnCancel;
+        private TrackBar trackRed;
+        private TrackBar trackGreen;
+        private TrackBar trackBlue;
+        private TrackBar trackAlpha;
+        private PictureBox pbColor;
+        private Label lblRed;
+        private Label lblGreen;
+        private Label lblBlue;
+        private Label lblAlpha;
+        private PictureBox pbRed;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox3;
+        private ToolTip tooltip;
     }
 }

@@ -1,4 +1,6 @@
-﻿using ScreenToGif.Properties;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+using ScreenToGif.Controls;
 
 namespace ScreenToGif.Pages
 {
@@ -7,7 +9,7 @@ namespace ScreenToGif.Pages
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -441,25 +443,25 @@ namespace ScreenToGif.Pages
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.NumericUpDown numEraser;
-        private System.Windows.Forms.NumericUpDown numBrush;
-        private System.Windows.Forms.TrackBar trackEraser;
-        private System.Windows.Forms.TrackBar trackBrush;
-        private System.Windows.Forms.Label lblEraserSize;
-        private System.Windows.Forms.Label lblBrushSize;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnDone;
-        private Controls.FreeDrawPanel panelDrawing;
-        private System.Windows.Forms.PictureBox pbSeparator;
-        private System.Windows.Forms.Button btnConfig;
-        private System.Windows.Forms.PictureBox pbColor;
-        private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.ColorDialog colorDialog;
-        private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.CheckBox cbCircle;
-        private System.Windows.Forms.CheckBox cbSquare;
-        private System.Windows.Forms.CheckBox cbEraser;
-        private System.Windows.Forms.TableLayoutPanel panelConfig;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private NumericUpDown numEraser;
+        private NumericUpDown numBrush;
+        private TrackBar trackEraser;
+        private TrackBar trackBrush;
+        private Label lblEraserSize;
+        private Label lblBrushSize;
+        private Button btnCancel;
+        private Button btnDone;
+        private FreeDrawPanel panelDrawing;
+        private PictureBox pbSeparator;
+        private Button btnConfig;
+        private PictureBox pbColor;
+        private Button btnClear;
+        private ColorDialog colorDialog;
+        private ToolTip toolTip;
+        private CheckBox cbCircle;
+        private CheckBox cbSquare;
+        private CheckBox cbEraser;
+        private TableLayoutPanel panelConfig;
     }
 }

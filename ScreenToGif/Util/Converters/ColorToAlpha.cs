@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
 
@@ -25,7 +21,7 @@ namespace ScreenToGif.Util.Converters
             if (String.IsNullOrEmpty(alphaAux))
                 return value;
 
-            int alpha = 0;
+            int alpha;
             if (!int.TryParse(alphaAux, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out alpha))
                 return value;
 

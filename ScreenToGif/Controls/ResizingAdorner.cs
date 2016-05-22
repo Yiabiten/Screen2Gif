@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -78,7 +77,7 @@ namespace ScreenToGif.Controls
         /// </summary>
         private void HandleBottomRight(object sender, DragDeltaEventArgs args)
         {
-            FrameworkElement adornedElement = this.AdornedElement as FrameworkElement;
+            FrameworkElement adornedElement = AdornedElement as FrameworkElement;
             Thumb hitThumb = sender as Thumb;
 
             if (adornedElement == null || hitThumb == null) return;
@@ -108,7 +107,7 @@ namespace ScreenToGif.Controls
         /// </summary>
         private void HandleTopRight(object sender, DragDeltaEventArgs args)
         {
-            FrameworkElement adornedElement = this.AdornedElement as FrameworkElement;
+            FrameworkElement adornedElement = AdornedElement as FrameworkElement;
             Thumb hitThumb = sender as Thumb;
 
             if (adornedElement == null || hitThumb == null) return;
@@ -194,7 +193,7 @@ namespace ScreenToGif.Controls
         /// </summary>
         private void HandleBottomMiddle(object sender, DragDeltaEventArgs args)
         {
-            FrameworkElement adornedElement = this.AdornedElement as FrameworkElement;
+            FrameworkElement adornedElement = AdornedElement as FrameworkElement;
             Thumb hitThumb = sender as Thumb;
 
             if (adornedElement == null || hitThumb == null) return;
@@ -219,7 +218,7 @@ namespace ScreenToGif.Controls
         /// </summary>
         private void HandleTopMiddle(object sender, DragDeltaEventArgs args)
         {
-            FrameworkElement adornedElement = this.AdornedElement as FrameworkElement;
+            FrameworkElement adornedElement = AdornedElement as FrameworkElement;
             Thumb hitThumb = sender as Thumb;
 
             if (adornedElement == null || hitThumb == null) return;
@@ -244,7 +243,7 @@ namespace ScreenToGif.Controls
         /// </summary>
         private void HandleLeftMiddle(object sender, DragDeltaEventArgs args)
         {
-            FrameworkElement adornedElement = this.AdornedElement as FrameworkElement;
+            FrameworkElement adornedElement = AdornedElement as FrameworkElement;
             Thumb hitThumb = sender as Thumb;
 
             if (adornedElement == null || hitThumb == null) return;
@@ -269,7 +268,7 @@ namespace ScreenToGif.Controls
         /// </summary>
         private void HandleRightMiddle(object sender, DragDeltaEventArgs args)
         {
-            FrameworkElement adornedElement = this.AdornedElement as FrameworkElement;
+            FrameworkElement adornedElement = AdornedElement as FrameworkElement;
             Thumb hitThumb = sender as Thumb;
 
             if (adornedElement == null || hitThumb == null) return;
@@ -301,8 +300,8 @@ namespace ScreenToGif.Controls
             double desiredHeight = AdornedElement.DesiredSize.Height;
 
             // adornerWidth & adornerHeight are used for placement as well.
-            double adornerWidth = this.DesiredSize.Width;
-            double adornerHeight = this.DesiredSize.Height;
+            double adornerWidth = DesiredSize.Width;
+            double adornerHeight = DesiredSize.Height;
 
             _topLeft.Arrange(new Rect(-adornerWidth / 2, -adornerHeight / 2, adornerWidth, adornerHeight));
             _topRight.Arrange(new Rect(adornerWidth / 2, -adornerHeight / 2, adornerWidth, adornerHeight));

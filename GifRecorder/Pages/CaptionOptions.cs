@@ -30,7 +30,7 @@ namespace ScreenToGif.Pages
 
             #region Localization of Labels
 
-            this.Text = Resources.Con_CaptionOptions;
+            Text = Resources.Con_CaptionOptions;
             lblSizeType.Text = Resources.Label_FontSizeAs;
             lblFontTitle.Text = Resources.Label_Font;
             lblFontSize2.Text = Resources.Label_FontSize;
@@ -175,7 +175,7 @@ namespace ScreenToGif.Pages
 
             Settings.Default.Save();
 
-            this.DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
         }
 
         #region Events

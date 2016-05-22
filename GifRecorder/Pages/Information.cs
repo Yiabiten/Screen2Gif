@@ -182,7 +182,7 @@ namespace ScreenToGif.Pages
 
         private void linkUpdates_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Cursor = Cursors.AppStarting;
+            Cursor = Cursors.AppStarting;
 
             var webClient = new WebClient();
             webClient.DownloadStringCompleted += webClient_DownloadStringCompleted;
@@ -236,7 +236,7 @@ namespace ScreenToGif.Pages
                     }
                     else
                     {
-                        this.Cursor = Cursors.Default;
+                        Cursor = Cursors.Default;
                         MessageBox.Show(this, "You are up to the date", "No New Release", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }

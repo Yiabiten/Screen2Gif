@@ -8,14 +8,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.CodeDom.Compiler;
+using System.Configuration;
+using System.Diagnostics;
+using System.Drawing;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Forms;
+using System.Windows.Ink;
+using Color = System.Windows.Media.Color;
+using FontFamily = System.Windows.Media.FontFamily;
+using FontStyle = System.Windows.FontStyle;
+using HorizontalAlignment = System.Windows.HorizontalAlignment;
+
 namespace ScreenToGif.Properties {
     
     
-    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    [CompilerGenerated()]
+    [GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    internal sealed partial class Settings : ApplicationSettingsBase {
         
-        private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
+        private static Settings defaultInstance = ((Settings)(Synchronized(new Settings())));
         
         public static Settings Default {
             get {
@@ -23,9 +36,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("True")]
         public bool UpgradeRequired {
             get {
                 return ((bool)(this["UpgradeRequired"]));
@@ -35,9 +48,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool FullScreen {
             get {
                 return ((bool)(this["FullScreen"]));
@@ -47,9 +60,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool PreStart {
             get {
                 return ((bool)(this["PreStart"]));
@@ -59,9 +72,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("True")]
         public bool ShowCursor {
             get {
                 return ((bool)(this["ShowCursor"]));
@@ -71,9 +84,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool Snapshot {
             get {
                 return ((bool)(this["Snapshot"]));
@@ -83,9 +96,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("0")]
         public int StartUp {
             get {
                 return ((int)(this["StartUp"]));
@@ -95,9 +108,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool MouseClicks {
             get {
                 return ((bool)(this["MouseClicks"]));
@@ -107,9 +120,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool UseDefaultOutput {
             get {
                 return ((bool)(this["UseDefaultOutput"]));
@@ -119,9 +132,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("")]
         public string DefaultOutput {
             get {
                 return ((string)(this["DefaultOutput"]));
@@ -131,9 +144,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("auto")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("auto")]
         public string Language {
             get {
                 return ((string)(this["Language"]));
@@ -143,9 +156,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("15")]
         public int LastFps {
             get {
                 return ((int)(this["LastFps"]));
@@ -155,9 +168,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("518")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("518")]
         public int Width {
             get {
                 return ((int)(this["Width"]));
@@ -167,9 +180,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("269")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("269")]
         public int Height {
             get {
                 return ((int)(this["Height"]));
@@ -179,9 +192,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("True")]
         public bool CustomEncoding {
             get {
                 return ((bool)(this["CustomEncoding"]));
@@ -191,21 +204,21 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FF32CD32")]
-        public global::System.Windows.Media.Color TransparentColor {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("#FF32CD32")]
+        public Color TransparentColor {
             get {
-                return ((global::System.Windows.Media.Color)(this["TransparentColor"]));
+                return ((Color)(this["TransparentColor"]));
             }
             set {
                 this["TransparentColor"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("True")]
         public bool PaintTransparent {
             get {
                 return ((bool)(this["PaintTransparent"]));
@@ -215,9 +228,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("True")]
         public bool Looped {
             get {
                 return ((bool)(this["Looped"]));
@@ -227,9 +240,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("2")]
         public int RepeatCount {
             get {
                 return ((int)(this["RepeatCount"]));
@@ -239,9 +252,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("True")]
         public bool RepeatForever {
             get {
                 return ((bool)(this["RepeatForever"]));
@@ -251,9 +264,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("10")]
         public int Quality {
             get {
                 return ((int)(this["Quality"]));
@@ -263,33 +276,33 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("F7")]
-        public global::System.Windows.Forms.Keys StartPauseKey {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("F7")]
+        public Keys StartPauseKey {
             get {
-                return ((global::System.Windows.Forms.Keys)(this["StartPauseKey"]));
+                return ((Keys)(this["StartPauseKey"]));
             }
             set {
                 this["StartPauseKey"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("F8")]
-        public global::System.Windows.Forms.Keys StopKey {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("F8")]
+        public Keys StopKey {
             get {
-                return ((global::System.Windows.Forms.Keys)(this["StopKey"]));
+                return ((Keys)(this["StopKey"]));
             }
             set {
                 this["StopKey"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("True")]
         public bool DetectUnchanged {
             get {
                 return ((bool)(this["DetectUnchanged"]));
@@ -299,45 +312,45 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FFF5F5F5")]
-        public global::System.Windows.Media.Color GridColor1 {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("#FFF5F5F5")]
+        public Color GridColor1 {
             get {
-                return ((global::System.Windows.Media.Color)(this["GridColor1"]));
+                return ((Color)(this["GridColor1"]));
             }
             set {
                 this["GridColor1"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FFF0F0F0")]
-        public global::System.Windows.Media.Color GridColor2 {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("#FFF0F0F0")]
+        public Color GridColor2 {
             get {
-                return ((global::System.Windows.Media.Color)(this["GridColor2"]));
+                return ((Color)(this["GridColor2"]));
             }
             set {
                 this["GridColor2"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0,0,20,20")]
-        public global::System.Windows.Rect GridSize {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("0,0,20,20")]
+        public Rect GridSize {
             get {
-                return ((global::System.Windows.Rect)(this["GridSize"]));
+                return ((Rect)(this["GridSize"]));
             }
             set {
                 this["GridSize"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool FixedFrameRate {
             get {
                 return ((bool)(this["FixedFrameRate"]));
@@ -347,9 +360,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("1000")]
         public int SnapshotDefaultDelay {
             get {
                 return ((int)(this["SnapshotDefaultDelay"]));
@@ -359,9 +372,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("15")]
         public int LastFpsImport {
             get {
                 return ((int)(this["LastFpsImport"]));
@@ -371,33 +384,33 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFFFF")]
-        public global::System.Windows.Media.Color InsertFillColor {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("#FFFFFFFF")]
+        public Color InsertFillColor {
             get {
-                return ((global::System.Windows.Media.Color)(this["InsertFillColor"]));
+                return ((Color)(this["InsertFillColor"]));
             }
             set {
                 this["InsertFillColor"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SourceCopy")]
-        public global::System.Drawing.CopyPixelOperation CaptureMode {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("SourceCopy")]
+        public CopyPixelOperation CaptureMode {
             get {
-                return ((global::System.Drawing.CopyPixelOperation)(this["CaptureMode"]));
+                return ((CopyPixelOperation)(this["CaptureMode"]));
             }
             set {
                 this["CaptureMode"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("-1")]
         public double EditorTop {
             get {
                 return ((double)(this["EditorTop"]));
@@ -407,9 +420,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("-1")]
         public double EditorLeft {
             get {
                 return ((double)(this["EditorLeft"]));
@@ -419,9 +432,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("-1")]
         public double EditorHeight {
             get {
                 return ((double)(this["EditorHeight"]));
@@ -431,9 +444,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("-1")]
         public double EditorWidth {
             get {
                 return ((double)(this["EditorWidth"]));
@@ -443,21 +456,21 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
-        public global::System.Windows.WindowState EditorWindowState {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Normal")]
+        public WindowState EditorWindowState {
             get {
-                return ((global::System.Windows.WindowState)(this["EditorWindowState"]));
+                return ((WindowState)(this["EditorWindowState"]));
             }
             set {
                 this["EditorWindowState"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Text")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Text")]
         public string CaptionText {
             get {
                 return ((string)(this["CaptionText"]));
@@ -467,45 +480,45 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI")]
-        public global::System.Windows.Media.FontFamily CaptionFontFamily {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Segoe UI")]
+        public FontFamily CaptionFontFamily {
             get {
-                return ((global::System.Windows.Media.FontFamily)(this["CaptionFontFamily"]));
+                return ((FontFamily)(this["CaptionFontFamily"]));
             }
             set {
                 this["CaptionFontFamily"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
-        public global::System.Windows.FontStyle CaptionFontStyle {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Normal")]
+        public FontStyle CaptionFontStyle {
             get {
-                return ((global::System.Windows.FontStyle)(this["CaptionFontStyle"]));
+                return ((FontStyle)(this["CaptionFontStyle"]));
             }
             set {
                 this["CaptionFontStyle"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Bold")]
-        public global::System.Windows.FontWeight CaptionFontWeight {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Bold")]
+        public FontWeight CaptionFontWeight {
             get {
-                return ((global::System.Windows.FontWeight)(this["CaptionFontWeight"]));
+                return ((FontWeight)(this["CaptionFontWeight"]));
             }
             set {
                 this["CaptionFontWeight"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("30")]
         public double CaptionFontSize {
             get {
                 return ((double)(this["CaptionFontSize"]));
@@ -515,21 +528,21 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFFFF")]
-        public global::System.Windows.Media.Color CaptionFontColor {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("#FFFFFFFF")]
+        public Color CaptionFontColor {
             get {
-                return ((global::System.Windows.Media.Color)(this["CaptionFontColor"]));
+                return ((Color)(this["CaptionFontColor"]));
             }
             set {
                 this["CaptionFontColor"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("1")]
         public double CaptionOutlineThickness {
             get {
                 return ((double)(this["CaptionOutlineThickness"]));
@@ -539,45 +552,45 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FF000000")]
-        public global::System.Windows.Media.Color CaptionOutlineColor {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("#FF000000")]
+        public Color CaptionOutlineColor {
             get {
-                return ((global::System.Windows.Media.Color)(this["CaptionOutlineColor"]));
+                return ((Color)(this["CaptionOutlineColor"]));
             }
             set {
                 this["CaptionOutlineColor"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Bottom")]
-        public global::System.Windows.VerticalAlignment CaptionVerticalAligment {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Bottom")]
+        public VerticalAlignment CaptionVerticalAligment {
             get {
-                return ((global::System.Windows.VerticalAlignment)(this["CaptionVerticalAligment"]));
+                return ((VerticalAlignment)(this["CaptionVerticalAligment"]));
             }
             set {
                 this["CaptionVerticalAligment"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Center")]
-        public global::System.Windows.HorizontalAlignment CaptionHorizontalAligment {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Center")]
+        public HorizontalAlignment CaptionHorizontalAligment {
             get {
-                return ((global::System.Windows.HorizontalAlignment)(this["CaptionHorizontalAligment"]));
+                return ((HorizontalAlignment)(this["CaptionHorizontalAligment"]));
             }
             set {
                 this["CaptionHorizontalAligment"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("10")]
         public double CaptionMargin {
             get {
                 return ((double)(this["CaptionMargin"]));
@@ -587,9 +600,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Text")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Text")]
         public string FreeTextText {
             get {
                 return ((string)(this["FreeTextText"]));
@@ -599,57 +612,57 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI")]
-        public global::System.Windows.Media.FontFamily FreeTextFontFamily {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Segoe UI")]
+        public FontFamily FreeTextFontFamily {
             get {
-                return ((global::System.Windows.Media.FontFamily)(this["FreeTextFontFamily"]));
+                return ((FontFamily)(this["FreeTextFontFamily"]));
             }
             set {
                 this["FreeTextFontFamily"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
-        public global::System.Windows.FontStyle FreeTextFontStyle {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Normal")]
+        public FontStyle FreeTextFontStyle {
             get {
-                return ((global::System.Windows.FontStyle)(this["FreeTextFontStyle"]));
+                return ((FontStyle)(this["FreeTextFontStyle"]));
             }
             set {
                 this["FreeTextFontStyle"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
-        public global::System.Windows.FontWeight FreeTextFontWeight {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Normal")]
+        public FontWeight FreeTextFontWeight {
             get {
-                return ((global::System.Windows.FontWeight)(this["FreeTextFontWeight"]));
+                return ((FontWeight)(this["FreeTextFontWeight"]));
             }
             set {
                 this["FreeTextFontWeight"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FF000000")]
-        public global::System.Windows.Media.Color FreeTextFontColor {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("#FF000000")]
+        public Color FreeTextFontColor {
             get {
-                return ((global::System.Windows.Media.Color)(this["FreeTextFontColor"]));
+                return ((Color)(this["FreeTextFontColor"]));
             }
             set {
                 this["FreeTextFontColor"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("14")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("14")]
         public double FreeTextFontSize {
             get {
                 return ((double)(this["FreeTextFontSize"]));
@@ -659,9 +672,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("500")]
         public int NewImageWidth {
             get {
                 return ((int)(this["NewImageWidth"]));
@@ -671,9 +684,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("200")]
         public int NewImageHeight {
             get {
                 return ((int)(this["NewImageHeight"]));
@@ -683,21 +696,21 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFFFF")]
-        public global::System.Windows.Media.Color NewImageColor {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("#FFFFFFFF")]
+        public Color NewImageColor {
             get {
-                return ((global::System.Windows.Media.Color)(this["NewImageColor"]));
+                return ((Color)(this["NewImageColor"]));
             }
             set {
                 this["NewImageColor"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Title")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Title")]
         public string TitleFrameText {
             get {
                 return ((string)(this["TitleFrameText"]));
@@ -707,93 +720,93 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI")]
-        public global::System.Windows.Media.FontFamily TitleFrameFontFamily {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Segoe UI")]
+        public FontFamily TitleFrameFontFamily {
             get {
-                return ((global::System.Windows.Media.FontFamily)(this["TitleFrameFontFamily"]));
+                return ((FontFamily)(this["TitleFrameFontFamily"]));
             }
             set {
                 this["TitleFrameFontFamily"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
-        public global::System.Windows.FontStyle TitleFrameFontStyle {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Normal")]
+        public FontStyle TitleFrameFontStyle {
             get {
-                return ((global::System.Windows.FontStyle)(this["TitleFrameFontStyle"]));
+                return ((FontStyle)(this["TitleFrameFontStyle"]));
             }
             set {
                 this["TitleFrameFontStyle"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
-        public global::System.Windows.FontWeight TitleFrameFontWeight {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Normal")]
+        public FontWeight TitleFrameFontWeight {
             get {
-                return ((global::System.Windows.FontWeight)(this["TitleFrameFontWeight"]));
+                return ((FontWeight)(this["TitleFrameFontWeight"]));
             }
             set {
                 this["TitleFrameFontWeight"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FF000000")]
-        public global::System.Windows.Media.Color TitleFrameFontColor {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("#FF000000")]
+        public Color TitleFrameFontColor {
             get {
-                return ((global::System.Windows.Media.Color)(this["TitleFrameFontColor"]));
+                return ((Color)(this["TitleFrameFontColor"]));
             }
             set {
                 this["TitleFrameFontColor"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Center")]
-        public global::System.Windows.VerticalAlignment TitleFrameVerticalAligment {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Center")]
+        public VerticalAlignment TitleFrameVerticalAligment {
             get {
-                return ((global::System.Windows.VerticalAlignment)(this["TitleFrameVerticalAligment"]));
+                return ((VerticalAlignment)(this["TitleFrameVerticalAligment"]));
             }
             set {
                 this["TitleFrameVerticalAligment"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Center")]
-        public global::System.Windows.HorizontalAlignment TitleFrameHorizontalAligment {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Center")]
+        public HorizontalAlignment TitleFrameHorizontalAligment {
             get {
-                return ((global::System.Windows.HorizontalAlignment)(this["TitleFrameHorizontalAligment"]));
+                return ((HorizontalAlignment)(this["TitleFrameHorizontalAligment"]));
             }
             set {
                 this["TitleFrameHorizontalAligment"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FFD7D7D7")]
-        public global::System.Windows.Media.Color TitleFrameBackgroundColor {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("#FFD7D7D7")]
+        public Color TitleFrameBackgroundColor {
             get {
-                return ((global::System.Windows.Media.Color)(this["TitleFrameBackgroundColor"]));
+                return ((Color)(this["TitleFrameBackgroundColor"]));
             }
             set {
                 this["TitleFrameBackgroundColor"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("20")]
         public double TitleFrameFontSize {
             get {
                 return ((double)(this["TitleFrameFontSize"]));
@@ -803,9 +816,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("0")]
         public double TitleFrameMargin {
             get {
                 return ((double)(this["TitleFrameMargin"]));
@@ -815,9 +828,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("-1")]
         public double RecorderTop {
             get {
                 return ((double)(this["RecorderTop"]));
@@ -827,9 +840,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("-1")]
         public double RecorderLeft {
             get {
                 return ((double)(this["RecorderLeft"]));
@@ -839,9 +852,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("")]
         public string WatermarkFilePath {
             get {
                 return ((string)(this["WatermarkFilePath"]));
@@ -851,9 +864,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.7")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("0.7")]
         public double WatermarkOpacity {
             get {
                 return ((double)(this["WatermarkOpacity"]));
@@ -863,9 +876,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("1")]
         public double WatermarkSize {
             get {
                 return ((double)(this["WatermarkSize"]));
@@ -875,33 +888,33 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Bottom")]
-        public global::System.Windows.VerticalAlignment WatermarkVerticalAligment {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Bottom")]
+        public VerticalAlignment WatermarkVerticalAligment {
             get {
-                return ((global::System.Windows.VerticalAlignment)(this["WatermarkVerticalAligment"]));
+                return ((VerticalAlignment)(this["WatermarkVerticalAligment"]));
             }
             set {
                 this["WatermarkVerticalAligment"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Right")]
-        public global::System.Windows.HorizontalAlignment WatermarkHorizontalAligment {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Right")]
+        public HorizontalAlignment WatermarkHorizontalAligment {
             get {
-                return ((global::System.Windows.HorizontalAlignment)(this["WatermarkHorizontalAligment"]));
+                return ((HorizontalAlignment)(this["WatermarkHorizontalAligment"]));
             }
             set {
                 this["WatermarkHorizontalAligment"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("10")]
         public double WatermarkMargin {
             get {
                 return ((double)(this["WatermarkMargin"]));
@@ -911,21 +924,21 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FF000000")]
-        public global::System.Windows.Media.Color BorderColor {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("#FF000000")]
+        public Color BorderColor {
             get {
-                return ((global::System.Windows.Media.Color)(this["BorderColor"]));
+                return ((Color)(this["BorderColor"]));
             }
             set {
                 this["BorderColor"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("1")]
         public double BorderLeftThickness {
             get {
                 return ((double)(this["BorderLeftThickness"]));
@@ -935,9 +948,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("1")]
         public double BorderTopThickness {
             get {
                 return ((double)(this["BorderTopThickness"]));
@@ -947,9 +960,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("1")]
         public double BorderRightThickness {
             get {
                 return ((double)(this["BorderRightThickness"]));
@@ -959,9 +972,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("1")]
         public double BorderBottomThickness {
             get {
                 return ((double)(this["BorderBottomThickness"]));
@@ -971,9 +984,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("5")]
         public int FreeDrawingPenWidth {
             get {
                 return ((int)(this["FreeDrawingPenWidth"]));
@@ -983,9 +996,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("5")]
         public int FreeDrawingPenHeight {
             get {
                 return ((int)(this["FreeDrawingPenHeight"]));
@@ -995,33 +1008,33 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FF000000")]
-        public global::System.Windows.Media.Color FreeDrawingColor {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("#FF000000")]
+        public Color FreeDrawingColor {
             get {
-                return ((global::System.Windows.Media.Color)(this["FreeDrawingColor"]));
+                return ((Color)(this["FreeDrawingColor"]));
             }
             set {
                 this["FreeDrawingColor"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Ellipse")]
-        public global::System.Windows.Ink.StylusTip FreeDrawingStylusTip {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Ellipse")]
+        public StylusTip FreeDrawingStylusTip {
             get {
-                return ((global::System.Windows.Ink.StylusTip)(this["FreeDrawingStylusTip"]));
+                return ((StylusTip)(this["FreeDrawingStylusTip"]));
             }
             set {
                 this["FreeDrawingStylusTip"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool FreeDrawingIsHighlighter {
             get {
                 return ((bool)(this["FreeDrawingIsHighlighter"]));
@@ -1031,9 +1044,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool FreeDrawingFitToCurve {
             get {
                 return ((bool)(this["FreeDrawingFitToCurve"]));
@@ -1043,9 +1056,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("10")]
         public int FreeDrawingEraserWidth {
             get {
                 return ((int)(this["FreeDrawingEraserWidth"]));
@@ -1055,9 +1068,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("10")]
         public int FreeDrawingEraserHeight {
             get {
                 return ((int)(this["FreeDrawingEraserHeight"]));
@@ -1067,21 +1080,21 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Rectangle")]
-        public global::System.Windows.Ink.StylusTip FreeDrawingEraserStylusTip {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Rectangle")]
+        public StylusTip FreeDrawingEraserStylusTip {
             get {
-                return ((global::System.Windows.Ink.StylusTip)(this["FreeDrawingEraserStylusTip"]));
+                return ((StylusTip)(this["FreeDrawingEraserStylusTip"]));
             }
             set {
                 this["FreeDrawingEraserStylusTip"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool EditorExtendChrome {
             get {
                 return ((bool)(this["EditorExtendChrome"]));
@@ -1091,9 +1104,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("66")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("66")]
         public int PlaybackOverrideDelay {
             get {
                 return ((int)(this["PlaybackOverrideDelay"]));
@@ -1103,9 +1116,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("10")]
         public int PlaybackChangeDelay {
             get {
                 return ((int)(this["PlaybackChangeDelay"]));
@@ -1115,9 +1128,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("30")]
         public int CinemagraphPenWidth {
             get {
                 return ((int)(this["CinemagraphPenWidth"]));
@@ -1127,9 +1140,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("30")]
         public int CinemagraphPenHeight {
             get {
                 return ((int)(this["CinemagraphPenHeight"]));
@@ -1139,30 +1152,30 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Ellipse")]
-        public global::System.Windows.Ink.StylusTip CinemagraphStylusTip {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Ellipse")]
+        public StylusTip CinemagraphStylusTip {
             get {
-                return ((global::System.Windows.Ink.StylusTip)(this["CinemagraphStylusTip"]));
+                return ((StylusTip)(this["CinemagraphStylusTip"]));
             }
             set {
                 this["CinemagraphStylusTip"] = value;
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [ApplicationScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("True")]
         public bool CinemagraphIsHighlighter {
             get {
                 return ((bool)(this["CinemagraphIsHighlighter"]));
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool CinemagraphFitToCurve {
             get {
                 return ((bool)(this["CinemagraphFitToCurve"]));
@@ -1172,9 +1185,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("30")]
         public int CinemagraphEraserWidth {
             get {
                 return ((int)(this["CinemagraphEraserWidth"]));
@@ -1184,9 +1197,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("30")]
         public int CinemagraphEraserHeight {
             get {
                 return ((int)(this["CinemagraphEraserHeight"]));
@@ -1196,45 +1209,45 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Rectangle")]
-        public global::System.Windows.Ink.StylusTip CinemagraphEraserStylusTip {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Rectangle")]
+        public StylusTip CinemagraphEraserStylusTip {
             get {
-                return ((global::System.Windows.Ink.StylusTip)(this["CinemagraphEraserStylusTip"]));
+                return ((StylusTip)(this["CinemagraphEraserStylusTip"]));
             }
             set {
                 this["CinemagraphEraserStylusTip"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#2000FF10")]
-        public global::System.Windows.Media.Color CinemagraphColor {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("#2000FF10")]
+        public Color CinemagraphColor {
             get {
-                return ((global::System.Windows.Media.Color)(this["CinemagraphColor"]));
+                return ((Color)(this["CinemagraphColor"]));
             }
             set {
                 this["CinemagraphColor"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF00")]
-        public global::System.Windows.Media.Color ClickColor {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("#FFFFFF00")]
+        public Color ClickColor {
             get {
-                return ((global::System.Windows.Media.Color)(this["ClickColor"]));
+                return ((Color)(this["ClickColor"]));
             }
             set {
                 this["ClickColor"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("2")]
         public int FadeFrameCount {
             get {
                 return ((int)(this["FadeFrameCount"]));
@@ -1244,9 +1257,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("500")]
         public int TitleFrameDelay {
             get {
                 return ((int)(this["TitleFrameDelay"]));
@@ -1256,33 +1269,33 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FF000000")]
-        public global::System.Windows.Media.Color BoardColor {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("#FF000000")]
+        public Color BoardColor {
             get {
-                return ((global::System.Windows.Media.Color)(this["BoardColor"]));
+                return ((Color)(this["BoardColor"]));
             }
             set {
                 this["BoardColor"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Ellipse")]
-        public global::System.Windows.Ink.StylusTip BoardStylusTip {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Ellipse")]
+        public StylusTip BoardStylusTip {
             get {
-                return ((global::System.Windows.Ink.StylusTip)(this["BoardStylusTip"]));
+                return ((StylusTip)(this["BoardStylusTip"]));
             }
             set {
                 this["BoardStylusTip"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("10")]
         public int BoardStylusWidth {
             get {
                 return ((int)(this["BoardStylusWidth"]));
@@ -1292,9 +1305,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("10")]
         public int BoardStylusHeight {
             get {
                 return ((int)(this["BoardStylusHeight"]));
@@ -1304,9 +1317,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool BoardIsHighlighter {
             get {
                 return ((bool)(this["BoardIsHighlighter"]));
@@ -1316,9 +1329,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool BoardFitToCurve {
             get {
                 return ((bool)(this["BoardFitToCurve"]));
@@ -1328,9 +1341,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("10")]
         public int BoardEraserWidth {
             get {
                 return ((int)(this["BoardEraserWidth"]));
@@ -1340,9 +1353,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("10")]
         public int BoardEraserHeight {
             get {
                 return ((int)(this["BoardEraserHeight"]));
@@ -1352,69 +1365,69 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Rectangle")]
-        public global::System.Windows.Ink.StylusTip BoardEraserStylusTip {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("Rectangle")]
+        public StylusTip BoardEraserStylusTip {
             get {
-                return ((global::System.Windows.Ink.StylusTip)(this["BoardEraserStylusTip"]));
+                return ((StylusTip)(this["BoardEraserStylusTip"]));
             }
             set {
                 this["BoardEraserStylusTip"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFFFF")]
-        public global::System.Windows.Media.Color BoardGridColor1 {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("#FFFFFFFF")]
+        public Color BoardGridColor1 {
             get {
-                return ((global::System.Windows.Media.Color)(this["BoardGridColor1"]));
+                return ((Color)(this["BoardGridColor1"]));
             }
             set {
                 this["BoardGridColor1"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFFFF")]
-        public global::System.Windows.Media.Color BoardGridColor2 {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("#FFFFFFFF")]
+        public Color BoardGridColor2 {
             get {
-                return ((global::System.Windows.Media.Color)(this["BoardGridColor2"]));
+                return ((Color)(this["BoardGridColor2"]));
             }
             set {
                 this["BoardGridColor2"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0,0,20,20")]
-        public global::System.Windows.Rect BoardGridSize {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("0,0,20,20")]
+        public Rect BoardGridSize {
             get {
-                return ((global::System.Windows.Rect)(this["BoardGridSize"]));
+                return ((Rect)(this["BoardGridSize"]));
             }
             set {
                 this["BoardGridSize"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFFFF")]
-        public global::System.Windows.Media.Color BoardGridBackground {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("#FFFFFFFF")]
+        public Color BoardGridBackground {
             get {
-                return ((global::System.Windows.Media.Color)(this["BoardGridBackground"]));
+                return ((Color)(this["BoardGridBackground"]));
             }
             set {
                 this["BoardGridBackground"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("True")]
         public bool TransparentCorner {
             get {
                 return ((bool)(this["TransparentCorner"]));
@@ -1424,9 +1437,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-666")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("-666")]
         public int WatermarkTop {
             get {
                 return ((int)(this["WatermarkTop"]));
@@ -1436,9 +1449,9 @@ namespace ScreenToGif.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-666")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("-666")]
         public int WatermarkLeft {
             get {
                 return ((int)(this["WatermarkLeft"]));

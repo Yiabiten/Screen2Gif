@@ -15,17 +15,17 @@ namespace ScreenToGif.Controls
     {
         #region Variables
 
-        public readonly static DependencyProperty ImageProperty;
-        public readonly static DependencyProperty MaxSizeProperty;
-        public readonly static DependencyProperty PercentageProperty;
-        public readonly static DependencyProperty CurrentFrameProperty;
-        public readonly static DependencyProperty FrameCountProperty;
-        public readonly static DependencyProperty TextProperty;
-        public readonly static DependencyProperty IdProperty;
-        public readonly static DependencyProperty TokenProperty;
-        public readonly static DependencyProperty StatusProperty;
-        public readonly static DependencyProperty SizeInBytesProperty;
-        public readonly static DependencyProperty OutputPathProperty;
+        public static readonly DependencyProperty ImageProperty;
+        public static readonly DependencyProperty MaxSizeProperty;
+        public static readonly DependencyProperty PercentageProperty;
+        public static readonly DependencyProperty CurrentFrameProperty;
+        public static readonly DependencyProperty FrameCountProperty;
+        public static readonly DependencyProperty TextProperty;
+        public static readonly DependencyProperty IdProperty;
+        public static readonly DependencyProperty TokenProperty;
+        public static readonly DependencyProperty StatusProperty;
+        public static readonly DependencyProperty SizeInBytesProperty;
+        public static readonly DependencyProperty OutputPathProperty;
 
         #endregion
 

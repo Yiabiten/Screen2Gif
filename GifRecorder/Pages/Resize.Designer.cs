@@ -1,4 +1,6 @@
-﻿using ScreenToGif.Properties;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+using ScreenToGif.Properties;
 
 namespace ScreenToGif.Pages
 {
@@ -7,7 +9,7 @@ namespace ScreenToGif.Pages
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -130,12 +132,12 @@ namespace ScreenToGif.Pages
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pbImage;
-        private System.Windows.Forms.ContextMenuStrip contextMenu;
-        private System.Windows.Forms.ToolStripMenuItem resetSizeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem freeAspectRatioToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem doneToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cancelToolStripMenuItem;
+        private PictureBox pbImage;
+        private ContextMenuStrip contextMenu;
+        private ToolStripMenuItem resetSizeToolStripMenuItem;
+        private ToolStripMenuItem freeAspectRatioToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem doneToolStripMenuItem;
+        private ToolStripMenuItem cancelToolStripMenuItem;
     }
 }

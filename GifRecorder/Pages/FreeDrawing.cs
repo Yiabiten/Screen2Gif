@@ -12,7 +12,7 @@ namespace ScreenToGif.Pages
     {
         #region Variables
 
-        private bool _paint = false;
+        private bool _paint;
 
         #endregion
 
@@ -31,7 +31,7 @@ namespace ScreenToGif.Pages
                 panelDrawing.Width = imageSize.Width;
                 panelDrawing.Height = imageSize.Height;
 
-                this.BackgroundImage = null;
+                BackgroundImage = null;
             }
             else
             {
@@ -40,17 +40,17 @@ namespace ScreenToGif.Pages
             }
 
             //TODO: Get the real values.
-            this.Width = panelDrawing.Width + 40;
-            this.Height = panelDrawing.Height + 66 + 20;
+            Width = panelDrawing.Width + 40;
+            Height = panelDrawing.Height + 66 + 20;
 
-            if (this.Width < 400) this.Width = 400;
-            if (this.Height < 215) this.Height = 215;
+            if (Width < 400) Width = 400;
+            if (Height < 215) Height = 215;
 
             panelDrawing.EraseAll();
 
             #region Localize Labels
 
-            this.Text = Resources.Title_FreeDrawing;
+            Text = Resources.Title_FreeDrawing;
             lblBrushSize.Text = Resources.Label_BrushSize;
             lblEraserSize.Text = Resources.Label_EraserSize;
 
@@ -135,7 +135,7 @@ namespace ScreenToGif.Pages
         private void btnDone_Click(object sender, EventArgs e)
         {
             ImagePainted = panelDrawing.CachedBitmap;
-            this.DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
         }
 
         #endregion

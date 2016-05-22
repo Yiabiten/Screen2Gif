@@ -27,7 +27,7 @@ namespace ScreenToGif.Windows.Other
 
         private readonly TranslateTransform _markerTransform = new TranslateTransform();
         private Point? _colorPosition;
-        private bool _isUpdating = false;
+        private bool _isUpdating;
 
         #endregion
 
@@ -257,8 +257,8 @@ namespace ScreenToGif.Windows.Other
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
-            this.Close();
+            DialogResult = true;
+            Close();
         }
 
         #endregion

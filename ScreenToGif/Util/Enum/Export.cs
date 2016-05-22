@@ -13,6 +13,6 @@
         /// <summary>
         /// Avi video.
         /// </summary>
-        Avi,
+        Avi
     }
 }

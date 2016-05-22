@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Windows.Input;
 
 namespace ScreenToGif.Capture
 {

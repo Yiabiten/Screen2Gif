@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Interop;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Microsoft.Win32;
 using ScreenToGif.Capture;
@@ -24,7 +22,7 @@ using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows.Other;
 using Cursors = System.Windows.Input.Cursors;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
-using Point = System.Drawing.Point;
+using Point = System.Windows.Point;
 using Size = System.Drawing.Size;
 using Timer = System.Windows.Forms.Timer;
 
@@ -60,7 +58,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// Indicates when the user is mouse-clicking.
         /// </summary>
-        private bool _recordClicked = false;
+        private bool _recordClicked;
 
         /// <summary>
         /// The action to be executed after closing this Window.
@@ -97,7 +95,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// The maximum size of the recording. Also the maximum size of the window.
         /// </summary>
-        private System.Windows.Point _sizeScreen = new System.Windows.Point(SystemInformation.PrimaryMonitorSize.Width, SystemInformation.PrimaryMonitorSize.Height);
+        private Point _sizeScreen = new Point(SystemInformation.PrimaryMonitorSize.Width, SystemInformation.PrimaryMonitorSize.Height);
 
         /// <summary>
         /// The size of the recording area.
@@ -107,7 +105,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// Holds the position of the cursor.
         /// </summary>
-        private System.Windows.Point _posCursor;
+        private Point _posCursor;
 
         private Bitmap _bt;
         private Graphics _gr;
@@ -120,7 +118,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// The delay of each frame took as snapshot.
         /// </summary>
-        private int? _snapDelay = null;
+        private int? _snapDelay;
 
         /// <summary>
         /// The DPI of the current screen.
@@ -233,7 +231,7 @@ namespace ScreenToGif.Windows
         private void MouseHookTarget(object sender, CustomMouseEventArgs keyEventArgs)
         {
             _recordClicked = keyEventArgs.Button == MouseButton.Left && keyEventArgs.State == MouseButtonState.Pressed;
-            _posCursor = new System.Windows.Point(keyEventArgs.PosX, keyEventArgs.PosY);
+            _posCursor = new Point(keyEventArgs.PosX, keyEventArgs.PosY);
 
             if (!IsMouseCaptured || Mouse.Captured == null)
                 return;
@@ -506,7 +504,7 @@ namespace ScreenToGif.Windows
         private void Normal_Elapsed(object sender, EventArgs e)
         {
             //Get the actual position of the form.
-            var lefttop = Dispatcher.Invoke(() => new Point((int)((Left + Constants.LeftOffset) * _scale), (int)((Top + Constants.TopOffset) * _scale)));
+            var lefttop = Dispatcher.Invoke(() => new System.Drawing.Point((int)((Left + Constants.LeftOffset) * _scale), (int)((Top + Constants.TopOffset) * _scale)));
 
             //Take a screenshot of the area.
             var bt = Native.Capture(_size, lefttop.X, lefttop.Y);
@@ -525,7 +523,7 @@ namespace ScreenToGif.Windows
         private void Cursor_Elapsed(object sender, EventArgs e)
         {
             //Get the actual position of the form.
-            var lefttop = Dispatcher.Invoke(() => new Point((int)((Left + Constants.LeftOffset) * _scale), (int)((Top + Constants.TopOffset) * _scale)));
+            var lefttop = Dispatcher.Invoke(() => new System.Drawing.Point((int)((Left + Constants.LeftOffset) * _scale), (int)((Top + Constants.TopOffset) * _scale)));
 
             #region TODO: 2 monitors
 
@@ -552,7 +550,7 @@ namespace ScreenToGif.Windows
 
         private void Full_Elapsed(object sender, EventArgs e)
         {
-            var bt = Native.Capture(new System.Drawing.Size((int)_sizeScreen.X, (int)_sizeScreen.Y), 0, 0);
+            var bt = Native.Capture(new Size((int)_sizeScreen.X, (int)_sizeScreen.Y), 0, 0);
 
             if (bt == null) return;
 
@@ -567,7 +565,7 @@ namespace ScreenToGif.Windows
 
         private void FullCursor_Elapsed(object sender, EventArgs e)
         {
-            var bt = Native.Capture(new System.Drawing.Size((int)_sizeScreen.X, (int)_sizeScreen.Y), 0, 0);
+            var bt = Native.Capture(new Size((int)_sizeScreen.X, (int)_sizeScreen.Y), 0, 0);
 
             if (bt == null) return;
 
@@ -723,7 +721,7 @@ namespace ScreenToGif.Windows
         {
             Mouse.Capture(this);
 
-            this.Cursor = Cursors.Cross;
+            Cursor = Cursors.Cross;
         }
 
         #endregion
@@ -743,7 +741,7 @@ namespace ScreenToGif.Windows
 
                     #region To Record
 
-                    _capture = new Timer { Interval = 1000 / (int)FpsNumericUpDown.Value };
+                    _capture = new Timer { Interval = 1000 / FpsNumericUpDown.Value };
                     _snapDelay = null;
 
                     ListFrames = new List<FrameInfo>();
@@ -753,7 +751,7 @@ namespace ScreenToGif.Windows
 
                     if (Settings.Default.FullScreen)
                     {
-                        _size = new System.Drawing.Size((int)_sizeScreen.X, (int)_sizeScreen.Y);
+                        _size = new Size((int)_sizeScreen.X, (int)_sizeScreen.Y);
 
                         HideWindowAndShowTrayIcon();
 
@@ -761,7 +759,7 @@ namespace ScreenToGif.Windows
                     }
                     else
                     {
-                        _size = new System.Drawing.Size((int)((Width - Constants.HorizontalOffset) * _scale), (int)((Height - Constants.VerticalOffset) * _scale));
+                        _size = new Size((int)((Width - Constants.HorizontalOffset) * _scale), (int)((Height - Constants.VerticalOffset) * _scale));
                     }
 
                     #endregion
@@ -891,13 +889,13 @@ namespace ScreenToGif.Windows
 
                 if (Settings.Default.FullScreen)
                 {
-                    _size = new System.Drawing.Size((int)_sizeScreen.X, (int)_sizeScreen.Y);
+                    _size = new Size((int)_sizeScreen.X, (int)_sizeScreen.Y);
 
                     HideWindowAndShowTrayIcon();
                 }
                 else
                 {
-                    _size = new System.Drawing.Size((int)((Width - Constants.HorizontalOffset) * _scale), (int)((Height - Constants.VerticalOffset) * _scale));
+                    _size = new Size((int)((Width - Constants.HorizontalOffset) * _scale), (int)((Height - Constants.VerticalOffset) * _scale));
                 }
 
                 #endregion
@@ -1142,7 +1140,7 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             #region Save Settings
 

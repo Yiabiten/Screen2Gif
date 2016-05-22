@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -21,8 +17,8 @@ namespace ScreenToGif.Controls
     {
         #region Variables
 
-        public readonly static DependencyProperty ImageSourceProperty;
-        public readonly static DependencyProperty ZoomProperty;
+        public static readonly DependencyProperty ImageSourceProperty;
+        public static readonly DependencyProperty ZoomProperty;
 
         private Point? _lastCenterPositionOnTarget;
         private Point? _lastMousePositionOnTarget;

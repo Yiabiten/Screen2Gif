@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ScreenToGif.Util
+﻿namespace ScreenToGif.Util
 {
     /// <summary>
     /// Static class that holds the information of the argument.

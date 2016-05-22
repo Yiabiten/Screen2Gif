@@ -1,4 +1,5 @@
-﻿using ScreenToGif.Properties;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace ScreenToGif.Pages
 {
@@ -7,7 +8,7 @@ namespace ScreenToGif.Pages
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -656,46 +657,46 @@ namespace ScreenToGif.Pages
 
         #endregion
 
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.FlowLayoutPanel flowFont;
-        private System.Windows.Forms.Label lblFontTitle;
-        private System.Windows.Forms.LinkLabel lblFont;
-        private System.Windows.Forms.FlowLayoutPanel flowPercentage;
-        private System.Windows.Forms.Label lblFontSize2;
-        private System.Windows.Forms.NumericUpDown numFontSizePercentage;
-        private System.Windows.Forms.PictureBox pbFontColor;
-        private System.Windows.Forms.FlowLayoutPanel flowVertical;
-        private System.Windows.Forms.Label lblVertical;
-        private System.Windows.Forms.RadioButton rbTop;
-        private System.Windows.Forms.RadioButton rbVerticalCenter;
-        private System.Windows.Forms.RadioButton rbBottom;
-        private System.Windows.Forms.FlowLayoutPanel flowSizeAs;
-        private System.Windows.Forms.Label lblSizeType;
-        private System.Windows.Forms.RadioButton rbPercentage;
-        private System.Windows.Forms.RadioButton rbPoint;
-        private System.Windows.Forms.Label lblPercentageSize;
-        private System.Windows.Forms.FlowLayoutPanel flowHorizontal;
-        private System.Windows.Forms.Label lblHorizontal;
-        private System.Windows.Forms.RadioButton rbLeft;
-        private System.Windows.Forms.RadioButton rbHorizontalCenter;
-        private System.Windows.Forms.RadioButton rbRight;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel8;
-        private System.Windows.Forms.FontDialog fontDialog;
-        private System.Windows.Forms.ColorDialog colorDialog;
-        private System.Windows.Forms.PictureBox pbExample;
-        private System.Windows.Forms.ColorDialog colorDialogOutline;
-        private System.Windows.Forms.FlowLayoutPanel flowHatchBrush;
-        private System.Windows.Forms.ComboBox cbHatchBrush;
-        private System.Windows.Forms.CheckBox cbUseHatch;
-        private System.Windows.Forms.PictureBox pbHatchColor;
-        private System.Windows.Forms.ColorDialog colorDialogHatch;
-        private System.Windows.Forms.FlowLayoutPanel flowUseOutline;
-        private System.Windows.Forms.CheckBox cbUseOutline;
-        private System.Windows.Forms.FlowLayoutPanel flowOutline;
-        private System.Windows.Forms.PictureBox pbOutlineColor;
-        private System.Windows.Forms.Label lblThick;
-        private System.Windows.Forms.NumericUpDown numThick;
-        private System.Windows.Forms.Label lblPointsDesc;
+        private Button btnCancel;
+        private Button btnOk;
+        private FlowLayoutPanel flowFont;
+        private Label lblFontTitle;
+        private LinkLabel lblFont;
+        private FlowLayoutPanel flowPercentage;
+        private Label lblFontSize2;
+        private NumericUpDown numFontSizePercentage;
+        private PictureBox pbFontColor;
+        private FlowLayoutPanel flowVertical;
+        private Label lblVertical;
+        private RadioButton rbTop;
+        private RadioButton rbVerticalCenter;
+        private RadioButton rbBottom;
+        private FlowLayoutPanel flowSizeAs;
+        private Label lblSizeType;
+        private RadioButton rbPercentage;
+        private RadioButton rbPoint;
+        private Label lblPercentageSize;
+        private FlowLayoutPanel flowHorizontal;
+        private Label lblHorizontal;
+        private RadioButton rbLeft;
+        private RadioButton rbHorizontalCenter;
+        private RadioButton rbRight;
+        private FlowLayoutPanel flowLayoutPanel8;
+        private FontDialog fontDialog;
+        private ColorDialog colorDialog;
+        private PictureBox pbExample;
+        private ColorDialog colorDialogOutline;
+        private FlowLayoutPanel flowHatchBrush;
+        private ComboBox cbHatchBrush;
+        private CheckBox cbUseHatch;
+        private PictureBox pbHatchColor;
+        private ColorDialog colorDialogHatch;
+        private FlowLayoutPanel flowUseOutline;
+        private CheckBox cbUseOutline;
+        private FlowLayoutPanel flowOutline;
+        private PictureBox pbOutlineColor;
+        private Label lblThick;
+        private NumericUpDown numThick;
+        private Label lblPointsDesc;
     }
 }

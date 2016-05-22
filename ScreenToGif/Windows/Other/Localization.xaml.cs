@@ -91,7 +91,7 @@ namespace ScreenToGif.Windows.Other
 
         private void MoveUp_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (LocalizationHelper.Move(ResourceListBox.SelectedIndex, true))
+            if (LocalizationHelper.Move(ResourceListBox.SelectedIndex))
             {
                 var selectedIndex = ResourceListBox.SelectedIndex;
 

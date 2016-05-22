@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ScreenToGif.Util
+﻿namespace ScreenToGif.Util
 {
     /// <summary>
     /// Class that holds the current culture selected by the user.

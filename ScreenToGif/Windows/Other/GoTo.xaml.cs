@@ -51,7 +51,7 @@ namespace ScreenToGif.Windows.Other
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            Selected = (int)NumberTextBox.Value;
+            Selected = NumberTextBox.Value;
             DialogResult = true;
         }
 

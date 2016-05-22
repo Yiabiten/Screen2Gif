@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Drawing;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using ScreenToGif.Properties;
 
@@ -18,7 +17,7 @@ namespace ScreenToGif.Controls
     {
         #region Properties
 
-        private bool _shift = false;
+        private bool _shift;
         private int _first = -1;
         private int _last = -1;
 
@@ -58,17 +57,17 @@ namespace ScreenToGif.Controls
         /// <param name="parentNodeLabel">Label that will be displayed on the parent node</param>
         public void UpdateListFrames(int frameCount, string parentNodeLabel)
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
 
-            this.KeyDown += NoDoubleClickTreeView_KeyDown;
-            this.KeyUp += NoDoubleClickTreeView_KeyUp;
+            KeyDown += NoDoubleClickTreeView_KeyDown;
+            KeyUp += NoDoubleClickTreeView_KeyUp;
 
             if (frameCount <= 0) return;
 
             #region If Frame Count > 0
 
             //Remove before inserting new node
-            this.Nodes.Clear();
+            Nodes.Clear();
 
             var arrayNode = new TreeNode[frameCount];
             for (int i = 0; i < frameCount; i++)
@@ -78,19 +77,19 @@ namespace ScreenToGif.Controls
             }
 
             // Finalize of the list
-            this.BeginUpdate();
-            this.Nodes.Add(new TreeNode(parentNodeLabel, arrayNode));
-            this.Nodes[0].Name = parentNodeLabel;
+            BeginUpdate();
+            Nodes.Add(new TreeNode(parentNodeLabel, arrayNode));
+            Nodes[0].Name = parentNodeLabel;
             
-            this.EndUpdate();
+            EndUpdate();
 
             // Display the list of frames
-            if (!this.Nodes[0].IsExpanded)
-                this.ExpandAll();
+            if (!Nodes[0].IsExpanded)
+                ExpandAll();
 
             Application.DoEvents();
 
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
 
             #endregion
         }
@@ -116,17 +115,17 @@ namespace ScreenToGif.Controls
         public void Add(int frameCount)
         {
             if (frameCount <= 0) return;
-            if (this.Nodes.Count != 1) return;
+            if (Nodes.Count != 1) return;
 
             //without the -1 because the for starts with 0
-            int nodeInside = this.Nodes[0].Nodes.Count;
+            int nodeInside = Nodes[0].Nodes.Count;
 
-            this.BeginUpdate();
+            BeginUpdate();
             for (int i = 0; i < frameCount; i++)
             {
-                this.Nodes[0].Nodes.Add(Resources.Msg_Frame + " " + (i + nodeInside));
+                Nodes[0].Nodes.Add(Resources.Msg_Frame + " " + (i + nodeInside));
             }
-            this.EndUpdate();
+            EndUpdate();
         }
 
         /// <summary>
@@ -136,16 +135,16 @@ namespace ScreenToGif.Controls
         public void Remove(int frameCount)
         {
             if (frameCount <= 0) return;
-            if (this.Nodes.Count != 1) return;
+            if (Nodes.Count != 1) return;
 
-            var nodeInside = this.Nodes[0].Nodes.Count;
+            var nodeInside = Nodes[0].Nodes.Count;
 
-            this.BeginUpdate();
+            BeginUpdate();
             for (int i = 0; i < frameCount; i++)
             {
-                this.Nodes[0].Nodes.RemoveAt(nodeInside - (i + 1));
+                Nodes[0].Nodes.RemoveAt(nodeInside - (i + 1));
             }
-            this.EndUpdate();
+            EndUpdate();
         }
 
         /// <summary>
@@ -153,9 +152,9 @@ namespace ScreenToGif.Controls
         /// </summary>
         public void UncheckAll()
         {
-            for (int i = 0; i < this.Nodes[0].Nodes.Count; i++)
+            for (int i = 0; i < Nodes[0].Nodes.Count; i++)
             {
-                this.Nodes[0].Nodes[i].Checked = false;
+                Nodes[0].Nodes[i].Checked = false;
             }
         }
 
@@ -164,9 +163,9 @@ namespace ScreenToGif.Controls
         /// </summary>
         public void CheckAll()
         {
-            for (int i = 0; i < this.Nodes[0].Nodes.Count; i++)
+            for (int i = 0; i < Nodes[0].Nodes.Count; i++)
             {
-                this.Nodes[0].Nodes[i].Checked = true;
+                Nodes[0].Nodes[i].Checked = true;
             }
         }
 
@@ -175,9 +174,9 @@ namespace ScreenToGif.Controls
         /// </summary>
         public bool IsAllChecked()
         {
-            for (int i = 0; i < this.Nodes[0].Nodes.Count; i++)
+            for (int i = 0; i < Nodes[0].Nodes.Count; i++)
             {
-                if (!this.Nodes[0].Nodes[i].Checked)
+                if (!Nodes[0].Nodes[i].Checked)
                     return false;
             }
 
@@ -192,9 +191,9 @@ namespace ScreenToGif.Controls
         public bool IsSomeChecked(int amount)
         {
             int count = 0;
-            for (int i = 0; i < this.Nodes[0].Nodes.Count; i++)
+            for (int i = 0; i < Nodes[0].Nodes.Count; i++)
             {
-                if (!this.Nodes[0].Nodes[i].Checked)
+                if (!Nodes[0].Nodes[i].Checked)
                     count++;
                 if (count >= amount)
                     return true;
@@ -217,7 +216,7 @@ namespace ScreenToGif.Controls
 
             #region Get indexes of selected frames
 
-            foreach (TreeNode node in this.Nodes[0].Nodes)
+            foreach (TreeNode node in Nodes[0].Nodes)
             {
                 if (node.Checked)
                     listIndexSelectedFrames.Add(node.Index);
@@ -246,7 +245,7 @@ namespace ScreenToGif.Controls
 
             #region Get indexes of selected frames
 
-            foreach (TreeNode node in this.Nodes[0].Nodes)
+            foreach (TreeNode node in Nodes[0].Nodes)
             {
                 if (node.Checked)
                     listIndexSelectedFrames.Add(node.Index);
@@ -272,8 +271,8 @@ namespace ScreenToGif.Controls
         {
             base.ScaleControl(factor, specified);
 
-            this.Width = (int)Math.Round(this.Width * factor.Width);
-            this.Height = (int)Math.Round(this.Height * factor.Width);
+            Width = (int)Math.Round(Width * factor.Width);
+            Height = (int)Math.Round(Height * factor.Width);
         }
 
     }

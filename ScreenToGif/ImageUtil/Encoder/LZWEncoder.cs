@@ -114,7 +114,6 @@ namespace ScreenToGif.ImageUtil.Encoder
                         ColorDepth = InitDataSize;
                         codeSize = (byte)(ColorDepth + 1);
                         availableCode = endOfFileFlag + 1;
-                        maskCode = (1 << codeSize) - 1;
 
                         bitEncoder.Add(clearFlag);
                         bitEncoder.InBit = codeSize;
@@ -125,7 +124,6 @@ namespace ScreenToGif.ImageUtil.Encoder
                         ColorDepth++;
                         codeSize = (byte)(ColorDepth + 1);
                         bitEncoder.InBit = codeSize;
-                        maskCode = (1 << codeSize) - 1;
                     }
 
                     //Divides into more blocks.

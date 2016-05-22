@@ -1,4 +1,5 @@
-﻿using ScreenToGif.Properties;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace ScreenToGif.Pages
 {
@@ -7,7 +8,7 @@ namespace ScreenToGif.Pages
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -477,31 +478,31 @@ namespace ScreenToGif.Pages
 
         #endregion
 
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.ColorDialog backColorDialog;
-        private System.Windows.Forms.TextBox tbTitle;
-        private System.Windows.Forms.GroupBox gbBackground;
-        private System.Windows.Forms.Label lblContent;
-        private System.Windows.Forms.RadioButton rbBlured;
-        private System.Windows.Forms.RadioButton rbSolidColor;
-        private System.Windows.Forms.PictureBox pbBackground;
-        private System.Windows.Forms.Button btnBackColor;
-        private System.Windows.Forms.ToolTip tooltip;
-        private System.Windows.Forms.FontDialog fontDialog;
-        private System.Windows.Forms.Label lblExample;
-        private System.Windows.Forms.TableLayoutPanel flowContent;
-        private System.Windows.Forms.FlowLayoutPanel flowPanel;
-        private System.Windows.Forms.ComboBox cbFonts;
-        private System.Windows.Forms.NumericUpDown numSize;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.CheckBox btnBold;
-        private System.Windows.Forms.CheckBox btnItalics;
-        private System.Windows.Forms.CheckBox btnUnderline;
-        private System.Windows.Forms.PictureBox pbSeparator2;
-        private System.Windows.Forms.PictureBox pbForeColor;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Button btnMoreOptions;
-        private System.Windows.Forms.ColorDialog foreColorDialog;
+        private Button btnCancel;
+        private Button btnOk;
+        private ColorDialog backColorDialog;
+        private TextBox tbTitle;
+        private GroupBox gbBackground;
+        private Label lblContent;
+        private RadioButton rbBlured;
+        private RadioButton rbSolidColor;
+        private PictureBox pbBackground;
+        private Button btnBackColor;
+        private ToolTip tooltip;
+        private FontDialog fontDialog;
+        private Label lblExample;
+        private TableLayoutPanel flowContent;
+        private FlowLayoutPanel flowPanel;
+        private ComboBox cbFonts;
+        private NumericUpDown numSize;
+        private PictureBox pictureBox1;
+        private CheckBox btnBold;
+        private CheckBox btnItalics;
+        private CheckBox btnUnderline;
+        private PictureBox pbSeparator2;
+        private PictureBox pbForeColor;
+        private PictureBox pictureBox3;
+        private Button btnMoreOptions;
+        private ColorDialog foreColorDialog;
     }
 }

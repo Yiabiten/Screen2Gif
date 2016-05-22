@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ScreenToGif.Controls;
 
 namespace ScreenToGif.Util
 {
@@ -13,7 +11,7 @@ namespace ScreenToGif.Util
         /// Identifies the attached property ScrollGroup
         /// </summary>
         public static readonly DependencyProperty ScrollGroupProperty =
-            DependencyProperty.RegisterAttached("ScrollGroup", typeof(string), typeof(ScrollSynchronizer), new PropertyMetadata(new PropertyChangedCallback(OnScrollGroupChanged)));
+            DependencyProperty.RegisterAttached("ScrollGroup", typeof(string), typeof(ScrollSynchronizer), new PropertyMetadata(OnScrollGroupChanged));
 
         /// <summary>
         /// List of all registered scroll viewers.
@@ -66,7 +64,7 @@ namespace ScreenToGif.Util
                     // Remove scrollviewer
                     if (scrollViewers.ContainsKey(scrollViewer))
                     {
-                        scrollViewer.ScrollChanged -= new ScrollChangedEventHandler(ScrollViewer_ScrollChanged);
+                        scrollViewer.ScrollChanged -= ScrollViewer_ScrollChanged;
                         scrollViewers.Remove(scrollViewer);
                     }
                 }
@@ -94,7 +92,7 @@ namespace ScreenToGif.Util
 
                     // Add scrollviewer
                     scrollViewers.Add(scrollViewer, (string)e.NewValue);
-                    scrollViewer.ScrollChanged += new ScrollChangedEventHandler(ScrollViewer_ScrollChanged);
+                    scrollViewer.ScrollChanged += ScrollViewer_ScrollChanged;
                 }
             }
         }
@@ -123,7 +121,7 @@ namespace ScreenToGif.Util
             verticalScrollOffsets[group] = changedScrollViewer.VerticalOffset;
             horizontalScrollOffsets[group] = changedScrollViewer.HorizontalOffset;
 
-            foreach (var scrollViewer in scrollViewers.Where((s) => s.Value == group && s.Key != changedScrollViewer))
+            foreach (var scrollViewer in scrollViewers.Where(s => s.Value == group && s.Key != changedScrollViewer))
             {
                 if (scrollViewer.Key.VerticalOffset != changedScrollViewer.VerticalOffset)
                 {

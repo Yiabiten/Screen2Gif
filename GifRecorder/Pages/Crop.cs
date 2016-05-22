@@ -2,8 +2,6 @@
 using System.Drawing;
 using System.Windows.Forms;
 using ScreenToGif.Properties;
-using Color = System.Drawing.Color;
-using Pen = System.Drawing.Pen;
 
 namespace ScreenToGif.Pages
 {
@@ -39,7 +37,7 @@ namespace ScreenToGif.Pages
         {
             InitializeComponent();
 
-            this.Size = new Size(bitmap.Size.Width + 40, bitmap.Size.Height + 80);
+            Size = new Size(bitmap.Size.Width + 40, bitmap.Size.Height + 80);
 
             pictureCrop.Size = bitmap.Size;
             pictureCrop.Image = bitmap;
@@ -49,12 +47,12 @@ namespace ScreenToGif.Pages
 
             if (bitmap.Size.Width < 320)
             {
-                this.Size = new Size(320 + 40, bitmap.Size.Height);
+                Size = new Size(320 + 40, bitmap.Size.Height);
             }
 
             if (bitmap.Size.Height < 100)
             {
-                this.Size = new Size(this.Size.Width, 100 + 80);
+                Size = new Size(Size.Width, 100 + 80);
             }
 
             #endregion
@@ -63,7 +61,7 @@ namespace ScreenToGif.Pages
 
             #region Localize Labels
 
-            this.Text = Resources.Title_CropNoSelection;
+            Text = Resources.Title_CropNoSelection;
 
             #endregion
 
@@ -128,7 +126,7 @@ namespace ScreenToGif.Pages
             }
             else if (e.X == _posX && e.Y == _posY)
             {
-                this.Text = Resources.Title_CropNoSelection;
+                Text = Resources.Title_CropNoSelection;
                 tbHeight.Text = "0"; 
                 tbWidth.Text = "0";
                 _width = 0;
@@ -155,7 +153,7 @@ namespace ScreenToGif.Pages
                 _posY = 0;
             }
 
-            this.Text = Resources.Title_Crop;
+            Text = Resources.Title_Crop;
             tbWidth.Text = _width.ToString();
             tbHeight.Text = _height.ToString();
 
@@ -201,7 +199,7 @@ namespace ScreenToGif.Pages
                     return;
                 }
 
-                this.Text = Resources.Title_Crop;
+                Text = Resources.Title_Crop;
                 tbWidth.Text = _width.ToString();
                 tbHeight.Text = _height.ToString();
 
@@ -216,7 +214,7 @@ namespace ScreenToGif.Pages
         {
             if (_width >= 10 && _height >= 10)
             {
-                this.DialogResult = DialogResult.OK;
+                DialogResult = DialogResult.OK;
             }
             else
             {
@@ -227,7 +225,7 @@ namespace ScreenToGif.Pages
 
         private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            DialogResult = DialogResult.Cancel;
         }
 
         private void Crop_Shown(object sender, EventArgs e)

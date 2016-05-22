@@ -24,7 +24,7 @@ namespace ScreenToGif.Pages
 
             #region Localize Labels
 
-            this.Text = Resources.Title_BorderOptions;
+            Text = Resources.Title_BorderOptions;
             lblColor.Text = Resources.Label_Color;
             lblThick.Text = Resources.Label_Thickness;
             lblPoints.Text = Resources.Label_Points;

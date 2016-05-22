@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScreenToGif.Util
 {
@@ -18,15 +14,14 @@ namespace ScreenToGif.Util
             {
                 return true;
             }
-            else if (a == 0 || b == 0 || diff < float.Epsilon)
+            if (a == 0 || b == 0 || diff < float.Epsilon)
             {
                 // a or b is zero or both are extremely close to it
                 // relative error is less meaningful here
                 return diff < epsilon;
             }
-            else { // use relative error
-                return diff / (absA + absB) < epsilon;
-            }
+            // use relative error
+            return diff / (absA + absB) < epsilon;
         }
 
         public static bool NearlyEquals(this double a, double b, double epsilon = 0.0001D)
@@ -39,16 +34,14 @@ namespace ScreenToGif.Util
             { // shortcut, handles infinities
                 return true;
             }
-            else if (a == 0 || b == 0 || diff < Double.Epsilon)
+            if (a == 0 || b == 0 || diff < Double.Epsilon)
             {
                 // a or b is zero or both are extremely close to it
                 // relative error is less meaningful here
                 return diff < epsilon;
             }
-            else
-            { // use relative error
-                return diff / (absA + absB) < epsilon;
-            }
+            // use relative error
+            return diff / (absA + absB) < epsilon;
         }
 
         public static bool NearlyEquals(this double a, int absB, double epsilon = 0.0001D)
@@ -60,16 +53,14 @@ namespace ScreenToGif.Util
             { // shortcut, handles infinities
                 return true;
             }
-            else if (a == 0 || absB == 0 || diff < Double.Epsilon)
+            if (a == 0 || absB == 0 || diff < Double.Epsilon)
             {
                 // a or b is zero or both are extremely close to it
                 // relative error is less meaningful here
                 return diff < epsilon;
             }
-            else
-            { // use relative error
-                return diff / (absA + absB) < epsilon;
-            }
+            // use relative error
+            return diff / (absA + absB) < epsilon;
         }
 
         public static bool NearlyEquals(this double? value1, double? value2, double unimportantDifference = 0.0001)

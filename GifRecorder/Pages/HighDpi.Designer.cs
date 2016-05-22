@@ -1,11 +1,14 @@
-﻿namespace ScreenToGif.Pages
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace ScreenToGif.Pages
 {
     partial class HighDpi
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -211,15 +214,15 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Panel panelTitle;
-        private System.Windows.Forms.CheckBox cbIgnore;
-        private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private Button btnClose;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private Panel panelTitle;
+        private CheckBox cbIgnore;
+        private Label lblTitle;
+        private PictureBox pictureBox2;
     }
 }

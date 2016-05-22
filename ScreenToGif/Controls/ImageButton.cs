@@ -1,8 +1,6 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using ScreenToGif.Util.Writers;
 
 namespace ScreenToGif.Controls
 {
@@ -13,9 +11,9 @@ namespace ScreenToGif.Controls
     {
         #region Variables
 
-        public readonly static DependencyProperty ChildProperty;
-        public readonly static DependencyProperty TextProperty;
-        public readonly static DependencyProperty MaxSizeProperty;
+        public static readonly DependencyProperty ChildProperty;
+        public static readonly DependencyProperty TextProperty;
+        public static readonly DependencyProperty MaxSizeProperty;
 
         #endregion
 

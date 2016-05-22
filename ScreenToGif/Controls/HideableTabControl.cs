@@ -3,9 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using ScreenToGif.Util;
 
@@ -100,11 +98,11 @@ namespace ScreenToGif.Controls
                 return;
 
             var animation = new DoubleAnimation(_border.ActualHeight, 100, new Duration(new TimeSpan(0, 0, 0, 1)));
-            animation.EasingFunction = new PowerEase() { Power = 8 };
+            animation.EasingFunction = new PowerEase { Power = 8 };
             _border.BeginAnimation(HeightProperty, animation);
 
             var opacityAnimation = new DoubleAnimation(_border.Opacity, 1, new Duration(new TimeSpan(0, 0, 0, 1)));
-            opacityAnimation.EasingFunction = new PowerEase() { Power = 8 };
+            opacityAnimation.EasingFunction = new PowerEase { Power = 8 };
             _border.BeginAnimation(OpacityProperty, opacityAnimation);
 
             var visibilityAnimation = new ObjectAnimationUsingKeyFrames();
@@ -113,7 +111,7 @@ namespace ScreenToGif.Controls
 
             //Marging = 5,0,0,-1
             var marginAnimation = new ThicknessAnimation(_tabPanel.Margin, new Thickness(5, 0, 0, -1), new Duration(new TimeSpan(0, 0, 0, 0, 1)));
-            marginAnimation.EasingFunction = new PowerEase() { Power = 8 };
+            marginAnimation.EasingFunction = new PowerEase { Power = 8 };
             _tabPanel.BeginAnimation(MarginProperty, marginAnimation);
         }
 
@@ -121,18 +119,18 @@ namespace ScreenToGif.Controls
         {
             //ActualHeight = 0
             var animation = new DoubleAnimation(_border.ActualHeight, 0, new Duration(new TimeSpan(0, 0, 0, 1)));
-            animation.EasingFunction = new PowerEase() { Power = 8 };
+            animation.EasingFunction = new PowerEase { Power = 8 };
             _border.BeginAnimation(HeightProperty, animation);
 
             //Opacity = 0
             var opacityAnimation = new DoubleAnimation(_border.Opacity, 0, new Duration(new TimeSpan(0, 0, 0, 1)));
-            opacityAnimation.EasingFunction = new PowerEase() { Power = 8 };
+            opacityAnimation.EasingFunction = new PowerEase { Power = 8 };
             _border.BeginAnimation(OpacityProperty, opacityAnimation);
 
             //SelectedItem = null
             var objectAnimation = new ObjectAnimationUsingKeyFrames();
             objectAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(null, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0))));
-            this.BeginAnimation(SelectedItemProperty, objectAnimation);
+            BeginAnimation(SelectedItemProperty, objectAnimation);
 
             //Visibility = Visibility.Collapsed
             var visibilityAnimation = new ObjectAnimationUsingKeyFrames();
@@ -141,7 +139,7 @@ namespace ScreenToGif.Controls
 
             //Marging = 5,0,0,5
             var marginAnimation = new ThicknessAnimation(_tabPanel.Margin, new Thickness(5, 0, 0, 5), new Duration(new TimeSpan(0, 0, 0, 0, 1)));
-            marginAnimation.EasingFunction = new PowerEase() { Power = 8 };
+            marginAnimation.EasingFunction = new PowerEase { Power = 8 };
             _tabPanel.BeginAnimation(MarginProperty, marginAnimation);
         }
 

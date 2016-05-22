@@ -32,7 +32,7 @@ namespace ScreenToGif.Util.Writers
 
             string dateAppendage = DateTime.Now.Day + "_" + DateTime.Now.Month + "_" + DateTime.Now.Year;
 
-            FileStream fs = null;
+            FileStream fs;
 
             try
             {

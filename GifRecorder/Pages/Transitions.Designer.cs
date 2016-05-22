@@ -1,4 +1,5 @@
-﻿using ScreenToGif.Properties;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace ScreenToGif.Pages
 {
@@ -7,7 +8,7 @@ namespace ScreenToGif.Pages
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -341,23 +342,23 @@ namespace ScreenToGif.Pages
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnDone;
-        private System.Windows.Forms.PictureBox pbSeparator;
-        private System.Windows.Forms.PictureBox pbFrame;
-        private System.Windows.Forms.TrackBar trackFrames;
-        private System.Windows.Forms.TrackBar trackQuant;
-        private System.Windows.Forms.Label lblDelay;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label lblFirst;
-        private System.Windows.Forms.Label lblNext;
-        private System.Windows.Forms.Label lblTransition;
-        private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.Label lblSize;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tbNext;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tbPrevious;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private Button btnCancel;
+        private Button btnDone;
+        private PictureBox pbSeparator;
+        private PictureBox pbFrame;
+        private TrackBar trackFrames;
+        private TrackBar trackQuant;
+        private Label lblDelay;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Label lblFirst;
+        private Label lblNext;
+        private Label lblTransition;
+        private ToolTip toolTip;
+        private Label lblSize;
+        private Label label1;
+        private TextBox tbNext;
+        private Label label2;
+        private TextBox tbPrevious;
     }
 }

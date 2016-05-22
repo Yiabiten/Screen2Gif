@@ -12,15 +12,14 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ScreenToGif.FileWriters.GifWriter;
+using ScreenToGif.ImageUtil.Decoder;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Enum;
 using Color = System.Drawing.Color;
-using Encoder = ScreenToGif.Windows.Encoder;
 using Image = System.Drawing.Image;
 using PixelFormat = System.Windows.Media.PixelFormat;
-using Point = System.Drawing.Point;
+using Point = System.Windows.Point;
 using Size = System.Drawing.Size;
-using ScreenToGif.ImageUtil.Decoder;
 
 namespace ScreenToGif.ImageUtil
 {
@@ -454,7 +453,7 @@ namespace ScreenToGif.ImageUtil
         public static BitmapDecoder GetDecoder(string fileName, out GifFile gifFile)
         {
             gifFile = null;
-            BitmapDecoder decoder = null;
+            BitmapDecoder decoder;
 
             using (var stream = new FileStream(fileName, FileMode.Open))
             {
@@ -489,17 +488,17 @@ namespace ScreenToGif.ImageUtil
             }
         }
 
-        public static System.Drawing.Size GetFullSize(BitmapDecoder decoder, GifFile gifMetadata)
+        public static Size GetFullSize(BitmapDecoder decoder, GifFile gifMetadata)
         {
             if (gifMetadata != null)
             {
                 var lsd = gifMetadata.Header.LogicalScreenDescriptor;
-                return new System.Drawing.Size(lsd.Width, lsd.Height);
+                return new Size(lsd.Width, lsd.Height);
             }
 
             int width = decoder.Metadata.GetQueryOrDefault("/logscrdesc/Width", 0);
             int height = decoder.Metadata.GetQueryOrDefault("/logscrdesc/Height", 0);
-            return new System.Drawing.Size(width, height);
+            return new Size(width, height);
         }
 
         private static T GetQueryOrDefault<T>(this BitmapMetadata metadata, string query, T defaultValue)
@@ -564,7 +563,7 @@ namespace ScreenToGif.ImageUtil
             return frameMetadata;
         }
 
-        public static BitmapSource MakeFrame(System.Drawing.Size fullSize, BitmapSource rawFrame, FrameMetadata metadata, BitmapSource baseFrame)
+        public static BitmapSource MakeFrame(Size fullSize, BitmapSource rawFrame, FrameMetadata metadata, BitmapSource baseFrame)
         {
             //I removed this, so I could save the same as 32bpp
             //if (baseFrame == null && IsFullFrame(metadata, fullSize))
@@ -596,7 +595,7 @@ namespace ScreenToGif.ImageUtil
             return bitmap;
         }
 
-        public static bool IsFullFrame(FrameMetadata metadata, System.Drawing.Size fullSize)
+        public static bool IsFullFrame(FrameMetadata metadata, Size fullSize)
         {
             return metadata.Left == 0
                    && metadata.Top == 0
@@ -643,7 +642,7 @@ namespace ScreenToGif.ImageUtil
 
             // Check the image format to determine what format
             // the image will be saved to the memory stream in
-            var guidToImageFormatMap = new Dictionary<Guid, ImageFormat>()
+            var guidToImageFormatMap = new Dictionary<Guid, ImageFormat>
             {
                 {ImageFormat.Bmp.Guid,  ImageFormat.Bmp},
                 {ImageFormat.Gif.Guid,  ImageFormat.Png},
@@ -937,7 +936,7 @@ namespace ScreenToGif.ImageUtil
             {
                 VisualBrush vb = new VisualBrush(source);
 
-                var locationRect = new System.Windows.Point(bounds.X, bounds.Y);
+                var locationRect = new Point(bounds.X, bounds.Y);
                 var sizeRect = new System.Windows.Size(bounds.Width, bounds.Height);
 
                 ctx.DrawRectangle(vb, null, new Rect(locationRect, sizeRect));
@@ -974,7 +973,7 @@ namespace ScreenToGif.ImageUtil
                     height = control.ActualHeight * scale;
                 }
 
-                bounds = new Rect(new System.Windows.Point(0d, 0d), new System.Windows.Point(width, height));
+                bounds = new Rect(new Point(0d, 0d), new Point(width, height));
             }
 
             #endregion
@@ -987,7 +986,7 @@ namespace ScreenToGif.ImageUtil
             {
                 VisualBrush vb = new VisualBrush(source);
 
-                var locationRect = new System.Windows.Point(bounds.X, bounds.Y);
+                var locationRect = new Point(bounds.X, bounds.Y);
                 var sizeRect = new System.Windows.Size(bounds.Width, bounds.Height);
 
                 ctx.DrawRectangle(vb, null, new Rect(locationRect, sizeRect));
@@ -1023,7 +1022,7 @@ namespace ScreenToGif.ImageUtil
                     height = control.ActualHeight * scale;
                 }
 
-                bounds = new Rect(new System.Windows.Point(0d, 0d), new System.Windows.Point(width, height));
+                bounds = new Rect(new Point(0d, 0d), new Point(width, height));
             }
 
             #endregion
@@ -1036,7 +1035,7 @@ namespace ScreenToGif.ImageUtil
             {
                 VisualBrush vb = new VisualBrush(source);
 
-                var locationRect = new System.Windows.Point(bounds.X, bounds.Y);
+                var locationRect = new Point(bounds.X, bounds.Y);
                 var sizeRect = new System.Windows.Size((int)Math.Round(bounds.Width, MidpointRounding.AwayFromZero), (int)Math.Round(bounds.Height, MidpointRounding.AwayFromZero));
 
                 ctx.DrawRectangle(vb, null, new Rect(locationRect, sizeRect));

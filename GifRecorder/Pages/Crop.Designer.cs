@@ -1,4 +1,5 @@
-﻿using ScreenToGif.Properties;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace ScreenToGif.Pages
 {
@@ -7,7 +8,7 @@ namespace ScreenToGif.Pages
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -255,18 +256,18 @@ namespace ScreenToGif.Pages
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureCrop;
-        private System.Windows.Forms.ContextMenuStrip contextMenu;
-        private System.Windows.Forms.ToolStripMenuItem doneToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cancelToolStripMenuItem;
-        private System.Windows.Forms.ToolTip toolHelp;
-        private System.Windows.Forms.FlowLayoutPanel flowPanel;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnDone;
-        private System.Windows.Forms.PictureBox pbSeparator2;
-        private System.Windows.Forms.TextBox tbHeight;
-        private System.Windows.Forms.Label lblX;
-        private System.Windows.Forms.TextBox tbWidth;
-        private System.Windows.Forms.Label lblSize;
+        private PictureBox pictureCrop;
+        private ContextMenuStrip contextMenu;
+        private ToolStripMenuItem doneToolStripMenuItem;
+        private ToolStripMenuItem cancelToolStripMenuItem;
+        private ToolTip toolHelp;
+        private FlowLayoutPanel flowPanel;
+        private Button btnCancel;
+        private Button btnDone;
+        private PictureBox pbSeparator2;
+        private TextBox tbHeight;
+        private Label lblX;
+        private TextBox tbWidth;
+        private Label lblSize;
     }
 }

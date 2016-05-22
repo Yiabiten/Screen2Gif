@@ -171,7 +171,7 @@ namespace ScreenToGif.Windows.Other
             /// <summary>
             /// A question mark, blue.
             /// </summary>
-            Question,
+            Question
         }
     }
 }

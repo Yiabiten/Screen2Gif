@@ -99,8 +99,8 @@ namespace ScreenToGif.ImageUtil.Decoder
                 }
             }
 
-            this.Frames = frames.AsReadOnly();
-            this.Extensions = specialExtensions.AsReadOnly();
+            Frames = frames.AsReadOnly();
+            Extensions = specialExtensions.AsReadOnly();
         }
     }
 }

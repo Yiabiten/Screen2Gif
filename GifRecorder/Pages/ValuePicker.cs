@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace ScreenToGif.Pages
@@ -60,7 +54,7 @@ namespace ScreenToGif.Pages
         {
             InitializeComponent();
 
-            this.Text = title;
+            Text = title;
             trackBar.Maximum = max;
             trackBar.Minimum = min;
 
@@ -83,7 +77,7 @@ namespace ScreenToGif.Pages
         {
             InitializeComponent();
 
-            this.Text = title;
+            Text = title;
             trackBar.Maximum = max;
             trackBar.Minimum = min;
 

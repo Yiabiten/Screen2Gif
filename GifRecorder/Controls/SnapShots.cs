@@ -15,8 +15,8 @@ namespace ScreenToGif.Controls
         private static int _count = 30;
 
         private bool _horizontalMode = true;
-        private int _cumulativeHeight = 0;
-        private int _cumulativeWidth = 0;
+        private int _cumulativeHeight;
+        private int _cumulativeWidth;
         private int _margin = 0;
         private int _verticalWidth = 0;
         private int _squareWidth = 70;
@@ -47,7 +47,7 @@ namespace ScreenToGif.Controls
         {
             InitializeComponent();
 
-            this.AutoScroll = true;
+            AutoScroll = true;
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace ScreenToGif.Controls
 
         protected int GetSquareID(Point location)
         {
-            int returnID = -1;
+            int returnID;
 
             if (_horizontalMode)
             {
@@ -140,16 +140,15 @@ namespace ScreenToGif.Controls
             }
             if (++returnID <= _numSquares)
                 return returnID;
-            else
-                return -1;
+            return -1;
         }
 
         protected Point GetVirtualMouseLocation(MouseEventArgs e)
         {
             var mx = new Matrix(_zoom, 0, 0, _zoom, 0, 0);
-            mx.Translate(this.AutoScrollPosition.X * (1.0f / _zoom), this.AutoScrollPosition.Y * (1.0f / _zoom));
+            mx.Translate(AutoScrollPosition.X * (1.0f / _zoom), AutoScrollPosition.Y * (1.0f / _zoom));
             mx.Invert();
-            var pa = new Point[] { new Point(e.X, e.Y) };
+            var pa = new[] { new Point(e.X, e.Y) };
             mx.TransformPoints(pa);
             return pa[0];
         }

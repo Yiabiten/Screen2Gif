@@ -85,11 +85,11 @@ namespace ScreenToGif.FileWriters.GifWriter
         /// <summary>
         /// First unused entry
         /// </summary>
-        int _freeEntry = 0;
+        int _freeEntry;
 
         // block compression parameters -- after all codes are used up,
         // and compression rate changes, start over.
-        bool clear_flg = false;
+        bool clear_flg;
 
         // Algorithm:  use open addressing double hashing (no chaining) on the
         // prefix code / next character combination.  We do a variant of Knuth's
@@ -123,8 +123,8 @@ namespace ScreenToGif.FileWriters.GifWriter
         // fit in it exactly).  Use the VAX insv instruction to insert each
         // code in turn.  When the buffer fills up empty it and start over.
 
-        int cur_accum = 0;
-        int cur_bits = 0;
+        int cur_accum;
+        int cur_bits;
 
         int[] masks =
 		{

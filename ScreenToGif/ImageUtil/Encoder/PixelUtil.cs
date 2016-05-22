@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Runtime.InteropServices;
-using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -14,8 +12,8 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
     {
         #region Variables and Properties
 
-        private readonly BitmapSource _source = null;
-        private WriteableBitmap _data = null;
+        private readonly BitmapSource _source;
+        private WriteableBitmap _data;
         private IntPtr _iptr = IntPtr.Zero;
 
         /// <summary>
@@ -54,29 +52,27 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
         /// </summary>
         public void LockBits()
         {
-            try
+            // Get width and height of bitmap
+            Width = _source.PixelWidth;
+            Height = _source.PixelHeight;
+
+            // Get total locked pixels count
+            int pixelCount = Width * Height;
+
+            // get source bitmap pixel format size
+            Depth = _source.Format.BitsPerPixel;
+
+            if (Depth != 32 && Depth != 24)
             {
-                // Get width and height of bitmap
-                Width = _source.PixelWidth;
-                Height = _source.PixelHeight;
+                throw new ArgumentException("Only 24 and 32 bpp images are supported.");
+            }
 
-                // Get total locked pixels count
-                int pixelCount = Width * Height;
+            _data = new WriteableBitmap(_source);
 
-                // get source bitmap pixel format size
-                Depth = _source.Format.BitsPerPixel;
+            // Lock bitmap and return bitmap data.
+            _data.Lock();
 
-                if (Depth != 32 && Depth != 24)
-                {
-                    throw new ArgumentException("Only 24 and 32 bpp images are supported.");
-                }
-
-                _data = new WriteableBitmap(_source);
-
-                // Lock bitmap and return bitmap data.
-                _data.Lock();
-
-                /*
+            /*
                     https://doanvublog.wordpress.com/tag/32bpp/
                     1,4,8 and 16bpp uses a color table.
 
@@ -90,19 +86,14 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
                     So, bpp/8 = color chunk size.
                 */
 
-                // Create byte array to copy pixel values
-                int step = Depth / 8;
+            // Create byte array to copy pixel values
+            int step = Depth / 8;
 
-                Pixels = new byte[pixelCount * step];
-                _iptr = _data.BackBuffer;
+            Pixels = new byte[pixelCount * step];
+            _iptr = _data.BackBuffer;
 
-                // Copy data from pointer to array
-                Marshal.Copy(_iptr, Pixels, 0, Pixels.Length);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            // Copy data from pointer to array
+            Marshal.Copy(_iptr, Pixels, 0, Pixels.Length);
         }
 
         /// <summary>
@@ -110,20 +101,13 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
         /// </summary>
         public void UnlockBits()
         {
-            try
-            {
-                // Copy data from byte array to pointer
-                Marshal.Copy(Pixels, 0, _iptr, Pixels.Length);
+            // Copy data from byte array to pointer
+            Marshal.Copy(Pixels, 0, _iptr, Pixels.Length);
 
-                // Unlock bitmap data
-                _data.Unlock();
+            // Unlock bitmap data
+            _data.Unlock();
 
-                GC.Collect(1);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            GC.Collect(1);
         }
 
         /// <summary>

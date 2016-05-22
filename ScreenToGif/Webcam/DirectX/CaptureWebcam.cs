@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Drawing;
-using System.Reflection;
+using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using ScreenToGif.Webcam.DirectShow;
-using Size = System.Windows.Size;
 
 namespace ScreenToGif.Webcam.DirectX
 {
@@ -15,6 +14,50 @@ namespace ScreenToGif.Webcam.DirectX
     /// </summary>
     public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
     {
+        /// <summary>
+        /// Default constructor of the Capture class.
+        /// </summary>
+        /// <param name="videoDevice">The video device to be the source.</param>
+        /// <exception cref="ArgumentException">If no video device is provided.</exception>
+        public CaptureWebcam(Filter videoDevice)
+        {
+            if (videoDevice == null)
+                throw new ArgumentException("The videoDevice parameter must be set to a valid Filter.\n");
+
+            VideoDevice = videoDevice;
+
+            CreateGraph();
+        }
+
+        #region Enum
+
+        /// <summary> 
+        /// Possible states of the interal filter graph.
+        /// </summary>
+        protected enum GraphState
+        {
+            /// <summary>
+            /// No filter graph at all.
+            /// </summary>
+            Null,
+            /// <summary>
+            /// Filter graph created with device filters added.
+            /// </summary>
+            Created,
+
+            /// <summary>
+            /// Filter complete built, ready to run (possibly previewing).
+            /// </summary>
+            Rendered,
+
+            /// <summary>
+            /// Recording is live.
+            /// </summary>
+            Live
+        }
+
+        #endregion
+
         #region Properties
 
         /// <summary> 
@@ -64,46 +107,17 @@ namespace ScreenToGif.Webcam.DirectX
 
         #endregion
 
-        #region Enum
-
-        /// <summary> 
-        /// Possible states of the interal filter graph.
-        /// </summary>
-        protected enum GraphState
-        {
-            /// <summary>
-            /// No filter graph at all.
-            /// </summary>
-            Null,
-            /// <summary>
-            /// Filter graph created with device filters added.
-            /// </summary>
-            Created,
-
-            /// <summary>
-            /// Filter complete built, ready to run (possibly previewing).
-            /// </summary>
-            Rendered,
-
-            /// <summary>
-            /// Recording is live.
-            /// </summary>
-            Live
-        }
-
-        #endregion
-
         #region Variables
 
         /// <summary>
         /// When graphState==Rendered, have we rendered the preview stream?
         /// </summary>
-        protected bool IsPreviewRendered = false;
+        protected bool IsPreviewRendered;
 
         /// <summary>
         /// Do we need the preview stream rendered (VideoDevice and PreviewWindow != null)
         /// </summary>
-        protected bool WantPreviewRendered = false;
+        protected bool WantPreviewRendered;
 
         ///// <summary>
         ///// List of physical video sources
@@ -123,17 +137,17 @@ namespace ScreenToGif.Webcam.DirectX
         /// <summary>
         /// DShow Filter: building graphs for capturing video.
         /// </summary>
-        protected ExtendStreaming.ICaptureGraphBuilder2 CaptureGraphBuilder = null;
+        protected ExtendStreaming.ICaptureGraphBuilder2 CaptureGraphBuilder;
 
         /// <summary>
         /// DShow Filter: selected video device.
         /// </summary>
-        protected CoreStreaming.IBaseFilter VideoDeviceFilter = null;
+        protected CoreStreaming.IBaseFilter VideoDeviceFilter;
 
         /// <summary>
         /// DShow Filter: configure frame rate, size.
         /// </summary>
-        protected ExtendStreaming.IAMStreamConfig VideoStreamConfig = null;
+        protected ExtendStreaming.IAMStreamConfig VideoStreamConfig;
 
         /// <summary>
         /// DShow Filter: Start/Stop the filter graph -> copy of graphBuilder.
@@ -148,7 +162,7 @@ namespace ScreenToGif.Webcam.DirectX
         /// <summary>
         /// DShow Filter: selected video compressor.
         /// </summary>
-        protected CoreStreaming.IBaseFilter VideoCompressorFilter = null;
+        protected CoreStreaming.IBaseFilter VideoCompressorFilter;
 
         /// <summary>
         /// Property Backer: Video compression filter.
@@ -162,28 +176,13 @@ namespace ScreenToGif.Webcam.DirectX
 
         private byte[] _savedArray;
 
-        protected EditStreaming.ISampleGrabber SampGrabber = null;
+        protected EditStreaming.ISampleGrabber SampGrabber;
         private EditStreaming.VideoInfoHeader _videoInfoHeader;
 
         private double _widthRatio = -1;
         private double _heightRatio = -1;
 
         #endregion
-
-        /// <summary>
-        /// Default constructor of the Capture class.
-        /// </summary>
-        /// <param name="videoDevice">The video device to be the source.</param>
-        /// <exception cref="ArgumentException">If no video device is provided.</exception>
-        public CaptureWebcam(Filter videoDevice)
-        {
-            if (videoDevice == null)
-                throw new ArgumentException("The videoDevice parameter must be set to a valid Filter.\n");
-
-            this.VideoDevice = videoDevice;
-
-            CreateGraph();
-        }
 
         #region Public Methods
 
@@ -194,7 +193,7 @@ namespace ScreenToGif.Webcam.DirectX
         {
             DerenderGraph();
 
-            WantPreviewRendered = ((PreviewWindow != null) && (VideoDevice != null));
+            WantPreviewRendered = (PreviewWindow != null) && (VideoDevice != null);
 
             RenderGraph();
             StartPreviewIfNeeded();
@@ -351,7 +350,7 @@ namespace ScreenToGif.Webcam.DirectX
 
             // Remove the Resize event handler
             if (PreviewWindow != null)
-                PreviewWindow.SizeChanged -= new SizeChangedEventHandler(OnPreviewWindowResize);
+                PreviewWindow.SizeChanged -= OnPreviewWindowResize;
 
             if ((int)ActualGraphState >= (int)GraphState.Rendered)
             {
@@ -363,7 +362,7 @@ namespace ScreenToGif.Webcam.DirectX
                 // video and audio devices. If we have a compressor
                 // then disconnect it, but don't remove it
                 if (VideoDeviceFilter != null)
-                    RemoveDownstream(VideoDeviceFilter, (VideoCompressor == null));
+                    RemoveDownstream(VideoDeviceFilter, VideoCompressor == null);
             }
         }
 
@@ -400,7 +399,7 @@ namespace ScreenToGif.Webcam.DirectX
                             // Is this an input pin?
                             var info = new CoreStreaming.PinInfo();
                             hr = pinTo.QueryPinInfo(out info);
-                            if ((hr == 0) && (info.dir == (CoreStreaming.PinDirection.Input)))
+                            if ((hr == 0) && (info.dir == CoreStreaming.PinDirection.Input))
                             {
                                 // Recurse down this branch
                                 RemoveDownstream(info.filter, true);
@@ -534,7 +533,7 @@ namespace ScreenToGif.Webcam.DirectX
             // Position video window in client rect of owner window.
             VideoWindow.SetWindowPosition(0, 0, 
                 (int)(PreviewWindow.ActualWidth * Scale), 
-                (int)((PreviewWindow.ActualHeight) * Scale)); //-70
+                (int)(PreviewWindow.ActualHeight * Scale)); //-70
         }
 
         /// <summary>
@@ -622,7 +621,7 @@ namespace ScreenToGif.Webcam.DirectX
             //scan0 += (height - 1) * stride;
             scan0 += height * stride;
 
-            var b = new Bitmap(width, height, -stride, System.Drawing.Imaging.PixelFormat.Format24bppRgb, (IntPtr)scan0);
+            var b = new Bitmap(width, height, -stride, PixelFormat.Format24bppRgb, (IntPtr)scan0);
             handle.Free();
 
             CaptureFrameEvent(b);
@@ -677,7 +676,7 @@ namespace ScreenToGif.Webcam.DirectX
             //address += (height - 1) * stride;
             address += height * stride;
 
-            var bitmap = new Bitmap(width, height, -stride, System.Drawing.Imaging.PixelFormat.Format24bppRgb, address);
+            var bitmap = new Bitmap(width, height, -stride, PixelFormat.Format24bppRgb, address);
             handleObj.Free();
 
             return bitmap;

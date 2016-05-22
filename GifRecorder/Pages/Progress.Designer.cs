@@ -1,11 +1,14 @@
-﻿namespace ScreenToGif.Pages
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace ScreenToGif.Pages
 {
     partial class Progress
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -462,32 +465,32 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.PictureBox pbExample;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel8;
-        private System.Windows.Forms.FlowLayoutPanel flowSizeAs;
-        private System.Windows.Forms.Label lblSizeType;
-        private System.Windows.Forms.RadioButton rbPercentage;
-        private System.Windows.Forms.RadioButton rbPoint;
-        private System.Windows.Forms.FlowLayoutPanel flowPercentage;
-        private System.Windows.Forms.Label lblBarThickness;
-        private System.Windows.Forms.NumericUpDown numThick;
-        private System.Windows.Forms.Label lblPercentageSize;
-        private System.Windows.Forms.FlowLayoutPanel flowPosition;
-        private System.Windows.Forms.Label lblPosition;
-        private System.Windows.Forms.RadioButton rbTop;
-        private System.Windows.Forms.RadioButton rbBottom;
-        private System.Windows.Forms.RadioButton rbLeft;
-        private System.Windows.Forms.RadioButton rbRight;
-        private System.Windows.Forms.FlowLayoutPanel flowColor;
-        private System.Windows.Forms.FlowLayoutPanel flowType;
-        private System.Windows.Forms.RadioButton rbUseSolid;
-        private System.Windows.Forms.RadioButton rbUseHatch;
-        private System.Windows.Forms.ComboBox cbHatchBrush;
-        private System.Windows.Forms.Label lblColor;
-        private System.Windows.Forms.PictureBox pbColor;
-        private System.Windows.Forms.ColorDialog colorDialog;
-        private System.Windows.Forms.TrackBar trackValue;
+        private Button button1;
+        private Button btnOk;
+        private PictureBox pbExample;
+        private FlowLayoutPanel flowLayoutPanel8;
+        private FlowLayoutPanel flowSizeAs;
+        private Label lblSizeType;
+        private RadioButton rbPercentage;
+        private RadioButton rbPoint;
+        private FlowLayoutPanel flowPercentage;
+        private Label lblBarThickness;
+        private NumericUpDown numThick;
+        private Label lblPercentageSize;
+        private FlowLayoutPanel flowPosition;
+        private Label lblPosition;
+        private RadioButton rbTop;
+        private RadioButton rbBottom;
+        private RadioButton rbLeft;
+        private RadioButton rbRight;
+        private FlowLayoutPanel flowColor;
+        private FlowLayoutPanel flowType;
+        private RadioButton rbUseSolid;
+        private RadioButton rbUseHatch;
+        private ComboBox cbHatchBrush;
+        private Label lblColor;
+        private PictureBox pbColor;
+        private ColorDialog colorDialog;
+        private TrackBar trackValue;
     }
 }

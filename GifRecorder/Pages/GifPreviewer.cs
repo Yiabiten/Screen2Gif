@@ -26,7 +26,7 @@ namespace ScreenToGif.Pages
                 if (null != webBrowser.Document.Body)
                 {
                     Size size = webBrowser.Document.Body.ScrollRectangle.Size;
-                    this.Size = this.SizeFromClientSize(size);
+                    Size = SizeFromClientSize(size);
                 }
             }
         }

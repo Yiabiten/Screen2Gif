@@ -28,7 +28,7 @@ namespace ScreenToGif.Pages
         /// <summary>
         /// Used to not execute OnFormClosing function
         /// </summary>
-        private bool _okClicked = false;
+        private bool _okClicked;
 
         /// <summary>
         /// Used to not execute OnFormClosing function
@@ -66,7 +66,7 @@ namespace ScreenToGif.Pages
 
             btnMoreOptions.Text = Resources.btnMoreOptions;
             lblContent.Text = Resources.Label_Content;
-            this.Text = Resources.Title_InsertText;
+            Text = Resources.Title_InsertText;
 
             #endregion
 
@@ -102,7 +102,7 @@ namespace ScreenToGif.Pages
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
                 == DialogResult.Yes)
                 //Free the resources and quit
-                this.Dispose();
+                Dispose();
             else
                 e.Cancel = true;
         }
@@ -110,7 +110,7 @@ namespace ScreenToGif.Pages
         private void btnCancel_Click(object sender, EventArgs e)
         {
             _cancelClicked = true;
-            this.Close();
+            Close();
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -147,7 +147,7 @@ namespace ScreenToGif.Pages
             insertTextMethod(tbContent.Text.Trim());
 
             _okClicked = true;
-            this.Close();
+            Close();
         }
 
         private void btnMoreOptions_Click(object sender, EventArgs e)

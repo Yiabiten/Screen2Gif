@@ -5,6 +5,6 @@
         FlipHorizontal,
         FlipVertical,
         RotateRight90,
-        RotateLeft90,
+        RotateLeft90
     }
 }

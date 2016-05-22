@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using ScreenToGif.Properties;
 
@@ -40,7 +35,7 @@ namespace ScreenToGif.Pages
         {
             #region Compression
 
-            trackBarQuality.Value = Properties.Settings.Default.quality;
+            trackBarQuality.Value = Settings.Default.quality;
             labelQuality.Text = (-(trackBarQuality.Value - 20)).ToString();
 
             #endregion

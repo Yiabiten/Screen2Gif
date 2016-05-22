@@ -1,4 +1,5 @@
-﻿using ScreenToGif.Properties;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace ScreenToGif.Pages
 {
@@ -7,7 +8,7 @@ namespace ScreenToGif.Pages
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -319,24 +320,24 @@ namespace ScreenToGif.Pages
 
         #endregion
 
-        private System.Windows.Forms.Label labelQuality;
-        private System.Windows.Forms.CheckBox cbLoop;
-        private System.Windows.Forms.Label lblSlow;
-        private System.Windows.Forms.Label lblFast;
-        private System.Windows.Forms.Label lblWorst;
-        private System.Windows.Forms.Label lblBetter;
-        private System.Windows.Forms.TrackBar trackBarQuality;
-        private System.Windows.Forms.RadioButton radioGif;
-        private System.Windows.Forms.RadioButton radioPaint;
-        private System.Windows.Forms.NumericUpDown numRepeatCount;
-        private System.Windows.Forms.CheckBox cbRepeatForever;
-        private System.Windows.Forms.Label lblRepeatCount;
-        private System.Windows.Forms.GroupBox gbLoop;
-        private System.Windows.Forms.GroupBox gbQuality;
-        private System.Windows.Forms.GroupBox gbGifSettings;
-        private System.Windows.Forms.CheckBox cbPaintTransparent;
-        private System.Windows.Forms.Button btnTranspColor;
-        private System.Windows.Forms.PictureBox pbTranspColor;
-        private System.Windows.Forms.ColorDialog colorDialog;
+        private Label labelQuality;
+        private CheckBox cbLoop;
+        private Label lblSlow;
+        private Label lblFast;
+        private Label lblWorst;
+        private Label lblBetter;
+        private TrackBar trackBarQuality;
+        private RadioButton radioGif;
+        private RadioButton radioPaint;
+        private NumericUpDown numRepeatCount;
+        private CheckBox cbRepeatForever;
+        private Label lblRepeatCount;
+        private GroupBox gbLoop;
+        private GroupBox gbQuality;
+        private GroupBox gbGifSettings;
+        private CheckBox cbPaintTransparent;
+        private Button btnTranspColor;
+        private PictureBox pbTranspColor;
+        private ColorDialog colorDialog;
     }
 }

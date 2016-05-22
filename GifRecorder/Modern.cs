@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using ScreenToGif.Capture;
@@ -15,12 +16,7 @@ using ScreenToGif.Encoding;
 using ScreenToGif.Pages;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
-using Application = System.Windows.Forms.Application;
-using MessageBox = System.Windows.Forms.MessageBox;
-using Point = System.Drawing.Point;
-using Size = System.Drawing.Size;
-using DataFormats = System.Windows.Forms.DataFormats;
-using DragDropEffects = System.Windows.Forms.DragDropEffects;
+using Timer = System.Windows.Forms.Timer;
 
 namespace ScreenToGif
 {
@@ -58,7 +54,7 @@ namespace ScreenToGif
         /// <summary>
         /// The numbers of frames, this is updated while recording.
         /// </summary>
-        private int _frameCount = 0;
+        private int _frameCount;
         /// <summary>
         /// The output path of the recording.
         /// </summary>
@@ -127,7 +123,7 @@ namespace ScreenToGif
         /// <summary>
         /// Indicates when the user is mouse-clicking.
         /// </summary>
-        private bool _recordClicked = false;
+        private bool _recordClicked;
 
         /// <summary>
         /// The Path of the Temp folder.
@@ -137,7 +133,7 @@ namespace ScreenToGif
 
         #region Enums
 
-        private enum Stage : int
+        private enum Stage
         {
             Stopped = 0,
             Recording = 1,
@@ -145,10 +141,10 @@ namespace ScreenToGif
             PreStarting = 3,
             Editing = 4,
             Encoding = 5,
-            Snapping = 6,
-        };
+            Snapping = 6
+        }
 
-        private enum ActionEnum : int
+        private enum ActionEnum
         {
             Grayscale = 0,
             Color,
@@ -164,8 +160,8 @@ namespace ScreenToGif
             AddText,
             FlipRotate,
             FreeDraw,
-            Progress,
-        };
+            Progress
+        }
 
         #endregion
 
@@ -215,7 +211,7 @@ namespace ScreenToGif
         /// <summary>
         /// Indicates the position of the cursor hot spot.
         /// </summary>
-        public enum HitTest : int
+        public enum HitTest
         {
             /// <summary>
             /// On the screen background or on a dividing line between windows (same as HTNOWHERE, except that the DefWindowProc function produces a system beep to indicate an error).
@@ -345,8 +341,8 @@ namespace ScreenToGif
             /// <summary>
             /// In a Help button.
             /// </summary>
-            HTHELP = 21,
-        };
+            HTHELP = 21
+        }
 
         #endregion
 
@@ -360,15 +356,15 @@ namespace ScreenToGif
             #region Load Save Data
 
             //Gets and sets the fps
-            numMaxFps.Value = Properties.Settings.Default.maxFps;
+            numMaxFps.Value = Settings.Default.maxFps;
 
             //Load last saved window size
-            this.Size = new Size(Settings.Default.size.Width, Settings.Default.size.Height);
+            Size = new Size(Settings.Default.size.Width, Settings.Default.size.Height);
 
             //Put the grid as background.
             RightSplit.Panel2.BackgroundImage =
                 (con_showGrid.Checked = Settings.Default.ShowGrid) ? //If
-                Properties.Resources.grid : null;  //True-False
+                Resources.grid : null;  //True-False
 
             //Recording options.
             con_Fullscreen.Checked = Settings.Default.fullscreen;
@@ -382,8 +378,8 @@ namespace ScreenToGif
 
             #region Performance and flickering tweaks
 
-            this.DoubleBuffered = true;
-            this.SetStyle(ControlStyles.ResizeRedraw |
+            DoubleBuffered = true;
+            SetStyle(ControlStyles.ResizeRedraw |
                           ControlStyles.OptimizedDoubleBuffer |
                           ControlStyles.AllPaintingInWmPaint |
                           ControlStyles.UserPaint, true);
@@ -430,7 +426,7 @@ namespace ScreenToGif
                 _listFrames = new List<string>(_listFramesEdit);
                 _listDelay = new List<int>(_listDelayEdit);
 
-                this.TopMost = false;
+                TopMost = false;
 
                 EditFrames();
                 ShowHideButtons(true);
@@ -447,7 +443,7 @@ namespace ScreenToGif
             #region Detect High DPI Settings
 
             float dpiX;
-            using (Graphics graphics = this.CreateGraphics())
+            using (Graphics graphics = CreateGraphics())
             {
                 dpiX = graphics.DpiX;
             }
@@ -497,7 +493,7 @@ namespace ScreenToGif
 
             //Creates a border around the form
             Graphics g = e.Graphics;
-            var rectOutside = new Rectangle(new Point(0, 0), new Size(this.Width - 1, this.Height - 1));
+            var rectOutside = new Rectangle(new Point(0, 0), new Size(Width - 1, Height - 1));
             var rectInside = new Rectangle(new Point(panelTransparent.Left - 1, panelTransparent.Top - 1), new Size(panelTransparent.Width + 1, panelTransparent.Height + 1));
 
             Pen pen;
@@ -524,8 +520,8 @@ namespace ScreenToGif
             //SetWindowRgn(this.Handle, ptrBorder, true);
 
             //Create a rectangle around the form, to make a hit test
-            Rectangle rc = new Rectangle(this.ClientSize.Width - cGrip,
-                this.ClientSize.Height - cGrip, cGrip, cGrip);
+            Rectangle rc = new Rectangle(ClientSize.Width - cGrip,
+                ClientSize.Height - cGrip, cGrip, cGrip);
 
             //Paints the size grip
             //ControlPaint.DrawSizeGrip(e.Graphics, this.BackColor, rc);
@@ -536,76 +532,77 @@ namespace ScreenToGif
         {
             if (_stage == Stage.Stopped || _stage == Stage.Editing)
             {
-                if (m.Msg == (int)WM_NCHITTEST)
+                if (m.Msg == WM_NCHITTEST)
                 {
                     #region Hit Test
                     // Trap WM_NCHITTEST
                     Point pos = new Point(m.LParam.ToInt32() & 0xffff, m.LParam.ToInt32() >> 16);
-                    pos = this.PointToClient(pos);
+                    pos = PointToClient(pos);
 
                     //Bottom Left
-                    if (pos.X <= cGrip && pos.Y >= this.ClientSize.Height - cGrip)
+                    if (pos.X <= cGrip && pos.Y >= ClientSize.Height - cGrip)
                     {
                         m.Result = (IntPtr)HitTest.HTBOTTOMLEFT;
                         return;
                     }
 
                     //Bottom Right
-                    else if (pos.X >= this.ClientSize.Width - cGrip &&
-                        pos.Y >= this.ClientSize.Height - cGrip)
+                    if (pos.X >= ClientSize.Width - cGrip &&
+                        pos.Y >= ClientSize.Height - cGrip)
                     {
                         m.Result = (IntPtr)HitTest.HTBOTTOMRIGHT;
                         return;
                     }
 
                     //Top Left
-                    else if (pos.Y <= cBorder && pos.X <= cBorder)
+                    if (pos.Y <= cBorder && pos.X <= cBorder)
                     {
                         m.Result = (IntPtr)HitTest.HTTOPLEFT;
                         return;
                     }
 
                     //Top Right
-                    else if (pos.Y <= cBorder && pos.X >= this.ClientSize.Width - cBorder)
+                    if (pos.Y <= cBorder && pos.X >= ClientSize.Width - cBorder)
                     {
                         m.Result = (IntPtr)HitTest.HTTOPRIGHT;
                         return;
                     }
 
                     //Top
-                    else if (pos.Y <= cBorder)
+                    if (pos.Y <= cBorder)
                     {
                         m.Result = (IntPtr)HitTest.HTTOP;
                         return;
                     }
 
                     //Caption
-                    else if (pos.Y < cCaption && pos.X > 50 && pos.Y < ClientSize.Width)
+                    if (pos.Y < cCaption && pos.X > 50 && pos.Y < ClientSize.Width)
                     {
                         m.Result = (IntPtr)HitTest.HTCAPTION;
                         return;
                     }
 
                     //Bottom
-                    else if (pos.Y >= this.ClientSize.Height - cBorder)
+                    if (pos.Y >= ClientSize.Height - cBorder)
                     {
                         m.Result = (IntPtr)HitTest.HTBOTTOM;
                         return;
                     }
 
                     //Left
-                    else if (pos.X <= cBorder)
+                    if (pos.X <= cBorder)
                     {
                         m.Result = (IntPtr)HitTest.HTLEFT;
                         return;
                     }
 
                     //Right
-                    else if (pos.X >= this.ClientSize.Width - cBorder)
+                    if (pos.X >= ClientSize.Width - cBorder)
                     {
                         m.Result = (IntPtr)HitTest.HTRIGHT;
                         return;
                     }
+
                     #endregion
                 }
             }
@@ -692,19 +689,19 @@ namespace ScreenToGif
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnMaximize_Click(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Normal)
+            if (WindowState == FormWindowState.Normal)
             {
-                this.WindowState = FormWindowState.Maximized;
+                WindowState = FormWindowState.Maximized;
                 btnMaximize.Image = Resources.MaximizePlus;
             }
             else
             {
-                this.WindowState = FormWindowState.Normal;
+                WindowState = FormWindowState.Normal;
                 btnMaximize.Image = Resources.MaximizeMinus;
             }
 
@@ -712,7 +709,7 @@ namespace ScreenToGif
 
         private void btnMinimize_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+            WindowState = FormWindowState.Minimized;
         }
 
         #endregion
@@ -735,8 +732,8 @@ namespace ScreenToGif
             if (e.Button == MouseButtons.Left)
             {
                 //Move the Form the same difference the mouse cursor moved;
-                this.Left += e.X - _lastClick.X;
-                this.Top += e.Y - _lastClick.Y;
+                Left += e.X - _lastClick.X;
+                Top += e.Y - _lastClick.Y;
             }
         }
 
@@ -748,7 +745,7 @@ namespace ScreenToGif
                 tbWidth.Text = panelTransparent.Width.ToString();
             }
 
-            if (this.WindowState == FormWindowState.Normal)
+            if (WindowState == FormWindowState.Normal)
                 btnMaximize.Image = Resources.MaximizeMinus;
 
             AutoFitButtons();
@@ -804,7 +801,7 @@ namespace ScreenToGif
             }
             else
             {
-                Settings.Default.size = this.Size;
+                Settings.Default.size = Size;
             }
 
             Settings.Default.Save();
@@ -834,7 +831,7 @@ namespace ScreenToGif
         /// </summary>
         private void Modern_TextChanged(object sender, EventArgs e)
         {
-            labelTitle.Text = this.Text;
+            labelTitle.Text = Text;
         }
 
         #endregion
@@ -866,7 +863,7 @@ namespace ScreenToGif
             {
                 ctrlParent.Controls.Clear(); //Removes all pages
 
-                this.TransparencyKey = Color.LimeGreen;
+                TransparencyKey = Color.LimeGreen;
                 panelTransparent.BackColor = Color.LimeGreen;
             }
             else
@@ -882,7 +879,7 @@ namespace ScreenToGif
                 btnGifConfig.Checked = false;
                 btnInfo.Checked = false;
 
-                this.TransparencyKey = Color.Empty;
+                TransparencyKey = Color.Empty;
             }
         }
 
@@ -902,7 +899,7 @@ namespace ScreenToGif
             {
                 ctrlParent.Controls.Clear(); //Removes all pages
 
-                this.TransparencyKey = Color.LimeGreen;
+                TransparencyKey = Color.LimeGreen;
                 panelTransparent.BackColor = Color.LimeGreen;
             }
             else
@@ -920,7 +917,7 @@ namespace ScreenToGif
                 btnConfig.Checked = false;
                 btnInfo.Checked = false;
 
-                this.TransparencyKey = Color.Empty;
+                TransparencyKey = Color.Empty;
             }
         }
 
@@ -940,7 +937,7 @@ namespace ScreenToGif
             {
                 ctrlParent.Controls.Clear(); //Removes all pages
 
-                this.TransparencyKey = Color.LimeGreen;
+                TransparencyKey = Color.LimeGreen;
                 panelTransparent.BackColor = Color.LimeGreen;
 
                 GC.Collect();
@@ -960,13 +957,13 @@ namespace ScreenToGif
 
                 GC.Collect();
 
-                this.TransparencyKey = Color.Empty;
+                TransparencyKey = Color.Empty;
             }
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
-            StopPreview(true);
+            StopPreview();
 
             if (trackBar.Value == 0)
             {
@@ -977,13 +974,13 @@ namespace ScreenToGif
                 trackBar.Value = trackBar.Value - 1;
             }
 
-            this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
+            Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
             DelayUpdate();
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            StopPreview(true);
+            StopPreview();
 
             if (trackBar.Value == trackBar.Maximum)
             {
@@ -994,14 +991,14 @@ namespace ScreenToGif
                 trackBar.Value = trackBar.Value + 1;
             }
 
-            this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
+            Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
             DelayUpdate();
         }
 
         private void btnFreeDrawing_Click(object sender, EventArgs e)
         {
-            StopPreview(true);
-            FreeDrawing freeDraw = null;
+            StopPreview();
+            FreeDrawing freeDraw;
 
             if (tvFrames.SelectedFrames().Count > 0)
             {
@@ -1014,11 +1011,11 @@ namespace ScreenToGif
 
             if (freeDraw.ShowDialog() == DialogResult.OK)
             {
-                this.Cursor = Cursors.AppStarting;
+                Cursor = Cursors.AppStarting;
 
                 ApplyActionToFrames("FreeDraw", ActionEnum.FreeDraw, 0F, freeDraw.ImagePainted);
 
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
 
             freeDraw.Dispose();
@@ -1066,7 +1063,7 @@ namespace ScreenToGif
                 #region Remove all pages
 
                 panelTransparent.BackColor = Color.LimeGreen;
-                this.TransparencyKey = Color.LimeGreen;
+                TransparencyKey = Color.LimeGreen;
                 panelTransparent.Controls.Clear(); //Removes all pages from the top
 
                 btnConfig.Checked = false;
@@ -1099,13 +1096,13 @@ namespace ScreenToGif
                 tbHeight.Enabled = false;
                 tbWidth.Enabled = false;
                 numMaxFps.Enabled = false;
-                this.TopMost = true;
+                TopMost = true;
 
                 _addDel = AddFrames;
 
                 if (Settings.Default.preStart) //if should show the pre start countdown
                 {
-                    this.Text = "Screen To Gif (2" + Resources.TitleSecondsToGo;
+                    Text = "Screen To Gif (2" + Resources.TitleSecondsToGo;
                     btnRecordPause.Enabled = false;
 
                     _actHook.OnMouseActivity += MouseHookTarget;
@@ -1141,7 +1138,7 @@ namespace ScreenToGif
                             }
                             else
                             {
-                                this.MinimizeBox = false;
+                                MinimizeBox = false;
                                 timerCapWithCursorFull_Tick(null, null);
                                 timerCapWithCursorFull.Start();
                             }
@@ -1162,10 +1159,10 @@ namespace ScreenToGif
                             //Set to snapshot mode, change the text of the record button to "Snap" and 
                             //every press of the button, takes a screenshot
                             _stage = Stage.Snapping;
-                            btnRecordPause.Image = Properties.Resources.Snap16x;
+                            btnRecordPause.Image = Resources.Snap16x;
                             btnRecordPause.Text = Resources.btnSnap;
                             btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
-                            this.Text = "Screen To Gif - " + Resources.Con_SnapshotMode;
+                            Text = "Screen To Gif - " + Resources.Con_SnapshotMode;
 
                             AutoFitButtons();
 
@@ -1211,7 +1208,7 @@ namespace ScreenToGif
                             btnRecordPause.Image = Resources.Snap16x;
                             btnRecordPause.Text = Resources.btnSnap;
                             btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
-                            this.Text = "Screen To Gif - " + Resources.Con_SnapshotMode;
+                            Text = "Screen To Gif - " + Resources.Con_SnapshotMode;
 
                             AutoFitButtons();
 
@@ -1222,7 +1219,7 @@ namespace ScreenToGif
                     }
                 }
 
-                this.Invalidate();
+                Invalidate();
 
                 #endregion
             }
@@ -1230,7 +1227,7 @@ namespace ScreenToGif
             {
                 #region To Pause
 
-                this.Text = Resources.TitlePaused;
+                Text = Resources.TitlePaused;
                 btnRecordPause.Text = Resources.btnRecordPause_Continue;
                 btnRecordPause.Image = Resources.Record;
                 btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
@@ -1246,7 +1243,7 @@ namespace ScreenToGif
             {
                 #region To Record Again
 
-                this.Text = Resources.TitleRecording;
+                Text = Resources.TitleRecording;
                 btnRecordPause.Text = Resources.Pause;
                 btnRecordPause.Image = Resources.Pause_17Blue;
                 btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
@@ -1316,10 +1313,8 @@ namespace ScreenToGif
                     _stopDel = StopAsync;
                     _stopDel.BeginInvoke(CallBackStop, null);
 
-                    this.Cursor = Cursors.AppStarting;
+                    Cursor = Cursors.AppStarting;
                     panelBottom.Enabled = false;
-
-                    return;
 
                     #endregion
                 }
@@ -1342,10 +1337,10 @@ namespace ScreenToGif
                     btnRecordPause.Text = Resources.btnRecordPause_Record;
                     btnRecordPause.Image = Resources.Record;
                     btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
-                    this.Text = Resources.TitleStoped;
+                    Text = Resources.TitleStoped;
 
                     AutoFitButtons();
-                    this.Invalidate();
+                    Invalidate();
 
                     try
                     {
@@ -1380,23 +1375,23 @@ namespace ScreenToGif
         {
             #region Processing Page
 
-            this.Invoke((Action)delegate //Needed because it's a cross thread call.
+            Invoke((Action)delegate //Needed because it's a cross thread call.
             {
                 #region Verifies the minimum size to display the Processing page
 
-                if (this.Size.Height < 220)
+                if (Size.Height < 220)
                 {
-                    this.Size = new Size(this.Size.Width, 220);
+                    Size = new Size(Size.Width, 220);
                 }
 
-                if (this.Size.Width < 400)
+                if (Size.Width < 400)
                 {
-                    this.Size = new Size(400, this.Size.Height);
+                    Size = new Size(400, Size.Height);
                 }
 
                 #endregion
 
-                this.TransparencyKey = Color.Empty;
+                TransparencyKey = Color.Empty;
                 panelBottom.Visible = false;
 
                 //Using this makes all Processing calls to change threads.
@@ -1412,7 +1407,7 @@ namespace ScreenToGif
             //TODO: Make lighter
             if (Settings.Default.showCursor)
             {
-                this.Invoke((Action)(() => Processing.Undefined("Merging Cursors...")));
+                Invoke((Action)(() => Processing.Undefined("Merging Cursors...")));
 
                 #region Merge Cursor and Bitmap
 
@@ -1469,9 +1464,9 @@ namespace ScreenToGif
 
             if (Settings.Default.fullscreen)
             {
-                this.Invoke((Action)ShowWindowAndHideTrayIcon);
+                Invoke((Action)ShowWindowAndHideTrayIcon);
 
-                this.Invoke((Action)(() => Processing.Undefined("Resizing Fullscreen Recording...")));
+                Invoke((Action)(() => Processing.Undefined("Resizing Fullscreen Recording...")));
 
                 var bitmapAux = _listFrames[0].From();
 
@@ -1513,13 +1508,13 @@ namespace ScreenToGif
 
             _stopDel.EndInvoke(r);
 
-            this.Invoke((Action)delegate
+            Invoke((Action)delegate
             {
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
                 panelBottom.Enabled = true;
 
-                this.TransparencyKey = Color.LimeGreen;
-                this.Invalidate();
+                TransparencyKey = Color.LimeGreen;
+                Invalidate();
 
                 panelBottom.Visible = true;
                 panelTransparent.Visible = true;
@@ -1529,11 +1524,11 @@ namespace ScreenToGif
                 if (Settings.Default.allowEdit)
                 {
                     //To return back to the last form size after the editor
-                    _lastSize = this.Size;
+                    _lastSize = Size;
                     _stage = Stage.Editing;
                     btnMaximize.Enabled = true;
                     btnMinimize.Enabled = true;
-                    this.TopMost = false;
+                    TopMost = false;
 
                     EditFrames();
 
@@ -1541,7 +1536,7 @@ namespace ScreenToGif
                 }
                 else
                 {
-                    _lastSize = this.Size; //Not sure why this is here
+                    _lastSize = Size; //Not sure why this is here
                     Save();
 
                     Processing.Page.Dispose();
@@ -1558,10 +1553,10 @@ namespace ScreenToGif
         /// </summary>
         private void Save()
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
 
-            this.Size = _lastSize;
-            this.Invalidate();
+            Size = _lastSize;
+            Invalidate();
             Application.DoEvents();
 
             if (!Settings.Default.saveLocation) // to choose the location to save the gif
@@ -1573,7 +1568,7 @@ namespace ScreenToGif
                 sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 sfd.DefaultExt = "gif";
 
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
 
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
@@ -1591,10 +1586,10 @@ namespace ScreenToGif
                     btnRecordPause.Text = Resources.btnRecordPause_Record;
                     btnRecordPause.Image = Resources.Record;
                     btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
-                    this.Text = Resources.TitleStoped;
+                    Text = Resources.TitleStoped;
 
                     AutoFitButtons();
-                    this.Invalidate();
+                    Invalidate();
 
                     try
                     {
@@ -1628,7 +1623,7 @@ namespace ScreenToGif
                     path = Settings.Default.folder;
                 }
 
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
 
                 #region Ask if should encode
 
@@ -1639,7 +1634,7 @@ namespace ScreenToGif
                 if (ask != DialogResult.Yes)
                 {
                     //If the user don't want to save the recording.
-                    this.Text = Resources.TitleStoped;
+                    Text = Resources.TitleStoped;
 
                     #region Clear Variables
 
@@ -1726,7 +1721,7 @@ namespace ScreenToGif
             btnRecordPause.Text = Resources.btnRecordPause_Record;
             btnRecordPause.Image = Resources.Record;
             btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
-            this.Text = Resources.TitleStoped;
+            Text = Resources.TitleStoped;
 
             AutoFitButtons();
 
@@ -1746,12 +1741,12 @@ namespace ScreenToGif
         /// </summary>
         private void FinishState()
         {
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
             //panelTransparent.Visible = true;
             panelBottom.Visible = true;
             _stage = Stage.Stopped;
-            this.MinimumSize = new Size(100, 100);
-            this.Size = _lastSize;
+            MinimumSize = new Size(100, 100);
+            Size = _lastSize;
 
             numMaxFps.Enabled = true;
             tbHeight.Enabled = true;
@@ -1765,7 +1760,7 @@ namespace ScreenToGif
 
             AutoFitButtons();
 
-            this.Invalidate(this.DisplayRectangle);
+            Invalidate(DisplayRectangle);
         }
 
         /// <summary>
@@ -1778,23 +1773,23 @@ namespace ScreenToGif
 
             #region Show Processing
 
-            this.Invoke((Action)delegate //Needed because it's a cross thread call.
+            Invoke((Action)delegate //Needed because it's a cross thread call.
             {
                 #region Verifies the minimum size to display the Processing page
 
-                if (this.Size.Height < 220)
+                if (Size.Height < 220)
                 {
-                    this.Size = new Size(this.Size.Width, 220);
+                    Size = new Size(Size.Width, 220);
                 }
 
-                if (this.Size.Width < 400)
+                if (Size.Width < 400)
                 {
-                    this.Size = new Size(400, this.Size.Height);
+                    Size = new Size(400, Size.Height);
                 }
 
                 #endregion
 
-                this.TransparencyKey = Color.Empty;
+                TransparencyKey = Color.Empty;
                 panelBottom.Visible = false;
 
                 //Control ctrlParent = panelTransparent;
@@ -1803,7 +1798,7 @@ namespace ScreenToGif
                 panelTransparent.Controls.Add(Processing.Page = new Processing { Dock = DockStyle.Fill });
                 Processing.MaximumValue(countList);
 
-                this.Text = "Screen To Gif - " + Resources.Label_Processing;
+                Text = "Screen To Gif - " + Resources.Label_Processing;
 
                 //Only set the dispose of the Processing page, if needed.
                 if (Settings.Default.showFinished)
@@ -1829,7 +1824,7 @@ namespace ScreenToGif
 
                 if (Settings.Default.paintTransparent)
                 {
-                    this.Invoke((Action)(delegate
+                    Invoke((Action)(delegate
                     {
                         Processing.Defined(Resources.Label_AnalyzingUnchanged);
                         Processing.Status(0);
@@ -1846,7 +1841,7 @@ namespace ScreenToGif
                     _encoder.SetQuality(Settings.Default.quality);
                     _encoder.SetRepeat(Settings.Default.loop ? (Settings.Default.repeatForever ? 0 : Settings.Default.repeatCount) : -1); // 0 = Always, -1 once
 
-                    this.Invoke((Action)(() => Processing.Defined(Resources.Label_Processing)));
+                    Invoke((Action)(() => Processing.Defined(Resources.Label_Processing)));
 
                     #region For Each Frame
 
@@ -1869,7 +1864,7 @@ namespace ScreenToGif
                                 bitmapAux.Dispose();
                                 numImage++;
 
-                                this.BeginInvoke((Action)(() => Processing.Status(numImage)));
+                                BeginInvoke((Action)(() => Processing.Status(numImage)));
                             }
 
                             #endregion
@@ -1884,7 +1879,7 @@ namespace ScreenToGif
                                 _encoder.AddFrame(image.From());
                                 numImage++;
 
-                                this.BeginInvoke((Action)(() => Processing.Status(numImage)));
+                                BeginInvoke((Action)(() => Processing.Status(numImage)));
                             }
 
                             #endregion
@@ -1901,7 +1896,6 @@ namespace ScreenToGif
                 #region Clean Speciffic Variables
 
                 listToEncode.Clear();
-                listToEncode = null;
 
                 #endregion
 
@@ -1925,7 +1919,7 @@ namespace ScreenToGif
                             encoderNet.AddFrame(bitmapAux, 0, 0, TimeSpan.FromMilliseconds(_listDelay[i]));
                             bitmapAux.Dispose();
 
-                            this.BeginInvoke((Action)(() => Processing.Status(i)));
+                            BeginInvoke((Action)(() => Processing.Status(i)));
                         }
                     }
 
@@ -1954,24 +1948,24 @@ namespace ScreenToGif
 
             if (Settings.Default.showFinished)
             {
-                this.Invoke((Action)delegate
+                Invoke((Action)delegate
                 {
                     Processing.FinishedState(_outputpath, Resources.btnDone + "!");
-                    this.Text = Resources.Title_EncodingDone;
+                    Text = Resources.Title_EncodingDone;
                 });
 
                 //After the user hits "Close", the processing_Disposed is called. To set to the right stage.
             }
             else
             {
-                this.Invoke((Action)delegate
+                Invoke((Action)delegate
                 {
                     Processing.Page.Dispose();
-                    this.Text = Resources.Title_EncodingDone;
+                    Text = Resources.Title_EncodingDone;
 
-                    this.Invalidate();
+                    Invalidate();
                     //Set again the transparency color
-                    this.TransparencyKey = Color.LimeGreen;
+                    TransparencyKey = Color.LimeGreen;
 
                     FinishState();
                 });
@@ -2018,9 +2012,9 @@ namespace ScreenToGif
         /// </summary>
         private void processing_Disposed(object sender, EventArgs e)
         {
-            this.Text = Resources.TitleStoped;
-            this.TransparencyKey = Color.LimeGreen;
-            this.Invalidate();
+            Text = Resources.TitleStoped;
+            TransparencyKey = Color.LimeGreen;
+            Invalidate();
 
             FinishState();
 
@@ -2037,12 +2031,12 @@ namespace ScreenToGif
         /// <param name="text">Content to insert</param>
         public void InsertText(String text)
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
 
             ApplyActionToFrames("AddText", ActionEnum.AddText, 0, text);
             GC.Collect();
 
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         /// <summary>
@@ -2118,11 +2112,11 @@ namespace ScreenToGif
         {
             IList listIndexSelectedFrames;
 
-            this.Invoke((Action)ResetUndoProp);
+            Invoke((Action)ResetUndoProp);
 
             int actualFrame = 0;
 
-            this.Invoke((Action)delegate
+            Invoke((Action)delegate
             { actualFrame = trackBar.Value; });
 
             #region Apply Action to the Selected Frames
@@ -2368,7 +2362,7 @@ namespace ScreenToGif
                                 float actualValue = frameIndex + 1;
                                 float maxValue = _listFramesEdit.Count;
 
-                                Brush fillBrush = null;
+                                Brush fillBrush;
 
                                 #region Pen
 
@@ -2387,7 +2381,7 @@ namespace ScreenToGif
 
                                 #region Position
 
-                                var rectangle = new Rectangle();
+                                Rectangle rectangle;
 
                                 if (Settings.Default.progressPosition.Equals('T'))
                                 {
@@ -2434,7 +2428,7 @@ namespace ScreenToGif
                     GC.Collect(1);
                 }
 
-                this.Invoke((Action)delegate
+                Invoke((Action)delegate
                 {
                     trackBar_ValueChanged(null, null);
 
@@ -2482,7 +2476,6 @@ namespace ScreenToGif
                 tvFrames.Add(bitmapsList.Count);
 
                 bitmapsList.Clear();
-                bitmapsList = null;
 
                 GC.Collect();
             }
@@ -2498,8 +2491,8 @@ namespace ScreenToGif
                 // Update the content for user
                 trackBar.Maximum = _listFramesEdit.Count - 1;
                 pictureBitmap.Image = _listFramesEdit[trackBar.Value].From();
-                this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
-                this.Cursor = Cursors.Default;
+                Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
+                Cursor = Cursors.Default;
 
                 DelayUpdate();
             }
@@ -2570,18 +2563,18 @@ namespace ScreenToGif
         private void HideWindowAndShowTrayIcon()
         {
             _trayIcon.ShowTrayIcon();
-            this.Visible = false;
+            Visible = false;
         }
 
         private void ShowWindowAndHideTrayIcon()
         {
             _trayIcon.HideTrayIcon();
-            this.Visible = true;
+            Visible = true;
         }
 
         private void NotifyIconClicked(object sender, EventArgs eventArgs)
         {
-            this.Visible = true;
+            Visible = true;
         }
 
         #endregion
@@ -2608,7 +2601,7 @@ namespace ScreenToGif
 
         private void CallBack(IAsyncResult r)
         {
-            if (this.IsDisposed) return;
+            if (IsDisposed) return;
 
             _addDel.EndInvoke(r);
         }
@@ -2624,14 +2617,14 @@ namespace ScreenToGif
         {
             if (_preStartCount >= 1)
             {
-                this.Text = String.Format("Screen To Gif ({0}", _preStartCount + Resources.TitleSecondsToGo);
+                Text = String.Format("Screen To Gif ({0}", _preStartCount + Resources.TitleSecondsToGo);
                 _preStartCount--;
             }
             else
             {
                 timerPreStart.Stop();
                 btnRecordPause.Enabled = true;
-                this.Invalidate(); //To redraw the form, activating OnPaint again
+                Invalidate(); //To redraw the form, activating OnPaint again
 
                 if (Settings.Default.showCursor)
                 {
@@ -2661,7 +2654,7 @@ namespace ScreenToGif
                     {
                         _stage = Stage.Snapping;
                         btnRecordPause.Text = Resources.btnSnap;
-                        this.Text = String.Format("Screen To Gif - {0}", Resources.Con_SnapshotMode);
+                        Text = String.Format("Screen To Gif - {0}", Resources.Con_SnapshotMode);
                         btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
 
                         AutoFitButtons();
@@ -2697,7 +2690,7 @@ namespace ScreenToGif
                     {
                         _stage = Stage.Snapping;
                         btnRecordPause.Text = Resources.btnSnap;
-                        this.Text = String.Format("Screen To Gif - {0}", Resources.Con_SnapshotMode);
+                        Text = String.Format("Screen To Gif - {0}", Resources.Con_SnapshotMode);
                         btnRecordPause.ImageAlign = ContentAlignment.MiddleLeft;
 
                         AutoFitButtons();
@@ -2721,7 +2714,7 @@ namespace ScreenToGif
 
             _addDel.BeginInvoke(String.Format("{0}{1}.bmp", _pathTemp, _frameCount), new Bitmap(_bt), CallBack, null);
 
-            this.Invoke((Action)(() => this.Text = String.Format("Screen To Gif • {0}", _frameCount)));
+            Invoke((Action)(() => Text = String.Format("Screen To Gif • {0}", _frameCount)));
 
             _frameCount++;
         }
@@ -2735,7 +2728,7 @@ namespace ScreenToGif
             {
                 IconImage = _capture.CaptureImageCursor(ref _posCursor),
                 Position = panelTransparent.PointToClient(_posCursor),
-                Clicked = _recordClicked,
+                Clicked = _recordClicked
             };
 
 
@@ -2748,7 +2741,7 @@ namespace ScreenToGif
 
             _addDel.BeginInvoke(String.Format("{0}{1}.bmp", _pathTemp, _frameCount), new Bitmap(_bt), CallBack, null);
 
-            this.Invoke((Action)(() => this.Text = String.Format("Screen To Gif • {0}", _frameCount)));
+            Invoke((Action)(() => Text = String.Format("Screen To Gif • {0}", _frameCount)));
 
             _frameCount++;
             GC.Collect(1);
@@ -2764,13 +2757,13 @@ namespace ScreenToGif
         private void timerCapture_Tick(object sender, EventArgs e)
         {
             //Get the actual position of the form.
-            var lefttop = new Point(this.Location.X + panelTransparent.Location.X, this.Location.Y + panelTransparent.Location.Y);
+            var lefttop = new Point(Location.X + panelTransparent.Location.X, Location.Y + panelTransparent.Location.Y);
             //Take a screenshot of the area.
             _gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, panelTransparent.Bounds.Size, CopyPixelOperation.SourceCopy);
             //Add the bitmap to a list
             _addDel.BeginInvoke(String.Format("{0}{1}.bmp", _pathTemp, _frameCount), new Bitmap(_bt), CallBack, null);
 
-            this.Invoke((Action)(() => this.Text = String.Format("Screen To Gif • {0}", _frameCount)));
+            Invoke((Action)(() => Text = String.Format("Screen To Gif • {0}", _frameCount)));
 
             _frameCount++;
             GC.Collect(1);
@@ -2785,20 +2778,20 @@ namespace ScreenToGif
             {
                 IconImage = _capture.CaptureImageCursor(ref _posCursor),
                 Position = panelTransparent.PointToClient(_posCursor),
-                Clicked = _recordClicked,
+                Clicked = _recordClicked
             };
 
             //Get actual icon of the cursor
             _listCursor.Add(_cursorInfo);
             //Get the actual position of the form.
-            Point lefttop = new Point(this.Location.X + panelTransparent.Location.X, this.Location.Y + panelTransparent.Location.Y);
+            Point lefttop = new Point(Location.X + panelTransparent.Location.X, Location.Y + panelTransparent.Location.Y);
             //Take a screenshot of the area.
             _gr.CopyFromScreen(lefttop.X, lefttop.Y, 0, 0, panelTransparent.Bounds.Size, CopyPixelOperation.SourceCopy);
             //Add the bitmap to a list
 
             _addDel.BeginInvoke(String.Format("{0}{1}.bmp", _pathTemp, _frameCount), new Bitmap(_bt), CallBack, null);
 
-            this.Invoke((Action)(() => this.Text = String.Format("Screen To Gif • {0}", _frameCount)));
+            Invoke((Action)(() => Text = String.Format("Screen To Gif • {0}", _frameCount)));
 
             _frameCount++;
             GC.Collect(1);
@@ -2832,8 +2825,8 @@ namespace ScreenToGif
             int heightTb = Convert.ToInt32(tbHeight.Text);
             int widthTb = Convert.ToInt32(tbWidth.Text);
 
-            int offsetY = this.Height - panelTransparent.Height;
-            int offsetX = this.Width - panelTransparent.Width;
+            int offsetY = Height - panelTransparent.Height;
+            int offsetX = Width - panelTransparent.Width;
 
             heightTb += offsetY;
             widthTb += offsetX;
@@ -2854,7 +2847,7 @@ namespace ScreenToGif
 
             #endregion
 
-            this.Size = new Size(widthTb, heightTb);
+            Size = new Size(widthTb, heightTb);
 
             _screenSizeEdit = false;
         }
@@ -2871,8 +2864,8 @@ namespace ScreenToGif
                 int heightTb = Convert.ToInt32(tbHeight.Text);
                 int widthTb = Convert.ToInt32(tbWidth.Text);
 
-                int offsetY = this.Height - panelTransparent.Height;
-                int offsetX = this.Width - panelTransparent.Width;
+                int offsetY = Height - panelTransparent.Height;
+                int offsetX = Width - panelTransparent.Width;
 
                 heightTb += offsetY;
                 widthTb += offsetX;
@@ -2893,7 +2886,7 @@ namespace ScreenToGif
 
                 #endregion
 
-                this.Size = new Size(widthTb, heightTb);
+                Size = new Size(widthTb, heightTb);
 
                 _screenSizeEdit = false;
             }
@@ -2915,7 +2908,7 @@ namespace ScreenToGif
                 var sizeBitmap = new Size(bitmap.Size.Width + 100, bitmap.Size.Height + 160);
 
                 //Only resize if the form is smaller than the image.
-                if (this.Size.Width >= sizeBitmap.Width && this.Size.Height >= sizeBitmap.Height)
+                if (Size.Width >= sizeBitmap.Width && Size.Height >= sizeBitmap.Height)
                 {
                     bitmap.Dispose();
                     return;
@@ -2931,7 +2924,7 @@ namespace ScreenToGif
                     sizeBitmap.Height = 300;
                 }
 
-                this.Size = sizeBitmap;
+                Size = sizeBitmap;
             }
 
             #endregion
@@ -2966,7 +2959,7 @@ namespace ScreenToGif
         /// </summary>
         private void EditFrames()
         {
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
 
             _listFramesEdit = new List<string>();
             _listFramesUndo = new List<string>();
@@ -2994,8 +2987,8 @@ namespace ScreenToGif
             trackBar.Value = 0;
             trackBar.Maximum = _listFramesEdit.Count - 1;
 
-            this.MinimumSize = new Size(100, 100);
-            this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
+            MinimumSize = new Size(100, 100);
+            Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
 
             ResizeFormToImage(); //Resizes the form to hold the image.
 
@@ -3031,12 +3024,12 @@ namespace ScreenToGif
 
             if (String.IsNullOrEmpty(ArgumentUtil.FileName))
             {
-                this.Invoke((Action)(() => Processing.Page.Dispose()));
+                Invoke((Action)(() => Processing.Page.Dispose()));
             }
 
             GC.Collect(3);
 
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         /// <summary>
@@ -3060,7 +3053,7 @@ namespace ScreenToGif
             panelEdit.Visible = false;
             ShowHideButtons(false);
 
-            this.Text = Resources.Title_Edit_PromptToSave;
+            Text = Resources.Title_Edit_PromptToSave;
             Save();
 
             GC.Collect();
@@ -3089,7 +3082,7 @@ namespace ScreenToGif
         /// </summary>
         private void trackBar_ValueChanged(object sender, EventArgs e)
         {
-            this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
+            Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
             pictureBitmap.Image = _listFramesEdit[trackBar.Value].From();
 
             GC.Collect(2);
@@ -3113,7 +3106,7 @@ namespace ScreenToGif
                 trackBar.Maximum = _listFramesEdit.Count - 1;
                 pictureBitmap.Image = _listFramesEdit[trackBar.Value].From();
 
-                this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
+                Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
 
                 DelayUpdate();
                 GC.Collect();
@@ -3150,7 +3143,7 @@ namespace ScreenToGif
 
             trackBar.Maximum = _listFramesEdit.Count - 1;
             pictureBitmap.Image = _listFramesEdit[trackBar.Value].From();
-            this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
+            Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
 
             btnUndo.Enabled = false;
 
@@ -3217,7 +3210,7 @@ namespace ScreenToGif
 
             trackBar.Maximum = _listFramesEdit.Count - 1;
             pictureBitmap.Image = _listFramesEdit[trackBar.Value].From();
-            this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
+            Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
 
             ResizeFormToImage();
 
@@ -3267,7 +3260,7 @@ namespace ScreenToGif
                 return;
             }
 
-            StopPreview(true);
+            StopPreview();
             ResetUndoProp();
 
             var tip = new ToolTip();
@@ -3282,11 +3275,11 @@ namespace ScreenToGif
         {
             if (!con_tbCaption.Text.Equals(String.Empty))
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
 
                 ApplyActionToFrames("Caption", ActionEnum.Caption, 0, con_tbCaption.Text);
 
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
         }
 
@@ -3323,7 +3316,7 @@ namespace ScreenToGif
             trackBar.Value = _listFramesEdit.Count - 1;
 
             pictureBitmap.Image = _listFramesEdit[trackBar.Value].From();
-            this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
+            Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
 
             tvFrames.Remove(removeCount);
             DelayUpdate();
@@ -3350,7 +3343,7 @@ namespace ScreenToGif
             trackBar.Value = 0;
 
             pictureBitmap.Image = _listFramesEdit[trackBar.Value].From();
-            this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
+            Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
 
             tvFrames.Remove(removeCount);
             DelayUpdate();
@@ -3368,7 +3361,7 @@ namespace ScreenToGif
 
             if (sfdExport.ShowDialog() == DialogResult.OK)
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
 
                 if (sfdExport.FileName.EndsWith(".png"))
                 {
@@ -3381,7 +3374,7 @@ namespace ScreenToGif
 
                 GC.Collect();
 
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
 
             sfdExport.Dispose();
@@ -3443,7 +3436,7 @@ namespace ScreenToGif
 
             if (context == null) return;
 
-            this.Cursor = Cursors.WaitCursor;
+            Cursor = Cursors.WaitCursor;
             ResetUndoProp();
 
             switch (context.AccessibleDescription)
@@ -3469,20 +3462,20 @@ namespace ScreenToGif
 
             GC.Collect();
             ResizeFormToImage();
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         private void con_deleteSelectedFrame_Click(object sender, EventArgs e)
         {
             if (_listFramesEdit.Count > 1 && !tvFrames.IsAllChecked())
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
 
                 ApplyActionToFrames("Delete", ActionEnum.Delete);
                 tvFrames.UncheckAll();
                 GC.Collect();
 
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
             else
             {
@@ -3500,12 +3493,12 @@ namespace ScreenToGif
                 return;
             }
 
-            this.Cursor = Cursors.AppStarting;
+            Cursor = Cursors.AppStarting;
 
             AddPictures(openImageDialog.FileName);
             GC.Collect();
 
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         /// <summary>
@@ -3515,7 +3508,7 @@ namespace ScreenToGif
         {
             if (_listFramesEdit.Count <= 1) return;
 
-            this.Cursor = Cursors.AppStarting;
+            Cursor = Cursors.AppStarting;
 
             ResetUndoProp();
 
@@ -3523,12 +3516,12 @@ namespace ScreenToGif
             _listDelayEdit.Reverse();
 
             pictureBitmap.Image = _listFramesEdit[trackBar.Value].From();
-            this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
+            Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
 
             DelayUpdate();
             GC.Collect();
 
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         /// <summary>
@@ -3538,24 +3531,24 @@ namespace ScreenToGif
         {
             if (_listFramesEdit.Count <= 1) return;
 
-            this.Cursor = Cursors.AppStarting;
+            Cursor = Cursors.AppStarting;
 
             ResetUndoProp();
 
             int countDiff = _listFramesEdit.Count;
             _listFramesEdit = ImageUtil.Yoyo(_listFramesEdit); //TODO
-            _listDelayEdit = ImageUtil.Yoyo<int>(_listDelayEdit);
+            _listDelayEdit = ImageUtil.Yoyo(_listDelayEdit);
             countDiff -= _listFramesEdit.Count;
 
             trackBar.Maximum = _listFramesEdit.Count - 1;
             pictureBitmap.Image = _listFramesEdit[trackBar.Value].From();
-            this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
+            Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
 
             tvFrames.Add(Math.Abs(countDiff));
             DelayUpdate();
             GC.Collect();
 
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         private void con_Progress_Click(object sender, EventArgs e)
@@ -3564,11 +3557,11 @@ namespace ScreenToGif
 
             if (progress.ShowDialog(this) == DialogResult.OK)
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
 
                 ApplyActionToFrames("Progress", ActionEnum.Progress);
 
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
 
             progress.Dispose();
@@ -3627,12 +3620,12 @@ namespace ScreenToGif
 
             if (borderOptions.ShowDialog(this) == DialogResult.OK)
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
 
                 ApplyActionToFrames("Border", ActionEnum.Border, Settings.Default.borderThickness, Settings.Default.borderColor);
                 GC.Collect();
 
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
         }
 
@@ -3645,20 +3638,18 @@ namespace ScreenToGif
 
             if (valuePicker.ShowDialog(this) == DialogResult.OK)
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
 
                 if (valuePicker.Value != 0)
                 {
-                    float speed = 1;
-
                     //TODO: Remove range.
-                    speed = valuePicker.Value / 100F;
+                    var speed = valuePicker.Value / 100F;
 
                     ApplyActionToFrames("Slo-Motion", ActionEnum.Speed, speed);
                     GC.Collect();
                 }
 
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
         }
 
@@ -3682,7 +3673,7 @@ namespace ScreenToGif
                     {
                         #region Blured
 
-                        this.Cursor = Cursors.WaitCursor;
+                        Cursor = Cursors.WaitCursor;
                         Bitmap blured;
 
                         if (_listFramesEdit.Count > (trackBar.Value - 1))
@@ -3698,7 +3689,7 @@ namespace ScreenToGif
 
                         Image bluredI = blured;
                         grp.DrawImage(bluredI, 0, 0);
-                        this.Cursor = Cursors.Default;
+                        Cursor = Cursors.Default;
 
                         blured.Dispose();
                         bluredI.Dispose();
@@ -3714,7 +3705,7 @@ namespace ScreenToGif
                     strFormat.Alignment = StringAlignment.Center;
                     strFormat.LineAlignment = StringAlignment.Center;
 
-                    grp.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+                    grp.TextRenderingHint = TextRenderingHint.AntiAlias;
                     grp.DrawString(title.Content, title.FontTitle, new SolidBrush(title.ColorForeground),
                         new RectangleF(0, 0, titleBitmap.Width, titleBitmap.Height), strFormat);
 
@@ -3726,7 +3717,7 @@ namespace ScreenToGif
 
                     trackBar.Maximum = _listFramesEdit.Count - 1;
                     pictureBitmap.Image = _listFramesEdit[trackBar.Value].From();
-                    this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
+                    Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
 
                     tvFrames.Add(1);
                     DelayUpdate();
@@ -3751,14 +3742,14 @@ namespace ScreenToGif
         {
             filterDel.EndInvoke(r);
 
-            this.Invoke((Action)delegate
+            Invoke((Action)delegate
             {
                 pictureBitmap.Image = _listFramesEdit[trackBar.Value].From();
                 panelEdit.Enabled = true;
                 panelBottom.Enabled = true;
                 GC.Collect();
 
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             });
         }
 
@@ -3789,7 +3780,7 @@ namespace ScreenToGif
 
             if (valuePicker.ShowDialog() == DialogResult.OK)
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
                 panelEdit.Enabled = false;
                 panelBottom.Enabled = false;
 
@@ -3811,7 +3802,7 @@ namespace ScreenToGif
 
             if (valuePicker.ShowDialog() == DialogResult.OK)
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
                 panelEdit.Enabled = false;
                 panelBottom.Enabled = false;
 
@@ -3857,12 +3848,12 @@ namespace ScreenToGif
 
             if (colorFilter.ShowDialog() == DialogResult.OK)
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
 
                 ApplyActionToFrames("Color filter", ActionEnum.Color, 0F, Color.FromArgb(colorFilter.Alpha, colorFilter.Red, colorFilter.Green, colorFilter.Blue));
                 GC.Collect();
 
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
         }
 
@@ -3874,10 +3865,10 @@ namespace ScreenToGif
 
         #region Play Preview
 
-        System.Windows.Forms.Timer _timerPlayPreview = new System.Windows.Forms.Timer();
-        private int _actualFrame = 0;
+        Timer _timerPlayPreview = new Timer();
+        private int _actualFrame;
 
-        private void pictureBitmap_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void pictureBitmap_MouseClick(object sender, MouseEventArgs e)
         {
             //Cursor.Cross is for point selection.
             if (pictureBitmap.Cursor != Cursors.Cross)
@@ -3929,7 +3920,7 @@ namespace ScreenToGif
                 lblDelay.Visible = true;
                 trackBar.Value = _actualFrame;
                 trackBar.Visible = true;
-                this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
+                Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
                 btnPreview.Text = Resources.Con_PlayPreview;
                 btnPreview.Image = Resources.Play_17Green;
 
@@ -3938,7 +3929,7 @@ namespace ScreenToGif
             else
             {
                 lblDelay.Visible = false;
-                this.Text = String.Format("Screen To Gif - {0}", Resources.Title_PlayingAnimation);
+                Text = String.Format("Screen To Gif - {0}", Resources.Title_PlayingAnimation);
                 btnPreview.Text = Resources.Con_StopPreview;
                 btnPreview.Image = Resources.Stop_17Red;
                 _actualFrame = trackBar.Value;
@@ -3980,7 +3971,7 @@ namespace ScreenToGif
                 }
             }
 
-            this.Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
+            Text = Resources.Title_EditorFrame + trackBar.Value + " - " + (_listFramesEdit.Count - 1);
             lblDelay.Visible = true;
             trackBar.Visible = true;
             btnPreview.Text = Resources.Con_PlayPreview;
@@ -4012,7 +4003,7 @@ namespace ScreenToGif
             GC.Collect(2);
         }
 
-        private void contextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        private void contextMenu_Opening(object sender, CancelEventArgs e)
         {
             StopPreview();
         }
@@ -4062,7 +4053,7 @@ namespace ScreenToGif
         /// <summary>
         /// Updates the <see cref="_clicked"/> flag or opens the contextMenu.
         /// </summary>
-        private void lblDelay_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void lblDelay_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -4079,7 +4070,7 @@ namespace ScreenToGif
         /// <summary>
         /// Gets if the user is draging to up or down and updates the values.
         /// </summary>
-        private void lblDelay_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void lblDelay_MouseMove(object sender, MouseEventArgs e)
         {
             //If the user is not clicking, returns.
             if (!_clicked)
@@ -4110,7 +4101,7 @@ namespace ScreenToGif
         /// <summary>
         /// Updates the flag <see cref="_clicked"/> to false and sets the delay value to the list.
         /// </summary>
-        private void lblDelay_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void lblDelay_MouseUp(object sender, MouseEventArgs e)
         {
             _clicked = false;
 
@@ -4287,7 +4278,7 @@ namespace ScreenToGif
             }
         }
 
-        private void contextMenuTreeview_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        private void contextMenuTreeview_Opening(object sender, CancelEventArgs e)
         {
             StopPreview();
 
@@ -4406,14 +4397,14 @@ namespace ScreenToGif
 
         #region Drag And Drop Events
 
-        private void pictureBitmap_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
+        private void pictureBitmap_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop)
                 ? DragDropEffects.Copy
                 : DragDropEffects.None;
         }
 
-        private void pictureBitmap_DragDrop(object sender, System.Windows.Forms.DragEventArgs e)
+        private void pictureBitmap_DragDrop(object sender, DragEventArgs e)
         {
             var fileNames = e.Data.GetData(DataFormats.FileDrop) as string[];
 
@@ -4442,7 +4433,7 @@ namespace ScreenToGif
             Settings.Default.snapshot = con_Snapshot.Checked;
         }
 
-        private void contextRecord_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        private void contextRecord_Opening(object sender, CancelEventArgs e)
         {
             btnRecordPause.BackColor = Color.DodgerBlue;
 

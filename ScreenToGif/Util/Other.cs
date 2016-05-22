@@ -6,10 +6,10 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
+using Microsoft.Win32;
 using ScreenToGif.Properties;
 using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows.Other;
-using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace ScreenToGif.Util
 {
@@ -202,11 +202,8 @@ namespace ScreenToGif.Util
 
                 #endregion
             }
-            else
-            {
-                //Save to default folder.
-                return IncrementalFileName(Settings.Default.DefaultOutput, fileType);
-            }
+            //Save to default folder.
+            return IncrementalFileName(Settings.Default.DefaultOutput, fileType);
         }
 
         /// <summary>

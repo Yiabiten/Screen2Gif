@@ -1,11 +1,14 @@
-﻿namespace ScreenToGif.Pages
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace ScreenToGif.Pages
 {
     partial class BorderOptions
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -247,17 +250,17 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pbExample;
-        private System.Windows.Forms.FlowLayoutPanel flowOutline;
-        private System.Windows.Forms.PictureBox pbOutlineColor;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Label lblThick;
-        private System.Windows.Forms.NumericUpDown numThick;
-        private System.Windows.Forms.Label lblPoints;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.Label lblColor;
-        private System.Windows.Forms.ColorDialog colorDialog;
-        private System.Windows.Forms.Label lblColorName;
+        private PictureBox pbExample;
+        private FlowLayoutPanel flowOutline;
+        private PictureBox pbOutlineColor;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private Label lblThick;
+        private NumericUpDown numThick;
+        private Label lblPoints;
+        private Button btnCancel;
+        private Button btnOk;
+        private Label lblColor;
+        private ColorDialog colorDialog;
+        private Label lblColorName;
     }
 }

@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace ScreenToGif.Controls
@@ -55,13 +49,13 @@ namespace ScreenToGif.Controls
 
         #region Events
 
-        private void DragScrollGrid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void DragScrollGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Mouse.Capture(this);
             Cursor = Cursors.ScrollWE;
         }
 
-        private void DragScrollGrid_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        private void DragScrollGrid_MouseMove(object sender, MouseEventArgs e)
         {
             if (!IsMouseCaptured) return;
             if ((int)_lastPosition.X == (int)e.GetPosition(this).X) return;
@@ -76,7 +70,7 @@ namespace ScreenToGif.Controls
             //Value++;
         }
 
-        private void DragScrollGrid_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void DragScrollGrid_MouseUp(object sender, MouseButtonEventArgs e)
         {
             ReleaseMouseCapture();
             Cursor = Cursors.Arrow;

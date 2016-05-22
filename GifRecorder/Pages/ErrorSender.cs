@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace ScreenToGif.Pages
@@ -32,14 +26,14 @@ namespace ScreenToGif.Pages
 
             if (type == 1)
             {
-                this.Text = "Report an Error";
+                Text = "Report an Error";
 
                 cbError.Checked = true;
                 cbSuggestion.Checked = false;
             }
             else
             {
-                this.Text = "Send us, your ideas!";
+                Text = "Send us, your ideas!";
 
                 cbError.Checked = false;
                 cbSuggestion.Checked = true;

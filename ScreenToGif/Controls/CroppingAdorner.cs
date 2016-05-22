@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -7,8 +8,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using Brush = System.Windows.Media.Brush;
+using Color = System.Windows.Media.Color;
 using Point = System.Drawing.Point;
+using Size = System.Windows.Size;
 
 namespace ScreenToGif.Controls
 {
@@ -56,8 +59,8 @@ namespace ScreenToGif.Controls
 
         public event RoutedEventHandler CropChanged
         {
-            add { base.AddHandler(CropChangedEvent, value); }
-            remove { base.RemoveHandler(CropChangedEvent, value); }
+            add { AddHandler(CropChangedEvent, value); }
+            remove { RemoveHandler(CropChangedEvent, value); }
         }
 
         #endregion
@@ -116,7 +119,7 @@ namespace ScreenToGif.Controls
 
         static CroppingAdorner()
         {
-            System.Drawing.Graphics g = System.Drawing.Graphics.FromHwnd((IntPtr)0);
+            Graphics g = Graphics.FromHwnd((IntPtr)0);
 
             DpiX = g.DpiX;
             DpiY = g.DpiY;

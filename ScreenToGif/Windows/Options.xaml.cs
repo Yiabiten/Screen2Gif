@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -20,7 +21,6 @@ using ComboBox = System.Windows.Controls.ComboBox;
 using DialogResultWinForms = System.Windows.Forms.DialogResult;
 using Label = System.Windows.Controls.Label;
 using Localization = ScreenToGif.Windows.Other.Localization;
-using Path = System.IO.Path;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace ScreenToGif.Windows
@@ -74,7 +74,7 @@ namespace ScreenToGif.Windows
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var combo = sender as System.Windows.Controls.ComboBox;
+            var combo = sender as ComboBox;
 
             if (combo == null)
                 return;
@@ -883,7 +883,7 @@ namespace ScreenToGif.Windows
 
         #region Other
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             Settings.Default.Save();
         }

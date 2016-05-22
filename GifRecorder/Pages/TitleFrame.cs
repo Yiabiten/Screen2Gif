@@ -105,9 +105,9 @@ namespace ScreenToGif.Pages
 
             #region Sets the current default values
 
-            this.FontTitle = fontDialog.Font;
-            this.ColorBackground = backColorDialog.Color;
-            this.ColorForeground = fontDialog.Color;
+            FontTitle = fontDialog.Font;
+            ColorBackground = backColorDialog.Color;
+            ColorForeground = fontDialog.Color;
 
             #endregion
 
@@ -122,7 +122,7 @@ namespace ScreenToGif.Pages
             lblContent.Text = Resources.Label_Content;
             gbBackground.Text = Resources.Label_Background;
             lblExample.Text = Resources.Label_Example;
-            this.Text = Resources.Title_TitleFrame;
+            Text = Resources.Title_TitleFrame;
             btnMoreOptions.Text = Resources.btnMoreOptions;
 
             #endregion
@@ -138,7 +138,7 @@ namespace ScreenToGif.Pages
             {
                 Settings.Default.backcolorTitleFrame = backColorDialog.Color;
 
-                this.ColorBackground = backColorDialog.Color;
+                ColorBackground = backColorDialog.Color;
                 pbBackground.BackColor = backColorDialog.Color;
 
                 lblExample.BackColor = backColorDialog.Color;
@@ -244,10 +244,10 @@ namespace ScreenToGif.Pages
         {
             #region Persist Properties
 
-            this.Content = tbTitle.Text;
-            this.ColorBackground = backColorDialog.Color;
-            this.ForeColor = foreColorDialog.Color;
-            this.FontTitle = fontDialog.Font;
+            Content = tbTitle.Text;
+            ColorBackground = backColorDialog.Color;
+            ForeColor = foreColorDialog.Color;
+            FontTitle = fontDialog.Font;
 
             #endregion
 

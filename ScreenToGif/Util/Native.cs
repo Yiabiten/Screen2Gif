@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Forms;
 using ScreenToGif.Util.Writers;
 using Size = System.Drawing.Size;
 
@@ -100,10 +99,10 @@ namespace ScreenToGif.Util
             CAPTUREBLT = 0x40000000
         }
 
-        public enum DeviceCaps : int
+        public enum DeviceCaps
         {
             LogPixelsX = 88,
-            LogPixelsY = 90,
+            LogPixelsY = 90
         }
 
         [StructLayout(LayoutKind.Sequential)]

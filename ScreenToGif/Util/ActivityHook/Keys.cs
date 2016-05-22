@@ -832,6 +832,6 @@ namespace ScreenToGif.Util.ActivityHook
         /// <summary>
         /// The ALT modifier key.
         /// </summary>
-        Alt = 262144,
+        Alt = 262144
     }
 }

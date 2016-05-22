@@ -8,9 +8,9 @@ namespace ScreenToGif.Controls
     {
         #region Variables
 
-        public readonly static DependencyProperty HeaderProperty;
-        public readonly static DependencyProperty TextProperty;
-        public readonly static DependencyProperty MaxSizeProperty;
+        public static readonly DependencyProperty HeaderProperty;
+        public static readonly DependencyProperty TextProperty;
+        public static readonly DependencyProperty MaxSizeProperty;
 
         #endregion
 

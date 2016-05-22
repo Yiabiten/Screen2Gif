@@ -178,7 +178,7 @@ namespace ScreenToGif.Pages
 
             if (Directory.Exists(_pathTemp))
             {
-                var date = new DateTime();
+                DateTime date;
                 _listFolders = Directory.GetDirectories(_pathTemp).Where(x =>
                     x.Split('\\').Last().Length == 19 && DateTime.TryParse(x.Split('\\').Last().Substring(0, 10), out date)).ToList();
             }
@@ -269,7 +269,7 @@ namespace ScreenToGif.Pages
 
                 #region Update the Information
 
-                var date = new DateTime();
+                DateTime date;
                 _listFolders = Directory.GetDirectories(_pathTemp).Where(x =>
                     x.Split('\\').Last().Length == 19 && DateTime.TryParse(x.Split('\\').Last().Substring(0, 10), out date)).ToList();
 
@@ -335,11 +335,11 @@ namespace ScreenToGif.Pages
         {
             if (comboStartPauseKey.Text.Equals(comboStopKey.Text))
             {
-                comboStartPauseKey.Text = Properties.Settings.Default.startPauseKey.ToString();
+                comboStartPauseKey.Text = Settings.Default.startPauseKey.ToString();
             }
             else
             {
-                Properties.Settings.Default.startPauseKey = getKeys(comboStartPauseKey.Text);
+                Settings.Default.startPauseKey = getKeys(comboStartPauseKey.Text);
             }
         }
 
@@ -347,11 +347,11 @@ namespace ScreenToGif.Pages
         {
             if (comboStopKey.Text.Equals(comboStartPauseKey.Text))
             {
-                comboStopKey.Text = Properties.Settings.Default.stopKey.ToString();
+                comboStopKey.Text = Settings.Default.stopKey.ToString();
             }
             else
             {
-                Properties.Settings.Default.stopKey = getKeys(comboStopKey.Text);
+                Settings.Default.stopKey = getKeys(comboStopKey.Text);
             }
         }
 

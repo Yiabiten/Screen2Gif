@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -44,10 +45,10 @@ namespace ScreenToGif.Util
                     var colorString = ((int)Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "ImageColor", "0xFFFFFFFF")).ToString("X").Replace("0x", "");
 
                     //bgr?
-                    var a = int.Parse(colorString.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
-                    var r = int.Parse(colorString.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
-                    var g = int.Parse(colorString.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
-                    var b = int.Parse(colorString.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
+                    var a = int.Parse(colorString.Substring(0, 2), NumberStyles.HexNumber);
+                    var r = int.Parse(colorString.Substring(2, 2), NumberStyles.HexNumber);
+                    var g = int.Parse(colorString.Substring(4, 2), NumberStyles.HexNumber);
+                    var b = int.Parse(colorString.Substring(6, 2), NumberStyles.HexNumber);
                     
                     //36 B2 CC
                     //54 178 204

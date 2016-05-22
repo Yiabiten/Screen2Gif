@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Ink;
 
@@ -34,9 +30,9 @@ namespace ScreenToGif.Util.Converters
         {
             var shape = value as StylusShape;
 
-            if (shape == null) return new object[3] { 10d, 10d, true };
+            if (shape == null) return new object[] { 10d, 10d, true };
 
-            return new object[3] {shape.Width, shape.Height, shape is RectangleStylusShape};
+            return new object[] {shape.Width, shape.Height, shape is RectangleStylusShape};
         }
     }
 }

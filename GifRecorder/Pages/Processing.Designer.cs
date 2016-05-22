@@ -1,4 +1,5 @@
-﻿using ScreenToGif.Properties;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace ScreenToGif.Pages
 {
@@ -7,7 +8,7 @@ namespace ScreenToGif.Pages
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -250,18 +251,18 @@ namespace ScreenToGif.Pages
 
         #endregion
 
-        private System.Windows.Forms.ProgressBar progressBarEncoding;
-        private System.Windows.Forms.Label lblValue;
-        private System.Windows.Forms.LinkLabel linkOpenFile;
-        private System.Windows.Forms.LinkLabel linkClose;
-        private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.Label lblSize;
-        private System.Windows.Forms.PictureBox picStatus;
-        private System.Windows.Forms.Label lblProcessing;
-        private System.Windows.Forms.TableLayoutPanel panelBottom;
-        private System.Windows.Forms.TableLayoutPanel panelTitle;
-        private System.Windows.Forms.TableLayoutPanel panelBottomFinish;
-        private System.Windows.Forms.PictureBox pbOpen;
-        private System.Windows.Forms.PictureBox pbSize;
+        private ProgressBar progressBarEncoding;
+        private Label lblValue;
+        private LinkLabel linkOpenFile;
+        private LinkLabel linkClose;
+        private ToolTip toolTip;
+        private Label lblSize;
+        private PictureBox picStatus;
+        private Label lblProcessing;
+        private TableLayoutPanel panelBottom;
+        private TableLayoutPanel panelTitle;
+        private TableLayoutPanel panelBottomFinish;
+        private PictureBox pbOpen;
+        private PictureBox pbSize;
     }
 }

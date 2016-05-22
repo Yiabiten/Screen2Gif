@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Windows.Data;
-using System.Windows.Media.Imaging;
 using ScreenToGif.ImageUtil;
 
 namespace ScreenToGif.Util.Converters
@@ -11,7 +11,7 @@ namespace ScreenToGif.Util.Converters
     /// </summary>
     public class UriToBitmap : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var stringValue = value as string;
             var size = parameter as string;
@@ -41,7 +41,7 @@ namespace ScreenToGif.Util.Converters
             return stringValue.SourceFrom();
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return Binding.DoNothing;
         }

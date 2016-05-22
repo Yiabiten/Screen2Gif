@@ -18,7 +18,7 @@ namespace ScreenToGif.Util
         private static readonly Stack<List<FrameInfo>> UndoStack = new Stack<List<FrameInfo>>();
         private static readonly Stack<List<FrameInfo>> RedoStack = new Stack<List<FrameInfo>>();
 
-        private static bool _happening = false;
+        private static bool _happening;
 
         #endregion
 

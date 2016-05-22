@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media;
 using ScreenToGif.ImageUtil.Encoder;
 using ScreenToGif.Util;
-using Color = System.Windows.Media.Color;
 
 namespace ScreenToGif.ImageUtil.GifEncoder2
 {
@@ -22,7 +21,7 @@ namespace ScreenToGif.ImageUtil.GifEncoder2
         /// <summary>
         /// Repeat Count for the gif.
         /// </summary>
-        public int RepeatCount { get; set; } = 0;
+        public int RepeatCount { get; set; }
 
         public Color? TransparentColor { get; set; }
 

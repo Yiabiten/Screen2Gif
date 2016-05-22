@@ -83,6 +83,6 @@
         /// <summary>
         /// Cinemagraph Panel.
         /// </summary>
-        Cinemagraph = -8,
+        Cinemagraph = -8
     }
 }

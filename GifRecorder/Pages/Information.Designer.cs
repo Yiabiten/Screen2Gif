@@ -1,4 +1,5 @@
-﻿using ScreenToGif.Properties;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace ScreenToGif.Pages
 {
@@ -7,7 +8,7 @@ namespace ScreenToGif.Pages
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -378,14 +379,14 @@ namespace ScreenToGif.Pages
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::ScreenToGif.Properties.Resources.Marocco_flag;
+            this.pictureBox2.Image = global::ScreenToGif.Properties.Resources.morocco_flag;
             this.pictureBox2.Location = new System.Drawing.Point(81, 6);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(31, 24);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 27;
             this.pictureBox2.TabStop = false;
-            this.tooltipFlags.SetToolTip(this.pictureBox2, "Marocco");
+            this.tooltipFlags.SetToolTip(this.pictureBox2, "morocco");
             // 
             // tabPage1
             // 
@@ -1197,85 +1198,85 @@ namespace ScreenToGif.Pages
 
         #endregion
 
-        private System.Windows.Forms.LinkLabel linkCodeplex;
-        private System.Windows.Forms.PictureBox pictureBoxBrazil;
-        private System.Windows.Forms.Label lblLibraries;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label labelVersion;
-        private System.Windows.Forms.LinkLabel link2;
-        private System.Windows.Forms.LinkLabel linkNgif;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblAuthor;
-        private System.Windows.Forms.TabControl tabInfo;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.LinkLabel linkSammdon;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.LinkLabel linkBumpkit;
-        private System.Windows.Forms.LinkLabel linkBadrfoot;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.LinkLabel linkWebfool;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.LinkLabel linkThecentury;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.LinkLabel linkGiorgos;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ToolTip tooltipFlags;
-        private System.Windows.Forms.LinkLabel linkReportBug;
-        private System.Windows.Forms.LinkLabel linkUpdates;
-        private System.Windows.Forms.Label labelPercent;
-        private System.Windows.Forms.LinkLabel linkNarendhar;
-        private System.Windows.Forms.PictureBox pictureBox9;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.LinkLabel linkTirzan;
-        private System.Windows.Forms.PictureBox pictureBox8;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.LinkLabel linkPierre;
-        private System.Windows.Forms.PictureBox pictureBox7;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.LinkLabel linkJwramz;
-        private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.LinkLabel linkInuya;
-        private System.Windows.Forms.PictureBox pictureBox10;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.LinkLabel linkInd01;
-        private System.Windows.Forms.LinkLabel linkNhok35;
-        private System.Windows.Forms.PictureBox pictureBox11;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.LinkLabel linkFreaksterrao;
-        private System.Windows.Forms.PictureBox pictureBox12;
-        private System.Windows.Forms.LinkLabel linkSam;
-        private System.Windows.Forms.PictureBox pbRomania2;
-        private System.Windows.Forms.LinkLabel linkCPOL;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox pictureBox13;
-        private System.Windows.Forms.LinkLabel linkKagen;
-        private System.Windows.Forms.PictureBox pictureBox14;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLinkAutor;
-        private System.Windows.Forms.TableLayoutPanel tableTitle;
-        private System.Windows.Forms.TableLayoutPanel tableNameVersion;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.PictureBox pictureBox15;
-        private System.Windows.Forms.LinkLabel linkBruce;
-        private System.Windows.Forms.LinkLabel linkYoav;
-        private System.Windows.Forms.PictureBox pictureBox16;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.PictureBox pictureBox17;
-        private System.Windows.Forms.LinkLabel linkKaiInt;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.PictureBox pictureBox19;
-        private System.Windows.Forms.LinkLabel linkSonic;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.PictureBox pictureBox18;
-        private System.Windows.Forms.LinkLabel linkAndrey;
+        private LinkLabel linkCodeplex;
+        private PictureBox pictureBoxBrazil;
+        private Label lblLibraries;
+        private Label label7;
+        private Label labelVersion;
+        private LinkLabel link2;
+        private LinkLabel linkNgif;
+        private Label label4;
+        private Label label3;
+        private Label lblAuthor;
+        private TabControl tabInfo;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private Label label1;
+        private PictureBox pictureBox1;
+        private Label label5;
+        private LinkLabel linkSammdon;
+        private TabPage tabPage3;
+        private LinkLabel linkBumpkit;
+        private LinkLabel linkBadrfoot;
+        private PictureBox pictureBox2;
+        private LinkLabel linkWebfool;
+        private PictureBox pictureBox3;
+        private Label label9;
+        private LinkLabel linkThecentury;
+        private PictureBox pictureBox4;
+        private Label label10;
+        private LinkLabel linkGiorgos;
+        private PictureBox pictureBox5;
+        private Label label11;
+        private ToolTip tooltipFlags;
+        private LinkLabel linkReportBug;
+        private LinkLabel linkUpdates;
+        private Label labelPercent;
+        private LinkLabel linkNarendhar;
+        private PictureBox pictureBox9;
+        private Label label15;
+        private LinkLabel linkTirzan;
+        private PictureBox pictureBox8;
+        private Label label14;
+        private LinkLabel linkPierre;
+        private PictureBox pictureBox7;
+        private Label label13;
+        private LinkLabel linkJwramz;
+        private PictureBox pictureBox6;
+        private Label label12;
+        private LinkLabel linkInuya;
+        private PictureBox pictureBox10;
+        private Label label16;
+        private LinkLabel linkInd01;
+        private LinkLabel linkNhok35;
+        private PictureBox pictureBox11;
+        private Label label17;
+        private LinkLabel linkFreaksterrao;
+        private PictureBox pictureBox12;
+        private LinkLabel linkSam;
+        private PictureBox pbRomania2;
+        private LinkLabel linkCPOL;
+        private Label label2;
+        private PictureBox pictureBox13;
+        private LinkLabel linkKagen;
+        private PictureBox pictureBox14;
+        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tableLinkAutor;
+        private TableLayoutPanel tableTitle;
+        private TableLayoutPanel tableNameVersion;
+        private Label label6;
+        private PictureBox pictureBox15;
+        private LinkLabel linkBruce;
+        private LinkLabel linkYoav;
+        private PictureBox pictureBox16;
+        private Label label8;
+        private PictureBox pictureBox17;
+        private LinkLabel linkKaiInt;
+        private Label label19;
+        private PictureBox pictureBox19;
+        private LinkLabel linkSonic;
+        private Label label18;
+        private PictureBox pictureBox18;
+        private LinkLabel linkAndrey;
     }
 }

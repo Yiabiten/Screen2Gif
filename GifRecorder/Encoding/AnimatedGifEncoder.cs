@@ -349,7 +349,7 @@ namespace ScreenToGif.Encoding
         /// <returns>False if open or initial write failed.</returns>
         public bool Start(String file)
         {
-            bool ok = true;
+            bool ok;
             try
             {
                 _fs = new FileStream(file, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
@@ -679,7 +679,7 @@ namespace ScreenToGif.Encoding
             {
                 for (int i = 0; i < numberChars; i++)
                     bytes[i] =
-                      Convert.ToByte(new string(new char[2] { (char)sr.Read(), (char)sr.Read() }), 16);
+                      Convert.ToByte(new string(new [] { (char)sr.Read(), (char)sr.Read() }), 16);
             }
             return bytes;
         }

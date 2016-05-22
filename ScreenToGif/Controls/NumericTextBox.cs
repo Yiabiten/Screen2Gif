@@ -17,13 +17,13 @@ namespace ScreenToGif.Controls
         #region Variables
 
         private TextBox _textBox;
-        private bool _ignore = false;
+        private bool _ignore;
 
-        public readonly static DependencyProperty MinValueProperty;
-        public readonly static DependencyProperty ValueProperty;
-        public readonly static DependencyProperty MaxValueProperty;
-        public readonly static DependencyProperty IsHexProperty;
-        public readonly static DependencyProperty IsBoundProperty;
+        public static readonly DependencyProperty MinValueProperty;
+        public static readonly DependencyProperty ValueProperty;
+        public static readonly DependencyProperty MaxValueProperty;
+        public static readonly DependencyProperty IsHexProperty;
+        public static readonly DependencyProperty IsBoundProperty;
 
         #endregion
 
@@ -128,7 +128,7 @@ namespace ScreenToGif.Controls
             //this.MouseWheel += TextBox_MouseWheel;
 
             AddHandler(DataObject.PastingEvent, new DataObjectPastingEventHandler(PastingEvent));
-            AddHandler(TextBox.PreviewTextInputEvent, new TextCompositionEventHandler(TextBox_PreviewTextInput));
+            AddHandler(PreviewTextInputEvent, new TextCompositionEventHandler(TextBox_PreviewTextInput));
             AddHandler(ValueChangedEvent, new RoutedEventHandler(NumericTextBox_ValueChanged));
         }
 

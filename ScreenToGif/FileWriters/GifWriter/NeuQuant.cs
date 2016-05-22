@@ -92,9 +92,9 @@ namespace ScreenToGif.FileWriters.GifWriter
         #region Constants for Freqquency and Bias
 
         private const int IntBiasShift = 16; /* bias for fractions */
-        private const int IntBias = (((int)1) << IntBiasShift);
+        private const int IntBias = (1 << IntBiasShift);
         private const int GammaShift = 10; /* gamma = 1024 */
-        private const int Gamma = (((int)1) << GammaShift);
+        private const int Gamma = (1 << GammaShift);
         private const int BetaShift = 10;
         private const int Beta = (IntBias >> BetaShift); /* beta = 1/1024 */
 
@@ -108,7 +108,7 @@ namespace ScreenToGif.FileWriters.GifWriter
 
         private const int InitRad = (Netsize >> 3);
         private const int RadiusBiasShift = 6;
-        private const int RadiusBias = (((int)1) << RadiusBiasShift);
+        private const int RadiusBias = (1 << RadiusBiasShift);
         private const int InitRadius = (InitRad * RadiusBias);
         private const int RadiusDec = 30;
 
@@ -117,7 +117,7 @@ namespace ScreenToGif.FileWriters.GifWriter
         #region Constants for Decreasing Alpha Factor
 
         private const int AlphaBiasShift = 10; /* alpha starts at 1.0 */
-        private const int InitAlpha = (((int)1) << AlphaBiasShift);
+        private const int InitAlpha = (1 << AlphaBiasShift);
 
         #endregion
 
@@ -129,9 +129,9 @@ namespace ScreenToGif.FileWriters.GifWriter
         #region Radbias and AlphaRadBias used for Radpower Calculation
 
         private const int RadBiasShift = 8;
-        private const int RadBias = (((int)1) << RadBiasShift);
+        private const int RadBias = (1 << RadBiasShift);
         private const int AlphaRadBShift = (AlphaBiasShift + RadBiasShift);
-        private const int AlphaRadBias = (((int)1) << AlphaRadBShift);
+        private const int AlphaRadBias = (1 << AlphaRadBShift);
 
         #endregion
 

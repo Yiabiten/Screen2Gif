@@ -171,7 +171,6 @@ namespace ScreenToGif.Controls
             if (!IsEntryAllowed(textBox, e.Text))
             {
                 e.Handled = true;
-                return;
             }
         }
 

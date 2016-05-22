@@ -1985,9 +1985,9 @@ namespace ScreenToGif.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Marocco_flag {
+        public static System.Drawing.Bitmap morocco_flag {
             get {
-                object obj = ResourceManager.GetObject("Marocco_flag", resourceCulture);
+                object obj = ResourceManager.GetObject("morocco_flag", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

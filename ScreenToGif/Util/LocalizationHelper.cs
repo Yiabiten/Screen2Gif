@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows;
-using System.Xaml;
+using System.Windows.Markup;
 using ScreenToGif.Util.Writers;
 using ScreenToGif.Windows.Other;
 
@@ -88,7 +88,7 @@ namespace ScreenToGif.Util
                     throw new ArgumentException("Path is null.");
 
                 using (var writer = new StreamWriter(path, false))
-                    System.Windows.Markup.XamlWriter.Save(resourceDictionary, writer);
+                    XamlWriter.Save(resourceDictionary, writer);
             }
             catch (Exception ex)
             {
@@ -108,7 +108,7 @@ namespace ScreenToGif.Util
                 using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
                     // Read in ResourceDictionary File
-                    var dictionary = (ResourceDictionary)System.Windows.Markup.XamlReader.Load(fs);
+                    var dictionary = (ResourceDictionary)XamlReader.Load(fs);
                     dictionary.Source = new Uri(path);
 
                     // Add in newly loaded Resource Dictionary
@@ -171,7 +171,7 @@ namespace ScreenToGif.Util
                     throw new IndexOutOfRangeException("Index out of range while trying to save the resource dictionary.");
 
                 using (var writer = new StreamWriter(path, false))
-                    System.Windows.Markup.XamlWriter.Save(Application.Current.Resources.MergedDictionaries[selectedIndex], writer);
+                    XamlWriter.Save(Application.Current.Resources.MergedDictionaries[selectedIndex], writer);
             }
             catch (Exception ex)
             {

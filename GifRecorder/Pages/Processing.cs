@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 using ScreenToGif.Properties;
 using ScreenToGif.Util;
@@ -13,7 +15,7 @@ namespace ScreenToGif.Pages
     {
         #region Variables
 
-        private static int _max = 0;
+        private static int _max;
         private static string _fileName = "";
         private static Processing _page;
 
@@ -37,7 +39,7 @@ namespace ScreenToGif.Pages
             //To localize this page too.
             if (CultureUtil.Lang.Length >= 2)
             {
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(CultureUtil.Lang);
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(CultureUtil.Lang);
             }
 
             InitializeComponent();
@@ -251,14 +253,14 @@ namespace ScreenToGif.Pages
 
         private void linkClose_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Dispose();
+            Dispose();
         }
 
         private void linkOpenFile_MouseHover(object sender, EventArgs e)
         {
             if (_fileName.Length > 1)
             {
-                toolTip.Show(_fileName, linkOpenFile, (int)linkOpenFile.Width/2, linkOpenFile.Height, 3000);
+                toolTip.Show(_fileName, linkOpenFile, linkOpenFile.Width/2, linkOpenFile.Height, 3000);
             }
         }
 

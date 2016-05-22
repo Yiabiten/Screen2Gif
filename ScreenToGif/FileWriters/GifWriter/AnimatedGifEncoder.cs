@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.IO;
+using System.Text;
 
 namespace ScreenToGif.FileWriters.GifWriter
 {
@@ -39,12 +40,12 @@ namespace ScreenToGif.FileWriters.GifWriter
         /// <summary>
         /// Frame delay.
         /// </summary>
-        private int _delay = 0;
+        private int _delay;
 
         /// <summary>
         /// Flag that tells about the output encoding.
         /// </summary>
-        private bool _started = false;
+        private bool _started;
 
         //	protected BinaryWriter bw;
 
@@ -96,7 +97,7 @@ namespace ScreenToGif.FileWriters.GifWriter
         /// <summary>
         /// Close stream when finished.
         /// </summary>
-        private bool _closeStream = false;
+        private bool _closeStream;
 
         /// <summary>
         /// True only for th first frame.
@@ -106,7 +107,7 @@ namespace ScreenToGif.FileWriters.GifWriter
         /// <summary>
         /// If False, get size from first frame.
         /// </summary>
-        private bool _sizeSet = false;
+        private bool _sizeSet;
 
         /// <summary>
         /// Default sample interval for quantizer.
@@ -349,7 +350,7 @@ namespace ScreenToGif.FileWriters.GifWriter
         /// <returns>False if open or initial write failed.</returns>
         public bool Start(String file)
         {
-            bool ok = true;
+            bool ok;
             try
             {
                 _fs = new FileStream(file, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
@@ -654,7 +655,7 @@ namespace ScreenToGif.FileWriters.GifWriter
             //    fs.WriteByte(b);
             //}
 
-            var bytes = System.Text.Encoding.ASCII.GetBytes(comment);
+            var bytes = Encoding.ASCII.GetBytes(comment);
             _fs.WriteByte((byte)bytes.Length);
             _fs.Write(bytes, 0, bytes.Length);
             _fs.WriteByte(0);
@@ -679,7 +680,7 @@ namespace ScreenToGif.FileWriters.GifWriter
             {
                 for (int i = 0; i < numberChars; i++)
                     bytes[i] =
-                      Convert.ToByte(new string(new char[2] { (char)sr.Read(), (char)sr.Read() }), 16);
+                      Convert.ToByte(new string(new [] { (char)sr.Read(), (char)sr.Read() }), 16);
             }
             return bytes;
         }

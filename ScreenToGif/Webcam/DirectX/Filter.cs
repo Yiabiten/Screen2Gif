@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using ScreenToGif.Webcam.DirectShow;
 
 namespace ScreenToGif.Webcam.DirectX
@@ -174,7 +170,7 @@ namespace ScreenToGif.Webcam.DirectX
                 return (1);
             var f = (Filter)obj;
 
-            return (String.Compare(this.Name, f.Name, StringComparison.Ordinal));
+            return (String.Compare(Name, f.Name, StringComparison.Ordinal));
         }
     }
 }

@@ -46,7 +46,7 @@ namespace ScreenToGif.Pages
 
             #region Localize Labels
 
-            this.Text = Resources.TitleExceptionViewer;
+            Text = Resources.TitleExceptionViewer;
 
             #endregion
         }

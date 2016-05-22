@@ -9,7 +9,7 @@ namespace ScreenToGif.ImageUtil.Encoder
         /// <summary>
         /// The last remaining bit
         /// </summary>
-        private int _currentBit = 0;
+        private int _currentBit;
 
         /// <summary>
         /// Output byte of data collection.

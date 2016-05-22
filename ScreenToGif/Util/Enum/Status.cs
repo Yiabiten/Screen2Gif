@@ -28,6 +28,6 @@
         /// <summary>
         /// File deleted or Moved.
         /// </summary>
-        FileDeletedOrMoved,
+        FileDeletedOrMoved
     }
 }

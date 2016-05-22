@@ -1,4 +1,5 @@
-﻿using ScreenToGif.Properties;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace ScreenToGif.Pages
 {
@@ -7,7 +8,7 @@ namespace ScreenToGif.Pages
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -197,14 +198,14 @@ namespace ScreenToGif.Pages
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pbStatus;
-        private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.TextBox tbError;
-        private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.TextBox tbMessage;
-        private System.Windows.Forms.TextBox tbSource;
-        private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.Button btnInnerException;
-        private System.Windows.Forms.Panel panelTitle;
+        private PictureBox pbStatus;
+        private Label lblTitle;
+        private TextBox tbError;
+        private Button btnClose;
+        private TextBox tbMessage;
+        private TextBox tbSource;
+        private ToolTip toolTip;
+        private Button btnInnerException;
+        private Panel panelTitle;
     }
 }

@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 using ScreenToGif.Util.Writers;
 
 //When using the NumericUpAndDown first, the slider won't work.
@@ -20,9 +19,9 @@ namespace ScreenToGif.Windows.Other
         #region Variables
 
         private bool _cancelled;
-        private int _playerLoadedCount = 0;
-        private readonly MediaPlayer _lowerPlayer = new MediaPlayer() { Volume = 0, ScrubbingEnabled = true };
-        private readonly MediaPlayer _upperPlayer = new MediaPlayer() { Volume = 0, ScrubbingEnabled = true };
+        private int _playerLoadedCount;
+        private readonly MediaPlayer _lowerPlayer = new MediaPlayer { Volume = 0, ScrubbingEnabled = true };
+        private readonly MediaPlayer _upperPlayer = new MediaPlayer { Volume = 0, ScrubbingEnabled = true };
         private readonly Queue<TimeSpan> _positions = new Queue<TimeSpan>();
 
         /// <summary>
@@ -62,7 +61,7 @@ namespace ScreenToGif.Windows.Other
 
         private delegate bool LoadVideo(Uri file);
 
-        private readonly LoadVideo _loadVideoDel = null;
+        private readonly LoadVideo _loadVideoDel;
 
         private bool LoadVideoAsync(Uri file)
         {
@@ -179,7 +178,7 @@ namespace ScreenToGif.Windows.Other
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             Scale = 100F/ScaleNumericUpDown.Value;
-            Delay = 1000 / (int)FpsNumericUpDown.Value;
+            Delay = 1000 / FpsNumericUpDown.Value;
             FrameList = new List<BitmapFrame>();
 
             if (CountFrames() == 0)

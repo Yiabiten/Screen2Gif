@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
+﻿using System.Diagnostics;
 using ScreenToGif.Properties;
 
 namespace ScreenToGif.Util
@@ -18,7 +13,7 @@ namespace ScreenToGif.Util
         private static Stopwatch _stopwatch = new Stopwatch();
         private static int _interval = 15;
         private static bool _started = true;
-        private static bool _fixedFrameRate = false;
+        private static bool _fixedFrameRate;
 
         #endregion
 

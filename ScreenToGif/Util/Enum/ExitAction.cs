@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ScreenToGif.Util.Enum
+﻿namespace ScreenToGif.Util.Enum
 {
     /// <summary>
     /// Exit actions after closing the Recording Window
     /// </summary>
-    public enum ExitAction : int
+    public enum ExitAction
     {
         /// <summary>
         /// Return to the StartUp Window.
@@ -24,6 +18,6 @@ namespace ScreenToGif.Util.Enum
         /// <summary>
         /// Exit the application.
         /// </summary>
-        Exit = 2,
-    };
+        Exit = 2
+    }
 }

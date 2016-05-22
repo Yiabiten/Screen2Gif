@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 using ScreenToGif.Controls;
 
@@ -20,9 +18,9 @@ namespace ScreenToGif.Util
 
         public static float GetBrightness3(this Color color)
         {
-            float num = ((float)color.R) / 255f;
-            float num2 = ((float)color.G) / 255f;
-            float num3 = ((float)color.B) / 255f;
+            float num = color.R / 255f;
+            float num2 = color.G / 255f;
+            float num3 = color.B / 255f;
             float num4 = num;
             float num5 = num;
             if (num2 > num4)
@@ -55,9 +53,9 @@ namespace ScreenToGif.Util
         {
             if ((color.R == color.G) && (color.G == color.B))
                 return 0f;
-            float num = ((float)color.R) / 255f;
-            float num2 = ((float)color.G) / 255f;
-            float num3 = ((float)color.B) / 255f;
+            float num = color.R / 255f;
+            float num2 = color.G / 255f;
+            float num3 = color.B / 255f;
             float num7 = 0f;
             float num4 = num;
             float num5 = num;
@@ -84,9 +82,9 @@ namespace ScreenToGif.Util
 
         public static float GetSaturation(this Color color)
         {
-            float num = ((float)color.R) / 255f;
-            float num2 = ((float)color.G) / 255f;
-            float num3 = ((float)color.B) / 255f;
+            float num = color.R / 255f;
+            float num2 = color.G / 255f;
+            float num3 = color.B / 255f;
             float num7 = 0f;
             float num4 = num;
             float num5 = num;
@@ -295,7 +293,7 @@ namespace ScreenToGif.Util
         /// <returns></returns>
         public static Color ConvertHsvToRgb(double h, double s, double v, double alpha)
         {
-            double r = 0, g = 0, b = 0;
+            double r, g, b;
 
             if (s == 0)
             {

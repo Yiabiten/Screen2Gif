@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using Point = System.Drawing.Point;
 
 namespace ScreenToGif.Util
 {

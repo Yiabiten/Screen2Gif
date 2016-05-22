@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Ink;
@@ -29,7 +25,7 @@ namespace ScreenToGif.Util.Converters
                 !isRectangle.HasValue)
                 return DependencyProperty.UnsetValue;
 
-            return new DrawingAttributes()
+            return new DrawingAttributes
             {
                 Height = height.Value,
                 Width = width.Value,

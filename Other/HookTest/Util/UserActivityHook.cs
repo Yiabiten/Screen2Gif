@@ -2,7 +2,6 @@ using System;
 using System.ComponentModel;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Windows;
 using System.Windows.Input;
 
 //http://joelabrahamsson.com/detecting-mouse-and-keyboard-input-with-net/
@@ -520,11 +519,11 @@ namespace HookTest.Util
         /// <summary>
         /// Stores the handle to the mouse hook procedure.
         /// </summary>
-        private int hMouseHook = 0;
+        private int hMouseHook;
         /// <summary>
         /// Stores the handle to the keyboard hook procedure.
         /// </summary>
-        private int hKeyboardHook = 0;
+        private int hKeyboardHook;
 
 
         /// <summary>
@@ -546,7 +545,7 @@ namespace HookTest.Util
         /// <exception cref="Win32Exception">Any windows problem.</exception>
         public void Start()
         {
-            this.Start(true, true);
+            Start(true, true);
         }
 
         /// <summary>
@@ -564,7 +563,7 @@ namespace HookTest.Util
             if (hMouseHook == 0 && installMouseHook)
             {
                 //Create an instance of HookProc.
-                MouseHookProcedure = new HookProc(MouseHookProc);
+                MouseHookProcedure = MouseHookProc;
 
                 //XP bug... - Nicke SM
                 if (osInfo.Version.Major < 6)
@@ -594,7 +593,7 @@ namespace HookTest.Util
             if (hKeyboardHook == 0 && installKeyboardHook)
             {
                 //Create an instance of HookProc.
-                KeyboardHookProcedure = new HookProc(KeyboardHookProc);
+                KeyboardHookProcedure = KeyboardHookProc;
                 
                 //Install hook
                 //XP bug... - Nicke SM
@@ -626,7 +625,7 @@ namespace HookTest.Util
         /// <exception cref="Win32Exception">Any windows problem.</exception>
         public void Stop()
         {
-            this.Stop(true, true, true);
+            Stop(true, true, true);
         }
 
         /// <summary>

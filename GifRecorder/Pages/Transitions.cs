@@ -73,7 +73,7 @@ namespace ScreenToGif.Pages
             #region Localize Labels
 
             lblTransition.Text = Resources.Label_TransitionCount + " 1";
-            this.Text = Resources.Title_Transitions;
+            Text = Resources.Title_Transitions;
 
             #endregion
         }

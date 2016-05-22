@@ -1,5 +1,5 @@
-﻿using System.Windows.Forms;
-using ScreenToGif.Properties;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace ScreenToGif.Pages
 {
@@ -8,7 +8,7 @@ namespace ScreenToGif.Pages
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -451,15 +451,15 @@ namespace ScreenToGif.Pages
 
         #endregion
 
-        private System.Windows.Forms.CheckBox cbModernStyle;
-        private System.Windows.Forms.ComboBox comboStartPauseKey;
-        private System.Windows.Forms.ComboBox comboStopKey;
-        private System.Windows.Forms.Label lblStop;
-        private System.Windows.Forms.Label lblStartPause;
-        private System.Windows.Forms.CheckBox cbSaveDirectly;
-        private System.Windows.Forms.CheckBox cbAllowEdit;
-        private System.Windows.Forms.CheckBox cbShowCursor;
-        private System.Windows.Forms.ToolTip toolTipHelp;
+        private CheckBox cbModernStyle;
+        private ComboBox comboStartPauseKey;
+        private ComboBox comboStopKey;
+        private Label lblStop;
+        private Label lblStartPause;
+        private CheckBox cbSaveDirectly;
+        private CheckBox cbAllowEdit;
+        private CheckBox cbShowCursor;
+        private ToolTip toolTipHelp;
         private GroupBox gbAppSettings;
         private GroupBox gbHotkeys;
         private GroupBox gbLang;

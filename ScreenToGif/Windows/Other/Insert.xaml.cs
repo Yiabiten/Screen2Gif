@@ -37,7 +37,7 @@ namespace ScreenToGif.Windows.Other
         private Point _lastPosition;
 
         private double _zoom = 1;
-        UIElement _selectedElement = null;
+        UIElement _selectedElement;
 
         #endregion
 

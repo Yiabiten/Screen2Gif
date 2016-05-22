@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -61,7 +62,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// The delay of each frame took as snapshot.
         /// </summary>
-        private int? _snapDelay = null;
+        private int? _snapDelay;
 
         #endregion
 
@@ -73,7 +74,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// The Path of the Temp folder.
         /// </summary>
-        private readonly string _pathTemp = System.IO.Path.GetTempPath() +
+        private readonly string _pathTemp = Path.GetTempPath() +
             String.Format(@"ScreenToGif\Recording\{0}\", DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")); //TODO: Change to a more dynamic folder naming.
 
         /// <summary>
@@ -155,7 +156,7 @@ namespace ScreenToGif.Windows
 
                     #region To Record
 
-                    _capture = new Timer {Interval = 1000/(int) FpsNumericUpDown.Value};
+                    _capture = new Timer {Interval = 1000/FpsNumericUpDown.Value};
                     _snapDelay = null;
 
                     ListFrames = new List<FrameInfo>();
@@ -441,7 +442,7 @@ namespace ScreenToGif.Windows
                 RecordPause();
         }
 
-        private void LightWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void LightWindow_Closing(object sender, CancelEventArgs e)
         {
             #region Save Settings
 

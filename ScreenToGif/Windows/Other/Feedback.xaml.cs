@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -31,7 +30,7 @@ namespace ScreenToGif.Windows.Other
         private void Feedback_OnLoaded(object sender, RoutedEventArgs e)
         {
             //Search for a Log folder and add the txt files as attachment.
-            var logFolder = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Logs");
+            var logFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs");
 
             if (Directory.Exists(logFolder))
             {

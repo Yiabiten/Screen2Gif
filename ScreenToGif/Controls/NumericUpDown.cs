@@ -19,10 +19,10 @@ namespace ScreenToGif.Controls
         private RepeatButton _downButton;
         private TextBox _textBox;
 
-        public readonly static DependencyProperty MaximumProperty;
-        public readonly static DependencyProperty MinimumProperty;
-        public readonly static DependencyProperty ValueProperty;
-        public readonly static DependencyProperty StepProperty;
+        public static readonly DependencyProperty MaximumProperty;
+        public static readonly DependencyProperty MinimumProperty;
+        public static readonly DependencyProperty ValueProperty;
+        public static readonly DependencyProperty StepProperty;
 
         #endregion
 

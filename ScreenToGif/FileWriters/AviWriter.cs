@@ -5,7 +5,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Media.Imaging;
-using PixelFormat = System.Drawing.Imaging.PixelFormat;
 
 namespace ScreenToGif.FileWriters
 {

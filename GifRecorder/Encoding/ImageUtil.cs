@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -700,9 +701,9 @@ namespace ScreenToGif.Encoding
 
                 using (var graphics = Graphics.FromImage(result))
                 {
-                    graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                    graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                    graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                    graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                    graphics.CompositingQuality = CompositingQuality.HighQuality;
 
                     graphics.DrawImage(image, 0, 0, result.Width, result.Height);
                 }
@@ -771,7 +772,7 @@ namespace ScreenToGif.Encoding
                 {
                     if (count != 0)
                     {
-                        myBitmaps.Add(ImageUtil.ResizeBitmap
+                        myBitmaps.Add(ResizeBitmap
                         (
                             img,
                             img.Width,
@@ -797,7 +798,7 @@ namespace ScreenToGif.Encoding
                     {
                         if (count != 0)
                         {
-                            myBitmaps.Add(ImageUtil.ResizeBitmap(tmpBitmap,
+                            myBitmaps.Add(ResizeBitmap(tmpBitmap,
                                 size.Width,
                                 size.Height
                                 ));
@@ -825,7 +826,7 @@ namespace ScreenToGif.Encoding
 
             // Check the image format to determine what format
             // the image will be saved to the memory stream in
-            var guidToImageFormatMap = new Dictionary<Guid, ImageFormat>()
+            var guidToImageFormatMap = new Dictionary<Guid, ImageFormat>
             {
                 {ImageFormat.Bmp.Guid,  ImageFormat.Bmp},
                 {ImageFormat.Gif.Guid,  ImageFormat.Png},
